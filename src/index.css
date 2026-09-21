@@ -203,14 +203,14 @@ body {
 }
 
 /* ==========================================================================
-   1. Top Announcement Bar (Deep Plum Executive Tone)
+   1. Top Announcement Bar
+   Slim navy contact strip — same four details, brand navy instead of plum.
    ========================================================================== */
 .top-bar {
-  background-color: #4D3752;
-  color: #EDE4EF;
-  font-size: 0.8125rem;
-  padding: 0.55rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: var(--navy-dark);
+  color: #A9B1C2;
+  font-size: 0.78rem;
+  padding: 0.5rem 0;
 }
 
 .top-bar-inner {
@@ -221,77 +221,89 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
-.top-bar-left, .top-bar-right {
+.top-bar-left,
+.top-bar-right {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.9rem;
 }
 
-.top-bar-link, .top-bar-item {
-  color: #EDE4EF;
+.top-bar-link,
+.top-bar-item {
+  color: #A9B1C2;
   text-decoration: none;
-  font-size: 0.775rem;
-  font-weight: 400;
+  font-size: 0.76rem;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   letter-spacing: 0.15px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
-.top-bar-link i, .top-bar-item i {
-  color: #EDE4EF;
-  font-size: 0.8rem;
-  opacity: 0.9;
+.top-bar-link i,
+.top-bar-item i {
+  color: var(--brand-orange);
+  font-size: 0.75rem;
 }
 
 .top-bar-link:hover {
-  color: #FCD34D;
+  color: #FFFFFF;
 }
 
 .top-bar-sep {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.16);
   font-weight: 300;
-  font-size: 0.85rem;
   user-select: none;
 }
 
 .top-bar-admin-link {
-  color: #EDE4EF;
-  opacity: 0.6;
+  color: #A9B1C2;
+  opacity: 0.7;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin-left: 0.5rem;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .top-bar-admin-link:hover {
   opacity: 1;
-  color: #FCD34D;
+  color: var(--brand-orange);
 }
 
 /* ==========================================================================
-   2. Main Navigation Header (Clean Executive White)
+   2. Main Navigation Header
+   Frosted white bar that firms up once the page scrolls.
    ========================================================================== */
 .main-header {
   position: sticky;
   top: 0;
   z-index: 2000;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #EEF2F6;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(30, 37, 56, 0.07);
+  box-shadow: none;
   overflow: visible;
+  transition: background-color 0.3s ease, box-shadow 0.35s ease, border-color 0.3s ease;
 }
 
+/* legacy modifier kept on the element — folded into the new look */
 .main-header.glass-header {
-  background: rgba(35, 28, 48, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  overflow: visible;
+  background: rgba(255, 255, 255, 0.78);
+  border-bottom: 1px solid rgba(30, 37, 56, 0.07);
+  box-shadow: none;
+}
+
+.main-header.is-scrolled,
+.main-header.glass-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom-color: rgba(30, 37, 56, 0.1);
+  box-shadow: 0 12px 32px -20px rgba(30, 37, 56, 0.45);
 }
 
 .nav-container {
@@ -303,75 +315,91 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 72px;
-  gap: 1.5rem;
+  gap: 1.25rem;
   overflow: visible;
-  position: relative;
-  z-index: 2001;
 }
 
+/* the menu sits centred between the brand and the actions */
+.nav-container > nav {
+  flex: 1 1 auto;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
 
-/* Brand Logo (Comfort Space) With Square White Badge */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-shrink: 0;
+}
+
+/* ── Brand lockup ────────────────────────────────────────────────── */
 .brand-logo {
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 0.95rem;
+  gap: 0.75rem;
   flex-shrink: 0;
 }
 
 .brand-logo-badge {
   background: #FFFFFF;
-  border-radius: 9px;
-  padding: 4px 7px;
+  border-radius: 12px;
+  padding: 7px 9px;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.25s ease;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 3px 12px rgba(30, 37, 56, 0.08);
+  transition: transform 0.3s var(--trans-smooth), box-shadow 0.3s ease;
 }
 
 .brand-logo:hover .brand-logo-badge {
-  transform: scale(1.05);
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 18px rgba(30, 37, 56, 0.14);
 }
 
 .brand-logo-img {
-  height: 32px;
+  height: 30px;
   width: auto;
   object-fit: contain;
 }
 
+/* the badge sits next to the wordmark, so its inner label is redundant */
 .brand-badge-text {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.52rem;
-  font-weight: 700;
-  color: #2D253B;
-  text-transform: lowercase;
-  line-height: 1;
-  margin-top: 1px;
-  letter-spacing: -0.2px;
+  display: none;
 }
 
+/* same treatment as the hero's "Commercial & Turnkey Spaces" line */
 .brand-logo-text-clean {
-  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.55rem;
-  font-weight: 350;
-  letter-spacing: 0.025em;
-  color: #FFFFFF;
-  text-transform: lowercase;
-  line-height: 1;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.34rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: capitalize;
+  /* background-clip: text paints only inside the line box, so a tight
+     line-height cut the tails off italic glyphs such as the P */
+  line-height: 1.4;
+  background: linear-gradient(120deg, #EA580C 0%, #B45309 55%, #1E2538 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-/* Nav Menu With Dropdown Chevrons */
+/* ── Nav menu ────────────────────────────────────────────────────── */
 .nav-menu {
   display: flex;
-  align-items: center;
+  align-items: stretch; /* each item spans the full bar height */
+  height: 100%;
   list-style: none;
-  gap: 1.5rem;
+  gap: 1.3rem;
   margin: 0;
   padding: 0;
-  flex-shrink: 0;
   overflow: visible;
 }
 
@@ -383,64 +411,68 @@ body {
   position: relative;
 }
 
+/* the drawer must not inherit the desktop full-height row behaviour */
+.mobile-nav-drawer .nav-link {
+  align-self: stretch;
+}
 
 .nav-link {
-  color: #F3F4F6;
+  color: #55607A;
   text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 450;
+  font-size: 0.855rem;
+  font-weight: 500;
   position: relative;
-  padding: 0.7rem 0.2rem;
-  transition: var(--trans-smooth);
+  padding: 0.7rem 0.15rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
   white-space: nowrap !important;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
+  transition: color 0.22s ease;
 }
 
 .nav-link i.fa-chevron-down {
-  font-size: 0.58rem;
-  color: #CBD5E1;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
-  margin-left: 0.25rem;
+  font-size: 0.55rem;
+  color: #A6AEBF;
+  transition: transform 0.25s var(--trans-smooth), color 0.2s ease;
+  margin-left: 0.15rem;
 }
 
-.nav-link:hover, .nav-link.active {
-  color: #FFFFFF;
+.nav-link:hover {
+  color: var(--navy-dark);
+}
+
+.nav-link.active {
+  color: var(--navy-dark);
   font-weight: 600;
 }
 
-/* Rotate chevron ONLY when the dropdown is open */
 .dd-trigger.dd-open i.fa-chevron-down,
 .dd-wrapper.is-open .dd-trigger i.fa-chevron-down {
-  color: #E5A83B;
+  color: var(--brand-orange);
   transform: rotate(180deg);
 }
 
+/* orange underline on the active / hovered item */
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 0px;
+  bottom: 2px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
-  height: 3.5px;
-  background: #E5A83B;
-  transition: width 0.25s ease;
+  height: 2.5px;
+  background: var(--brand-orange);
   border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(229, 168, 59, 0.6);
+  transition: width 0.28s var(--trans-smooth);
 }
 
-.nav-link.active::after,
-.nav-link:hover::after,
-.dd-wrapper.is-open .nav-link::after {
+/* only the page you are on gets the underline — not hover, not an open menu */
+.nav-link.active::after {
   width: 100%;
 }
 
-
-/* ── nav-link used as button (dropdown triggers) ─────────────────── */
 button.nav-link,
 button.dd-trigger {
   background: none;
@@ -450,9 +482,8 @@ button.dd-trigger {
 }
 
 /* ==========================================================================
-   Dropdown Panel & Items (Luxury Glassmorphism System)
+   Dropdown panels — white cards matching the page's bento surfaces
    ========================================================================== */
-
 .dd-wrapper {
   position: relative;
   display: flex;
@@ -462,92 +493,102 @@ button.dd-trigger {
 
 .dd-panel {
   position: absolute;
-  top: calc(100% + 2px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 290px;
-  background: rgba(18, 14, 28, 0.97);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 2.5px solid #F59E0B;
+  /* flush with the header's lower edge — the panel reads as part of the bar,
+     not a rounded card floating underneath it */
+  top: calc(100% + 1px);
+  left: 0;
+  min-width: 390px;
+  max-width: calc(100vw - 2rem);
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-top: none;
   border-radius: 0 0 14px 14px;
-  padding: 0.5rem 0.5rem 0.6rem;
+  padding: 0.55rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.35),
-    0 24px 48px rgba(0, 0, 0, 0.6),
-    0 0 20px rgba(245, 158, 11, 0.08);
+  gap: 0.1rem;
+  box-shadow: 0 1px 2px rgba(30, 37, 56, 0.04), 0 30px 60px -26px rgba(30, 37, 56, 0.5);
   z-index: 9999;
-  animation: ddFadeSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: ddFadeSlideIn 0.2s var(--trans-smooth) both;
 }
 
-/* Hover bridge: ensures smooth cursor transit between nav link and panel */
-.dd-panel::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 0;
+/* the right-most menu with a panel flips its anchor so it stays on screen */
+.dd-wrapper.dd-align-right .dd-panel {
+  left: auto;
   right: 0;
-  height: 12px;
-  background: transparent;
 }
 
 @keyframes ddFadeSlideIn {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(-6px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
-/* Each row in the panel */
 .dd-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  padding: 0.65rem 0.85rem;
-  border-radius: 9px;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
   background: transparent;
   border: none;
-  color: #E2E8F0;
+  color: var(--navy-dark);
   cursor: pointer;
   font-family: inherit;
   text-align: left;
   width: 100%;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  transition: background-color 0.2s ease;
   box-sizing: border-box;
 }
 
+/* thin brand rule that wipes in from the left on hover */
+.dd-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--brand-orange);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.25s var(--trans-smooth);
+}
+
 .dd-item:hover {
-  background: rgba(245, 158, 11, 0.14);
-  transform: translateX(4px);
+  background: #F5F6F8;
+}
+
+.dd-item:hover::before {
+  transform: scaleY(1);
 }
 
 .dd-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  color: #F59E0B;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #EEF1F6;
+  color: var(--navy-dark);
   flex-shrink: 0;
   font-size: 0.85rem;
-  transition: all 0.18s ease;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.25s var(--trans-smooth);
 }
 
 .dd-item:hover .dd-icon {
-  background: #F59E0B;
-  color: #1A1625;
-  box-shadow: 0 0 14px rgba(245, 158, 11, 0.4);
+  background: var(--brand-orange);
+  color: #FFFFFF;
+  transform: scale(1.04);
 }
 
 .dd-text {
@@ -559,36 +600,33 @@ button.dd-trigger {
 
 .dd-text strong {
   display: block;
-  color: #FFFFFF;
-  font-size: 0.86rem;
-  font-weight: 600;
+  color: var(--navy-dark);
+  font-size: 0.855rem;
+  font-weight: 700;
   line-height: 1.25;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.005em;
 }
 
 .dd-text span {
   display: block;
-  color: #94A3B8;
-  font-size: 0.72rem;
-  line-height: 1.35;
-  white-space: normal;
-  transition: color 0.18s ease;
-}
-
-.dd-item:hover .dd-text span {
-  color: #E2E8F0;
+  color: #7B849A;
+  font-size: 0.725rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dd-arrow {
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.62rem;
+  color: #C6CBD6;
   margin-left: 0.25rem;
   flex-shrink: 0;
-  transition: transform 0.18s ease, color 0.18s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .dd-item:hover .dd-arrow {
-  color: #F59E0B;
+  color: var(--brand-orange);
   transform: translateX(3px);
 }
 
@@ -598,53 +636,106 @@ button.dd-trigger {
 .nav-dropdown-item,
 .dd-backdrop { all: unset; }
 
+/* ── "Get a Quote" pill — mirrors the dark buttons used on the page ── */
 .btn-header-quote {
-  background: linear-gradient(135deg, #4A2550 0%, #683568 100%);
+  background: var(--navy-dark);
   color: #FFFFFF !important;
-  padding: 0.62rem 1.45rem;
+  padding: 0.4rem 0.4rem 0.4rem 1.2rem;
   border-radius: 9999px;
-  font-size: 0.88rem;
+  font-size: 0.845rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  gap: 0.65rem;
   text-decoration: none;
-  transition: var(--trans-smooth);
   white-space: nowrap !important;
   flex-shrink: 0;
+  border: none;
+  box-shadow: 0 6px 18px -6px rgba(30, 37, 56, 0.55);
+  transition: background-color 0.28s ease, transform 0.28s var(--trans-smooth),
+    box-shadow 0.28s ease;
 }
 
+.btn-header-quote i {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: var(--brand-orange);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  transition: transform 0.3s var(--trans-smooth), background-color 0.28s ease;
+}
+
+/* neutralise the old amber rim animation this button still carries */
 .btn-header-quote.glowing-rim {
-  border: 1.5px solid #F59E0B;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.35), 0 4px 15px rgba(0, 0, 0, 0.25);
-  animation: amberGlowPulse 3s infinite ease-in-out;
+  border: none;
+  animation: none;
+  box-shadow: 0 6px 18px -6px rgba(30, 37, 56, 0.55);
+}
+
+.btn-header-quote.glowing-rim::after {
+  display: none;
 }
 
 .btn-header-quote:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 24px rgba(245, 158, 11, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: #2B3450;
   color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -8px rgba(30, 37, 56, 0.6);
 }
 
+.btn-header-quote:hover i {
+  transform: translateX(2px);
+  background: #F97316;
+}
+
+/* ── Mobile toggle & drawer ──────────────────────────────────────── */
 .mobile-toggle {
   display: none;
-  background: none;
-  border: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #F1F2F5;
+  border: 1px solid var(--border-subtle);
   color: var(--navy-dark);
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.mobile-toggle:hover {
+  background: var(--navy-dark);
+  color: #FFFFFF;
 }
 
 .mobile-nav-drawer {
   display: none;
   background-color: #FFFFFF;
   border-bottom: 1px solid var(--border-subtle);
-  padding: 1.25rem 1.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
   flex-direction: column;
-  gap: 0.85rem;
-  box-shadow: var(--shadow-md);
+  gap: 0.25rem;
+  box-shadow: 0 24px 40px -24px rgba(30, 37, 56, 0.5);
+}
+
+.mobile-nav-drawer .nav-link {
+  padding: 0.75rem 0.25rem;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #F1F2F5;
+}
+
+.mobile-nav-drawer .nav-link::after {
+  display: none;
+}
+
+.mobile-nav-drawer .nav-link.active {
+  color: var(--brand-orange);
 }
 
 .mobile-nav-drawer.active {
@@ -2356,16 +2447,17 @@ textarea.form-control {
   
   .mobile-nav-drawer {
     position: fixed;
-    top: 78px;
+    top: 72px;
     left: 0;
     width: 100%;
     background: #FFFFFF;
-    padding: 2rem 1.5rem;
+    padding: 0.75rem 1.25rem 1.25rem;
     display: none;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0;
     border-bottom: 1px solid var(--border-subtle);
-    box-shadow: var(--shadow-md);
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 24px 40px -24px rgba(30, 37, 56, 0.5);
     z-index: 999;
   }
   
@@ -2660,5 +2752,2820 @@ textarea.form-control {
 
   .about-milestone-body {
     padding-bottom: 1rem;
+  }
+}
+
+/* ==========================================================================
+   HOME V2 — Editorial / Bento Layout
+   Same brand tokens (orange #EA580C, navy #1E2538, Plus Jakarta Sans +
+   Playfair Display). Scoped under .csx-home so other pages are unaffected.
+   ========================================================================== */
+.csx-home {
+  --csx-page: #EFEFEE;
+  /* the alternating section background — panels sitting in those sections
+     must use this, not --csx-page, or they read as a lighter patch */
+  --csx-tint: #E9E9E7;
+  --csx-tint-hover: #E1E1DF;
+  --csx-card: #FFFFFF;
+  --csx-ink: #1E2538;
+  --csx-ink-soft: #64748B;
+  --csx-line: #E4E4E2;
+  --csx-radius-xl: 30px;
+  --csx-radius-lg: 22px;
+  --csx-radius-md: 16px;
+  --csx-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  background: var(--csx-page);
+  padding-bottom: 1px;
+}
+
+/* ---------- Scroll reveal ---------- */
+.csx-home [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.75s var(--csx-ease), transform 0.75s var(--csx-ease);
+  will-change: opacity, transform;
+}
+
+.csx-home [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csx-home [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Shared bits ---------- */
+.csx-section {
+  padding: 4.5rem 0;
+}
+
+.csx-section-tint {
+  background: var(--csx-tint);
+}
+
+.csx-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: var(--brand-orange);
+  background: var(--brand-orange-light);
+  border: 1.5px solid rgba(234, 88, 12, 0.22);
+  padding: 0.34rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.9rem;
+}
+
+.csx-tag-amber {
+  color: #B45309;
+  background: #FEF3C7;
+  border-color: #FCD34D;
+}
+
+.csx-tag-green {
+  color: #15803D;
+  background: #DCFCE7;
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+.csx-head-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--csx-ink);
+  margin: 0;
+}
+
+.csx-head-sm {
+  font-size: clamp(1.5rem, 2.3vw, 2.05rem);
+}
+
+.csx-head-sub {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--csx-ink-soft);
+  max-width: 560px;
+  margin-top: 0.7rem;
+}
+
+.csx-head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.csx-head-center {
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+
+.csx-head-center .csx-head-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Buttons ---------- */
+.csx-home .csx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.72rem 1.4rem;
+  border-radius: 9999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.3s var(--csx-ease), box-shadow 0.3s var(--csx-ease),
+    background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.csx-home .csx-btn i {
+  font-size: 0.75rem;
+}
+
+.csx-home .csx-btn:hover {
+  transform: translateY(-2px);
+}
+
+.csx-btn-dark {
+  background: var(--csx-ink);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(30, 37, 56, 0.24);
+}
+
+.csx-btn-dark:hover {
+  background: #2B3450;
+  box-shadow: 0 10px 26px rgba(30, 37, 56, 0.32);
+}
+
+.csx-btn-brand {
+  background: var(--brand-orange-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
+}
+
+.csx-btn-brand:hover {
+  box-shadow: 0 10px 26px rgba(234, 88, 12, 0.42);
+}
+
+.csx-btn-outline {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--csx-ink);
+  border-color: var(--csx-line);
+}
+
+.csx-btn-outline:hover {
+  background: #FFFFFF;
+  border-color: #C7C7C4;
+  box-shadow: 0 8px 22px rgba(30, 37, 56, 0.12);
+}
+
+.csx-btn-white {
+  background: #FFFFFF;
+  color: var(--csx-ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.csx-btn-glass {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.csx-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.csx-btn-ghost {
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--csx-ink);
+  border-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding-left: 0.5rem;
+}
+
+.csx-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.csx-btn-row {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+
+.csx-btn-row-center {
+  justify-content: center;
+}
+
+/* ==========================================================================
+   1. HERO
+   ========================================================================== */
+.csx-hero {
+  padding: 0.85rem clamp(0.75rem, 2vw, 1.5rem) 0;
+}
+
+.csx-hero-frame {
+  position: relative;
+  border-radius: var(--csx-radius-xl);
+  overflow: hidden;
+  min-height: clamp(520px, 78vh, 760px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  /* the frame sits flat on the page, no drop shadow behind the photo */
+  box-shadow: none;
+}
+
+.csx-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 78%;
+  transform: scale(1.08);
+  z-index: -2;
+  animation: csxHeroIn 1.5s var(--csx-ease) both;
+}
+
+.csx-hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.58) 42%, rgba(255, 255, 255, 0.34) 70%, rgba(30, 37, 56, 0.28) 100%),
+    radial-gradient(ellipse at 50% 42%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.1) 62%);
+}
+
+.csx-hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.csx-hero-glow.orb-a {
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(234, 88, 12, 0.22) 0%, transparent 70%);
+  top: -8%;
+  right: 12%;
+  animation: csxDrift1 18s ease-in-out infinite;
+}
+
+.csx-hero-glow.orb-b {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(30, 37, 56, 0.18) 0%, transparent 70%);
+  bottom: 2%;
+  left: 8%;
+  animation: csxDrift2 22s ease-in-out infinite;
+}
+
+.csx-hero-inner {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 980px;
+  padding: 4rem 1.5rem;
+}
+
+.csx-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--csx-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.55rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 6px 22px rgba(30, 37, 56, 0.14);
+  backdrop-filter: blur(10px);
+  margin-bottom: 1.5rem;
+  animation: csxUp 0.8s var(--csx-ease) 0.1s both;
+}
+
+.csx-hero-pill i {
+  color: var(--brand-orange);
+}
+
+.csx-hero-title {
+  margin: 0 0 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.csx-hero-title .csx-line {
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 5.6vw, 4.6rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--csx-ink);
+  text-shadow: 0 2px 18px rgba(255, 255, 255, 0.55);
+  animation: csxUp 0.9s var(--csx-ease) both;
+}
+
+.csx-hero-title .csx-line:nth-child(1) { animation-delay: 0.16s; }
+.csx-hero-title .csx-line:nth-child(2) { animation-delay: 0.26s; }
+
+.csx-hero-title .csx-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.7rem, 4vw, 3.6rem);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #EA580C 0%, #B45309 55%, #1E2538 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.csx-hero-sub {
+  font-size: clamp(0.92rem, 1.15vw, 1.04rem);
+  line-height: 1.7;
+  color: #3B4559;
+  max-width: 640px;
+  margin: 0 auto;
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.6);
+  animation: csxUp 0.9s var(--csx-ease) 0.36s both;
+}
+
+.csx-hero-actions {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  animation: csxUp 0.9s var(--csx-ease) 0.46s both;
+}
+
+.csx-play {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--csx-ink);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.csx-play i {
+  font-size: 0.6rem;
+  margin-left: 2px;
+}
+
+.csx-play-wave {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(30, 37, 56, 0.5);
+  animation: csxRadar 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+/* Floating hero cards */
+/* Frosted panel: a translucent white fill plus a backdrop blur, so the
+   photograph reads through it. No stroke — the edge is defined by the blur
+   and a soft shadow, which is what keeps it looking like frosted glass
+   rather than a boxed-in card. */
+.csx-hero-card {
+  position: absolute;
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  border: none;
+  box-shadow: 0 18px 44px -22px rgba(30, 37, 56, 0.45);
+  animation: csxUp 1s var(--csx-ease) 0.6s both;
+}
+
+.csx-hero-card-left {
+  left: clamp(1rem, 3vw, 2.5rem);
+  bottom: clamp(1rem, 3vw, 2.5rem);
+  border-radius: var(--csx-radius-lg);
+  padding: 1.35rem 1.5rem 1.15rem;
+  min-width: 230px;
+}
+
+.csx-hero-card-num {
+  font-family: var(--font-heading);
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--csx-ink);
+}
+
+.csx-hero-card-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: #5A6478;
+  margin: 0.4rem 0 1rem;
+}
+
+/* full-width pill with the glyph carried in its own circle on the left */
+.csx-hero-card-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.6rem;
+  background: #FFFFFF;
+  color: var(--csx-ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.32rem 1rem 0.32rem 0.32rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(30, 37, 56, 0.14);
+  transition: transform 0.3s var(--csx-ease), box-shadow 0.3s var(--csx-ease);
+}
+
+.csx-hero-card-btn i {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #EDF0F5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #25D366;
+  font-size: 0.92rem;
+  transition: background-color 0.3s ease;
+}
+
+.csx-hero-card-btn:hover i {
+  background: #E2F7EA;
+}
+
+.csx-hero-card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(30, 37, 56, 0.22);
+  color: var(--csx-ink);
+}
+
+/* Tucked into the frame's bottom-right corner rather than floating: flush
+   with both edges, filled in the page colour, with the outer corner following
+   the frame's own curve. Same treatment at every screen size. */
+.csx-hero-card-right {
+  left: auto;
+  right: 0;
+  bottom: 0;
+  width: clamp(300px, 27%, 400px);
+  z-index: 5;
+  border-radius: 28px 0 var(--csx-radius-xl) 0;
+  border: none;
+  background: var(--csx-page);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  padding: 1.4rem 1.6rem 1.4rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease;
+}
+
+/* Concave fillets on the two inner corners, so the photo curves away into the
+   card instead of stopping on a hard edge. A border-radius can only round
+   outward, so each is a quarter circle punched out of a page-coloured square. */
+.csx-hero-card-right::before,
+.csx-hero-card-right::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 26px at 0 0,
+    transparent 0 26px,
+    var(--csx-page) 26px
+  );
+}
+
+/* bottom-left, against the frame's lower edge */
+.csx-hero-card-right::after {
+  left: -26px;
+  bottom: 0;
+}
+
+/* top-right, against the frame's right edge */
+.csx-hero-card-right::before {
+  right: 0;
+  top: -26px;
+}
+
+/* it sits in a corner, so it tints rather than lifts */
+.csx-hero-card-right:hover {
+  background: var(--csx-tint);
+}
+
+.csx-hero-card-arrow i {
+  /* fa-arrow-up-right is Pro-only, so the diagonal comes from a rotation */
+  transform: rotate(-45deg);
+  transition: transform 0.35s var(--csx-ease);
+}
+
+.csx-hero-card-arrow {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--csx-ink);
+  flex-shrink: 0;
+  transition: transform 0.35s var(--csx-ease), background-color 0.3s ease, color 0.3s ease;
+}
+
+.csx-hero-card-right:hover .csx-hero-card-arrow {
+  background: var(--brand-orange);
+  color: #FFFFFF;
+}
+
+.csx-hero-card-right:hover .csx-hero-card-arrow i {
+  transform: rotate(0deg);
+}
+
+.csx-hero-card-copy strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--csx-ink);
+  line-height: 1.2;
+}
+
+.csx-hero-card-copy small {
+  display: block;
+  font-size: 0.78rem;
+  color: #5A6478;
+  margin-top: 0.2rem;
+}
+
+.csx-hero-card-copy small i {
+  font-size: 0.6rem;
+  margin-left: 2px;
+}
+
+/* ==========================================================================
+   2. MARQUEE
+   ========================================================================== */
+.csx-marquee {
+  padding: 2.5rem 0 2.75rem;
+  overflow: hidden;
+}
+
+.csx-marquee-label {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  color: #77808F;
+  margin-bottom: 1.5rem;
+}
+
+.csx-marquee-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.csx-marquee-rail {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: csxMarquee 34s linear infinite;
+}
+
+.csx-marquee:hover .csx-marquee-rail {
+  animation-play-state: paused;
+}
+
+.csx-marquee-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: #FFFFFF;
+  border: 1px solid var(--csx-line);
+  border-radius: var(--csx-radius-md);
+  padding: 0.9rem 1.6rem;
+  min-width: 210px;
+  transition: border-color 0.3s ease, transform 0.3s var(--csx-ease), box-shadow 0.3s var(--csx-ease);
+}
+
+.csx-marquee-chip:hover {
+  border-color: rgba(234, 88, 12, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px -12px rgba(30, 37, 56, 0.3);
+}
+
+.csx-chip-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--csx-ink);
+  white-space: nowrap;
+}
+
+.csx-chip-badge {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: #8A93A2;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   3. STATS BAR
+   ========================================================================== */
+.csx-stats-section {
+  padding-top: 0.5rem;
+}
+
+.csx-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #E9E9E7;
+  border: 1px solid var(--csx-line);
+  border-radius: var(--csx-radius-xl);
+  padding: 2.75rem 1rem;
+}
+
+.csx-stat {
+  text-align: center;
+  padding: 0 1.5rem;
+  border-right: 1px solid rgba(30, 37, 56, 0.1);
+}
+
+.csx-stat:last-child {
+  border-right: none;
+}
+
+.csx-stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--csx-ink);
+}
+
+.csx-stat-label {
+  font-size: 0.85rem;
+  color: var(--csx-ink-soft);
+  margin-top: 0.6rem;
+}
+
+/* ==========================================================================
+   4. BENTO
+   ========================================================================== */
+.csx-bento {
+  display: grid;
+  grid-template-columns: 0.95fr 1.25fr 0.95fr;
+  grid-template-rows: min-content 1fr;
+  gap: 1.15rem;
+}
+
+.csx-bento-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--csx-card);
+  border: 1px solid var(--csx-line);
+  border-radius: var(--csx-radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  transition: transform 0.4s var(--csx-ease), box-shadow 0.4s var(--csx-ease), border-color 0.3s ease;
+}
+
+.csx-bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(234, 88, 12, 0.3);
+  box-shadow: 0 22px 46px -22px rgba(30, 37, 56, 0.38);
+}
+
+.csx-bento-tall {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.csx-bento-wide {
+  grid-column: 2 / span 2;
+  grid-row: 1;
+}
+
+/* icon on the left, service number on the right */
+.csx-bento-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.csx-bento-num {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #B9BFCB;
+  transition: color 0.3s ease;
+}
+
+.csx-bento-card:hover .csx-bento-num {
+  color: var(--brand-orange);
+}
+
+.csx-bento-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: #EEF1F6;
+  color: var(--csx-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: background-color 0.35s ease, color 0.35s ease, transform 0.35s var(--csx-ease);
+}
+
+.csx-bento-card:hover .csx-bento-icon {
+  background: var(--brand-orange);
+  color: #FFFFFF;
+  transform: scale(1.06);
+}
+
+.csx-bento-icon-arrow {
+  background: #FFF1E8;
+  color: var(--brand-orange);
+}
+
+.csx-bento-watermark {
+  position: absolute;
+  right: -18px;
+  bottom: -26px;
+  font-size: 9rem;
+  color: rgba(30, 37, 56, 0.045);
+  pointer-events: none;
+  transition: transform 0.6s var(--csx-ease), color 0.4s ease;
+}
+
+.csx-bento-card:hover .csx-bento-watermark {
+  transform: scale(1.08) rotate(-6deg);
+  color: rgba(234, 88, 12, 0.07);
+}
+
+.csx-bento-media {
+  position: relative;
+  border-radius: var(--csx-radius-md);
+  overflow: hidden;
+  height: 210px;
+  flex-shrink: 0;
+}
+
+.csx-bento-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--csx-ease);
+}
+
+.csx-bento-card:hover .csx-bento-media img {
+  transform: scale(1.07);
+}
+
+.csx-bento-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* the bullet list takes the slack so short cards no longer leave a void */
+.csx-bento-card > .csx-bento-body {
+  flex: 1;
+}
+
+.csx-bento-body h3 {
+  font-family: var(--font-heading);
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--csx-ink);
+  margin-bottom: 0.6rem;
+}
+
+.csx-bento-body p {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--csx-ink-soft);
+}
+
+.csx-bento-sub {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--brand-orange);
+  margin: -0.3rem 0 0.7rem;
+}
+
+/* horizontal scope chips, used on the wide card */
+.csx-bento-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+}
+
+.csx-bento-chips li {
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #4B5563;
+  background: #F1F3F7;
+  border: 1px solid var(--csx-line);
+  border-radius: 9999px;
+  padding: 0.34rem 0.8rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.csx-bento-card:hover .csx-bento-chips li {
+  background: var(--brand-orange-light);
+  border-color: rgba(234, 88, 12, 0.28);
+  color: #9A3412;
+}
+
+/* inline "read more" cue at the foot of the last card */
+.csx-bento-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  /* pinned to the foot of the card so no card trails off into empty space */
+  margin-top: auto;
+  padding-top: 1.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brand-orange);
+}
+
+.csx-bento-link i {
+  font-size: 0.68rem;
+  transition: transform 0.3s var(--csx-ease);
+}
+
+.csx-bento-card:hover .csx-bento-link i {
+  transform: translateX(4px);
+}
+
+.csx-bento-list {
+  list-style: none;
+  margin-top: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.csx-bento-list li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #4B5563;
+}
+
+.csx-bento-list i {
+  color: var(--brand-green);
+  font-size: 0.7rem;
+  margin-top: 0.32rem;
+  flex-shrink: 0;
+}
+
+.csx-bento-accent {
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   5. FLAGSHIP SHOTS
+   ========================================================================== */
+.csx-shot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.15rem;
+}
+
+/* Same language as the hero's corner card: the photo fills the frame and the
+   caption is a flat, page-coloured panel tucked into its bottom-right corner,
+   with concave fillets where the two meet. No border, no shadow. */
+.csx-shot {
+  position: relative;
+  display: block;
+  text-align: left;
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: var(--csx-radius-lg);
+  overflow: hidden;
+  height: 300px;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: opacity 0.75s var(--csx-ease), transform 0.75s var(--csx-ease);
+}
+
+.csx-shot-media {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+}
+
+.csx-shot-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--csx-ease);
+}
+
+.csx-shot:hover .csx-shot-media img {
+  transform: scale(1.08);
+}
+
+.csx-shot-zoom {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--csx-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.35s var(--csx-ease);
+}
+
+.csx-shot:hover .csx-shot-zoom {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.csx-shot-meta {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 80%;
+  display: block;
+  background: var(--csx-tint);
+  border-radius: 18px 0 var(--csx-radius-lg) 0;
+  padding: 0.85rem 1rem 0.85rem 0.95rem;
+  transition: background-color 0.3s ease;
+}
+
+.csx-shot:hover .csx-shot-meta {
+  background: var(--csx-tint-hover);
+}
+
+/* the quarter-circle cut-outs that make the photo curve away into the panel */
+.csx-shot-meta::before,
+.csx-shot-meta::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 18px at 0 0,
+    transparent 0 18px,
+    var(--csx-tint) 18px
+  );
+  transition: background 0.3s ease;
+}
+
+.csx-shot:hover .csx-shot-meta::before,
+.csx-shot:hover .csx-shot-meta::after {
+  background: radial-gradient(
+    circle 18px at 0 0,
+    transparent 0 18px,
+    var(--csx-tint-hover) 18px
+  );
+}
+
+/* bottom-left, against the card's lower edge */
+.csx-shot-meta::after {
+  left: -18px;
+  bottom: 0;
+}
+
+/* top-right, against the card's right edge */
+.csx-shot-meta::before {
+  right: 0;
+  top: -18px;
+}
+
+.csx-shot-meta strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--csx-ink);
+}
+
+.csx-shot-meta small {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--csx-ink-soft);
+  margin-top: 0.2rem;
+}
+
+/* ==========================================================================
+   6. ABOUT SPLIT
+   ========================================================================== */
+.csx-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.csx-split-copy p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #4B5563;
+  margin-bottom: 1rem;
+}
+
+.csx-split-copy .csx-head-title {
+  margin-bottom: 1.2rem;
+}
+
+.csx-split-media {
+  position: relative;
+}
+
+.csx-split-media img {
+  width: 100%;
+  border-radius: var(--csx-radius-lg);
+  object-fit: cover;
+  max-height: 440px;
+  box-shadow: 0 26px 56px -26px rgba(30, 37, 56, 0.5);
+}
+
+.csx-split-badge {
+  position: absolute;
+  left: -18px;
+  bottom: -22px;
+  background: #FFFFFF;
+  border: 1px solid var(--csx-line);
+  border-radius: var(--csx-radius-md);
+  padding: 1.1rem 1.5rem;
+  max-width: 250px;
+  box-shadow: 0 16px 36px -18px rgba(30, 37, 56, 0.4);
+}
+
+.csx-split-badge strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--brand-orange);
+}
+
+.csx-split-badge > span {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--csx-ink-soft);
+  margin-top: 0.3rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   7. STAGE FRAMEWORK
+   ========================================================================== */
+.csx-stage-wrap {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.csx-stage-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.csx-stage-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  text-align: left;
+  background: #FFFFFF;
+  border: 1px solid var(--csx-line);
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: transform 0.3s var(--csx-ease), border-color 0.3s ease, background-color 0.3s ease,
+    box-shadow 0.3s var(--csx-ease);
+}
+
+.csx-stage-btn:hover {
+  transform: translateX(4px);
+  border-color: rgba(234, 88, 12, 0.35);
+}
+
+.csx-stage-btn.active {
+  background: var(--csx-ink);
+  border-color: var(--csx-ink);
+  box-shadow: 0 14px 30px -16px rgba(30, 37, 56, 0.7);
+}
+
+.csx-stage-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #EEF1F6;
+  color: var(--csx-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.csx-stage-btn.active .csx-stage-num {
+  background: var(--brand-orange);
+  color: #FFFFFF;
+}
+
+.csx-stage-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--csx-ink);
+  line-height: 1.35;
+  transition: color 0.3s ease;
+}
+
+.csx-stage-btn.active .csx-stage-title {
+  color: #FFFFFF;
+}
+
+.csx-stage-panel {
+  background: #FFFFFF;
+  border: 1px solid var(--csx-line);
+  border-radius: var(--csx-radius-lg);
+  padding: 2.25rem;
+  animation: csxPanelIn 0.5s var(--csx-ease) both;
+}
+
+.csx-stage-chip {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--brand-orange);
+  background: var(--brand-orange-light);
+  border-radius: 9999px;
+  padding: 0.32rem 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.csx-stage-panel h3 {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--csx-ink);
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
+}
+
+.csx-stage-panel p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--csx-ink-soft);
+  margin-bottom: 1.6rem;
+}
+
+/* ==========================================================================
+   8. PROJECT CARDS
+   ========================================================================== */
+.csx-proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.25rem;
+}
+
+.csx-proj-card {
+  background: var(--csx-card);
+  border: 1px solid var(--csx-line);
+  border-radius: var(--csx-radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s var(--csx-ease), box-shadow 0.4s var(--csx-ease),
+    border-color 0.3s ease, opacity 0.75s var(--csx-ease);
+}
+
+.csx-proj-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(234, 88, 12, 0.35);
+  box-shadow: 0 26px 52px -26px rgba(30, 37, 56, 0.48);
+}
+
+.csx-proj-media {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.csx-proj-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.75s var(--csx-ease);
+}
+
+.csx-proj-card:hover .csx-proj-media img {
+  transform: scale(1.07);
+}
+
+.csx-proj-status {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 0.32rem 0.8rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+}
+
+.csx-proj-status.done {
+  background: rgba(220, 252, 231, 0.95);
+  color: #15803D;
+}
+
+.csx-proj-status.live {
+  background: rgba(255, 237, 213, 0.95);
+  color: #C2410C;
+}
+
+.csx-proj-body {
+  padding: 1.35rem 1.5rem 1.5rem;
+}
+
+.csx-proj-cat {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--brand-orange);
+}
+
+.csx-proj-body h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--csx-ink);
+  margin: 0.5rem 0 0.35rem;
+}
+
+.csx-proj-client {
+  font-size: 0.82rem;
+  color: var(--csx-ink-soft);
+}
+
+.csx-proj-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--csx-line);
+  font-size: 0.78rem;
+  color: #8A93A2;
+}
+
+.csx-proj-foot i.fa-location-dot {
+  color: var(--brand-orange);
+  margin-right: 0.3rem;
+}
+
+.csx-proj-go {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #EEF1F6;
+  color: var(--csx-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.35s var(--csx-ease);
+}
+
+.csx-proj-card:hover .csx-proj-go {
+  background: var(--brand-orange);
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   9. GREEN / IGBC
+   ========================================================================== */
+.csx-green {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  background: linear-gradient(135deg, #F0FDF4 0%, #FFFFFF 60%);
+  border: 1px solid rgba(22, 163, 74, 0.22);
+  border-radius: var(--csx-radius-xl);
+  padding: 3rem;
+}
+
+.csx-green-title {
+  color: #064E3B;
+  margin-bottom: 0.9rem;
+}
+
+.csx-green-quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #15803D;
+  margin-bottom: 0.9rem;
+}
+
+.csx-green-text {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: #166534;
+  margin-bottom: 1.6rem;
+}
+
+.csx-green .csx-btn-dark i {
+  color: #4ADE80;
+}
+
+.csx-green-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.csx-green-grid li {
+  background: #FFFFFF;
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-radius: var(--csx-radius-md);
+  padding: 1.35rem 1.25rem;
+  transition: transform 0.35s var(--csx-ease), box-shadow 0.35s var(--csx-ease);
+}
+
+.csx-green-grid li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -20px rgba(22, 163, 74, 0.55);
+}
+
+.csx-green-grid i {
+  color: var(--brand-green);
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+
+.csx-green-grid h5 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #064E3B;
+  margin-bottom: 0.35rem;
+}
+
+.csx-green-grid p {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #166534;
+}
+
+/* ==========================================================================
+   10. TESTIMONIALS
+   ========================================================================== */
+.csx-quote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.csx-quote {
+  position: relative;
+  overflow: hidden;
+  background: var(--csx-card);
+  border: 1px solid var(--csx-line);
+  border-radius: var(--csx-radius-lg);
+  padding: 2rem;
+  margin: 0;
+  transition: transform 0.4s var(--csx-ease), box-shadow 0.4s var(--csx-ease),
+    border-color 0.3s ease, opacity 0.75s var(--csx-ease);
+}
+
+.csx-quote:hover {
+  transform: translateY(-5px);
+  border-color: rgba(234, 88, 12, 0.3);
+  box-shadow: 0 22px 46px -24px rgba(30, 37, 56, 0.4);
+}
+
+.csx-quote-mark {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  font-size: 2.6rem;
+  color: rgba(30, 37, 56, 0.06);
+  transition: color 0.35s ease, transform 0.5s var(--csx-ease);
+}
+
+.csx-quote:hover .csx-quote-mark {
+  color: rgba(234, 88, 12, 0.14);
+  transform: scale(1.1);
+}
+
+.csx-quote-stars {
+  color: var(--brand-orange);
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.9rem;
+}
+
+.csx-quote blockquote {
+  font-size: 0.875rem;
+  font-style: italic;
+  line-height: 1.75;
+  color: #334155;
+  margin: 0 0 1.4rem;
+}
+
+.csx-quote figcaption strong {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--csx-ink);
+}
+
+.csx-quote figcaption span {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--brand-orange);
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   11. CLOSING CTA
+   ========================================================================== */
+.csx-cta-section {
+  padding: 1rem 0 4.5rem;
+}
+
+.csx-cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--csx-radius-xl);
+  /* taller, cinematic format */
+  min-height: clamp(460px, 76vh, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  box-shadow: 0 34px 72px -32px rgba(30, 37, 56, 0.65);
+}
+
+/* the project showreel that plays behind the closing call to action */
+.csx-cta-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+  /* the clip carries its own camera move, so no CSS pan is needed */
+  border: none;
+  outline: none;
+  pointer-events: none;
+}
+
+.csx-cta-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    /* soft plate so the headline holds up as the footage cuts between shots */
+    radial-gradient(ellipse 58% 46% at 50% 47%, rgba(12, 16, 28, 0.5) 0%, rgba(12, 16, 28, 0) 100%),
+    /* vignette — darker at the corners, like a lens */
+    radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0) 36%, rgba(12, 16, 28, 0.62) 100%),
+    linear-gradient(135deg, rgba(30, 37, 56, 0.78) 0%, rgba(30, 37, 56, 0.58) 48%, rgba(180, 83, 9, 0.55) 100%);
+}
+
+/* a light sweep that travels across the frame every so often */
+.csx-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.07) 48%, transparent 58%);
+  transform: translateX(-60%);
+  animation: csxSweep 11s ease-in-out infinite;
+}
+
+@keyframes csxSweep {
+  0%, 62% { transform: translateX(-60%); }
+  100% { transform: translateX(60%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csx-cta::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.csx-cta-inner {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  max-width: 760px;
+}
+
+/* same treatment as the hero's "Commercial & Turnkey Spaces" line — Playfair
+   italic with a gradient fill, re-keyed to read against the dark footage */
+.csx-cta-inner h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4.8vw, 3.9rem);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+  background: linear-gradient(120deg, #FFFFFF 0%, #FCD9B0 46%, #F97316 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* drop-shadow works with background-clip: text, where text-shadow does not */
+  filter: drop-shadow(0 4px 22px rgba(0, 0, 0, 0.45));
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   Keyframes
+   ========================================================================== */
+@keyframes csxHeroIn {
+  from { opacity: 0; transform: scale(1.16); }
+  to { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes csxUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes csxPanelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes csxRadar {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes csxMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes csxDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, 30px) scale(1.12); }
+}
+
+@keyframes csxDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(35px, -28px) scale(1.08); }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1100px) {
+  /* the cards narrow here, so the caption panel widens to keep its title
+     on one line rather than wrapping and eating into the photo */
+  .csx-shot-meta {
+    width: 87%;
+  }
+
+  .csx-bento {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .csx-bento-tall {
+    grid-column: 1 / span 2;
+    grid-row: auto;
+  }
+
+  .csx-bento-wide {
+    grid-column: 1 / span 2;
+    grid-row: auto;
+  }
+
+  .csx-stage-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .csx-stage-rail {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+  }
+
+  .csx-stage-btn {
+    min-width: 230px;
+    flex-shrink: 0;
+  }
+
+  .csx-stage-btn:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 900px) {
+  .csx-split,
+  .csx-green {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .csx-green {
+    padding: 2rem;
+  }
+
+  .csx-split-badge {
+    left: 1rem;
+    bottom: -18px;
+  }
+
+  /* 2x2 with a full cross divider: verticals on the left column,
+     horizontals under the top row */
+  .csx-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    padding: 1.5rem 0.75rem;
+  }
+
+  .csx-stat {
+    padding: 1.75rem 0.85rem;
+    text-align: left;
+  }
+
+  .csx-stat:nth-child(2n) {
+    border-right: none;
+  }
+
+  .csx-stat:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(30, 37, 56, 0.1);
+  }
+
+  .csx-stat:last-child {
+    border-right: none;
+  }
+
+  .csx-stat-label {
+    font-size: 0.8rem;
+  }
+
+  .csx-head-row {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .csx-section {
+    padding: 3rem 0;
+  }
+
+  /* the hero keeps its desktop shape on phones: the frame fills the screen,
+     the copy sits centred in it, and the two cards stay floating over the
+     photograph rather than stacking underneath it */
+  .csx-hero {
+    padding: 0.6rem 0.7rem 0;
+  }
+
+  .csx-hero-frame {
+    /* 96px covers the sticky header plus the hero's own top padding, so the
+       frame — and the card tucked into its bottom corner — always lands
+       above the fold rather than running past it on shorter phones */
+    min-height: 520px;
+    min-height: max(520px, calc(100svh - 96px));
+    border-radius: 26px;
+    justify-content: center;
+  }
+
+  .csx-hero-inner {
+    /* The bottom padding reserves the band the cards float in. Anchored to
+       the bottom of the frame rather than centred — the cards are positioned
+       from the bottom too, so this keeps the space between copy and cards
+       constant at every frame height, and the extra height on tall phones
+       goes to the photograph above instead of opening up a gap. */
+    padding: 1.5rem 1.1rem 14.5rem;
+    align-self: flex-end;
+    margin-top: 0;
+  }
+
+  /* the two hero buttons stay on one row as compact pills */
+  .csx-hero-actions {
+    margin-top: 1.5rem;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .csx-home .csx-hero-actions .csx-btn {
+    width: auto;
+    flex: 0 1 auto;
+    min-width: 0;
+    font-size: 0.78rem;
+    padding: 0.6rem 1rem;
+    gap: 0.45rem;
+    white-space: nowrap;
+  }
+
+  .csx-home .csx-hero-actions .csx-btn-ghost {
+    padding-left: 0.4rem;
+  }
+
+  .csx-hero-actions .csx-play {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* both cards sit to the right and overlap, leaving the photograph
+     open down the left of the frame */
+  .csx-hero-card-left {
+    left: auto;
+    right: 0.9rem;
+    bottom: 6.75rem;
+    width: 47%;
+    min-width: 0;
+    padding: 0.85rem 0.85rem 0.8rem;
+    border-radius: 19px;
+  }
+
+  .csx-hero-card-num {
+    font-size: 1.5rem;
+  }
+
+  .csx-hero-card-label {
+    font-size: 0.58rem;
+    letter-spacing: 1px;
+    margin: 0.22rem 0 0.6rem;
+  }
+
+  .csx-hero-card-btn {
+    font-size: 0.74rem;
+    padding: 0.28rem 0.85rem 0.28rem 0.28rem;
+    gap: 0.5rem;
+  }
+
+  .csx-hero-card-btn i {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8rem;
+  }
+
+  /* the corner tuck itself comes from the base rule — only its scale and the
+     fillet size change down here */
+  .csx-hero-card-right {
+    width: 66%;
+    padding: 1rem 1.1rem 1rem 0.85rem;
+    gap: 0.8rem;
+    border-radius: 24px 0 26px 0;
+  }
+
+  .csx-hero-card-right::after,
+  .csx-hero-card-right::before {
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(
+      circle 22px at 0 0,
+      transparent 0 22px,
+      var(--csx-page) 22px
+    );
+  }
+
+  .csx-hero-card-right::after {
+    left: -22px;
+  }
+
+  .csx-hero-card-right::before {
+    top: -22px;
+  }
+
+  /* a tap leaves :hover stuck on a touch screen, so no tint down here */
+  .csx-hero-card-right:hover {
+    background: var(--csx-page);
+  }
+
+  .csx-hero-card-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 0.8rem;
+  }
+
+  .csx-hero-card-copy strong {
+    font-size: 0.92rem;
+  }
+
+  .csx-hero-card-copy small {
+    font-size: 0.7rem;
+  }
+
+  .csx-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .csx-bento-tall,
+  .csx-bento-wide {
+    grid-column: 1;
+  }
+
+  .csx-green-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .csx-head-title br {
+    display: none;
+  }
+}
+
+/* narrowest phones: keep the floating card titles on one line */
+@media (max-width: 400px) {
+  .csx-home .csx-hero-actions .csx-btn {
+    font-size: 0.72rem;
+    padding: 0.55rem 0.8rem;
+  }
+
+  /* drop the trailing icon rather than let the pair wrap */
+  .csx-hero-actions .csx-btn-dark i {
+    display: none;
+  }
+
+  .csx-hero-actions .csx-play {
+    width: 24px;
+    height: 24px;
+  }
+
+  .csx-hero-card-left {
+    width: 52%;
+  }
+
+  .csx-hero-card-right {
+    width: 72%;
+  }
+
+  .csx-hero-card-copy strong {
+    font-size: 0.85rem;
+  }
+
+  .csx-hero-card-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .csx-stats-bar {
+    border-radius: 24px;
+    padding: 1.25rem 0.4rem;
+  }
+
+  .csx-stat {
+    padding: 1.4rem 0.65rem;
+  }
+
+  .csx-home .csx-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Header overflow fix (pre-existing): between 769px and 1120px the full desktop
+   nav (including the long "Turnkey & Project Management" label) no longer fits
+   beside the brand and the quote button, so collapse to the drawer earlier.
+   -------------------------------------------------------------------------- */
+@media (min-width: 769px) and (max-width: 1140px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Header overflow fix (pre-existing): on narrow phones the brand lockup plus
+   the full-width "Get a Quote" pill pushed the header past the viewport,
+   which gave every page a horizontal scroll.
+   -------------------------------------------------------------------------- */
+@media (max-width: 560px) {
+  .nav-container {
+    padding: 0 1rem;
+    gap: 0.75rem;
+  }
+
+  .brand-logo {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .brand-logo-text-clean {
+    font-size: 1.14rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .btn-header-quote {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.78rem;
+  }
+
+  .btn-header-quote i {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .btn-header-quote {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.72rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7-Stage framework — scroll-pinned sequence.
+
+   On desktop the section is taller than the viewport and its inner panel is
+   sticky, so the page looks like it holds still while each slice of scroll
+   advances one stage. After the last stage the section releases and the page
+   carries on. Narrow or short windows drop the extra height and the stages
+   cascade in on a timer instead.
+   -------------------------------------------------------------------------- */
+.csx-stage-scroller {
+  position: relative;
+  padding: 4.5rem 0;
+}
+
+.csx-stage-scroller.is-pinning {
+  /* one viewport for the pinned panel + one slice of scroll per stage.
+     svh rather than vh so the section does not resize as a phone's address
+     bar hides and shows mid-pin. */
+  --csx-stage-step: 34svh;
+  height: calc(100svh + (var(--csx-stage-count) * var(--csx-stage-step)));
+  padding: 0;
+}
+
+.csx-stage-sticky {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.csx-stage-scroller.is-pinning .csx-stage-sticky {
+  position: sticky;
+  top: 72px; /* clears the sticky site header */
+  height: calc(100svh - 72px);
+}
+
+/* ---- the rail ---- */
+.csx-stage-rail {
+  position: relative;
+}
+
+.csx-stage-track {
+  position: absolute;
+  left: 32px;
+  top: 16px;
+  bottom: 54px;
+  width: 2px;
+  border-radius: 2px;
+  background: rgba(30, 37, 56, 0.1);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.csx-stage-track-fill {
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--brand-orange) 0%, #D97706 100%);
+  transition: height 0.45s var(--csx-ease);
+}
+
+.csx-stage-btn {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.55s var(--csx-ease), transform 0.55s var(--csx-ease),
+    border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s var(--csx-ease);
+}
+
+.csx-stage-btn.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* a stage that has already passed recedes so the current one stays the focus */
+.csx-stage-btn.is-in:not(.active) {
+  opacity: 0.72;
+}
+
+.csx-stage-btn.is-in:not(.active):hover {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.csx-stage-caret {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: #B4BAC6;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.35s var(--csx-ease), color 0.3s ease;
+}
+
+.csx-stage-btn.active .csx-stage-caret {
+  opacity: 1;
+  transform: none;
+  color: var(--brand-orange);
+}
+
+.csx-stage-btn.active .csx-stage-num {
+  animation: csxStagePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes csxStagePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.55); }
+  60% { box-shadow: 0 0 0 7px rgba(234, 88, 12, 0); }
+}
+
+/* ---- progress counter under the rail ---- */
+.csx-stage-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.9rem 0 0 0.35rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #A9B0BD;
+}
+
+.csx-stage-counter-now {
+  font-size: 1.5rem;
+  color: var(--brand-orange);
+}
+
+.csx-stage-counter-sep,
+.csx-stage-counter-all {
+  font-size: 0.95rem;
+}
+
+/* ---- phones and tablets: the rail lies on its side ---- */
+@media (max-width: 1100px) {
+  .csx-stage-track,
+  .csx-stage-caret,
+  .csx-stage-counter {
+    display: none;
+  }
+
+  /* The pin only engages when this whole block fits below the header. At full
+     size it needs ~670px, which a phone showing its address bar does not have,
+     so it was silently falling back to the timed cascade. Trimmed to ~520px
+     it fits, and the scroll-driven sequence runs on mobile as well. */
+  .csx-stage-scroller .csx-head-sub {
+    display: none;
+  }
+
+  .csx-stage-scroller .csx-head-center {
+    margin-bottom: 1.5rem;
+  }
+
+  .csx-stage-scroller .csx-head-title {
+    font-size: clamp(1.35rem, 5.4vw, 1.75rem);
+  }
+
+  .csx-stage-panel {
+    padding: 1.5rem 1.35rem;
+  }
+
+  .csx-stage-panel h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .csx-stage-panel p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+  }
+
+  .csx-stage-chip {
+    margin-bottom: 0.7rem;
+  }
+
+  .csx-stage-btn {
+    transform: translateY(22px);
+  }
+
+  .csx-stage-btn.is-in:not(.active) {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csx-stage-btn,
+  .csx-stage-btn.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .csx-stage-track-fill {
+    transition: none;
+  }
+
+  .csx-stage-btn.active .csx-stage-num {
+    animation: none;
+  }
+}
+
+/* shorter laptop screens: tighten the pinned panel so it still fits in one view */
+@media (min-width: 1101px) and (max-height: 880px) {
+  .csx-stage-scroller .csx-head-center {
+    margin-bottom: 1.75rem;
+  }
+
+  .csx-stage-scroller .csx-head-sub {
+    display: none;
+  }
+
+  .csx-stage-scroller .csx-stage-btn {
+    padding: 0.62rem 1rem;
+  }
+
+  .csx-stage-scroller .csx-stage-rail {
+    gap: 0.4rem;
+  }
+
+  .csx-stage-scroller .csx-stage-panel {
+    padding: 1.75rem;
+  }
+
+  .csx-stage-counter {
+    padding-top: 0.6rem;
+  }
+}
+
+/* Short viewports (a 667px phone leaves only ~570px of frame above the fold):
+   the copy itself has to come down, and the card band with it, or the two
+   collide. The band is always card offset + card height + a small gap. */
+@media (max-width: 700px) and (max-height: 700px) {
+  .csx-hero-inner {
+    padding: 0.75rem 1rem 11.6rem;
+  }
+
+  .csx-hero-pill {
+    font-size: 0.74rem;
+    padding: 0.42rem 1rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .csx-hero-title .csx-line {
+    font-size: clamp(1.45rem, 6.2vw, 1.9rem);
+  }
+
+  .csx-hero-title .csx-serif {
+    font-size: clamp(1.3rem, 5.6vw, 1.75rem);
+  }
+
+  .csx-hero-sub {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .csx-hero-actions {
+    margin-top: 1.1rem;
+  }
+
+  /* The corner card is ~64px tall, so the stat card has to clear that as well
+     as the buttons above it. It shrinks here to make room for both. */
+  .csx-hero-card-left {
+    bottom: 4.75rem;
+    padding: 0.65rem 0.8rem 0.6rem;
+  }
+
+  .csx-hero-card-num {
+    font-size: 1.3rem;
+  }
+
+  .csx-hero-card-label {
+    font-size: 0.55rem;
+    margin: 0.18rem 0 0.45rem;
+  }
+
+  .csx-hero-card-btn {
+    font-size: 0.7rem;
+    padding: 0.24rem 0.75rem 0.24rem 0.24rem;
+  }
+
+  .csx-hero-card-btn i {
+    width: 22px;
+    height: 22px;
+    font-size: 0.72rem;
+  }
+}
+
+/* the closing band keeps its two buttons side by side on phones, as a pair of
+   compact pills, rather than stacking them full-width */
+@media (max-width: 700px) {
+  /* fill the screen like the hero does, and share its narrower side gutter
+     so the two frames line up at the same width */
+  .csx-cta-section {
+    padding: 0.5rem 0 3rem;
+  }
+
+  .csx-cta-section .container {
+    padding: 0 0.7rem;
+  }
+
+  .csx-cta {
+    min-height: 520px;
+    min-height: max(520px, calc(100svh - 110px));
+    border-radius: 26px;
+  }
+
+  .csx-cta-inner {
+    padding: 2.5rem 1rem;
+  }
+
+  .csx-cta-inner .csx-btn-row {
+    flex-wrap: nowrap;
+    gap: 0.55rem;
+    margin-top: 1.5rem;
+  }
+
+  .csx-home .csx-cta-inner .csx-btn {
+    width: auto;
+    flex: 0 1 auto;
+    min-width: 0;
+    font-size: 0.8rem;
+    padding: 0.64rem 1.05rem;
+    gap: 0.45rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 380px) {
+  /* the very narrowest phones drop the icon to keep both pills on one row */
+  .csx-home .csx-cta-inner .csx-btn i {
+    display: none;
+  }
+
+  .csx-home .csx-cta-inner .csx-btn {
+    font-size: 0.76rem;
+    padding: 0.6rem 0.9rem;
+  }
+}
+
+/* the band crops tighter on phones, so deepen the veil to keep the type crisp */
+@media (max-width: 700px) {
+  .csx-cta-veil {
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0.1) 30%, rgba(12, 16, 28, 0.6) 100%),
+      linear-gradient(160deg, rgba(30, 37, 56, 0.88) 0%, rgba(30, 37, 56, 0.68) 50%, rgba(180, 83, 9, 0.6) 100%);
+  }
+}
+
+/* the tall card goes full-width below 1100px, so its photo needs more height
+   or it letterboxes into a thin strip */
+@media (max-width: 1100px) {
+  .csx-bento-media {
+    height: 300px;
+  }
+}
+
+@media (max-width: 700px) {
+  .csx-bento-media {
+    height: 220px;
+  }
+}
+
+/* ==========================================================================
+   PROJECT DETAIL MODAL
+   Same language as the homepage: page-grey surfaces, navy type, orange
+   accents, generous corner radii.
+   ========================================================================== */
+.csx-pm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem;
+  background: rgba(16, 20, 32, 0.62);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  animation: csxPmFade 0.25s ease both;
+}
+
+.csx-pm-box {
+  --csx-page: #EFEFEE;
+  --csx-tint: #E9E9E7;
+  --csx-ink: #1E2538;
+  --csx-ink-soft: #64748B;
+  --csx-line: #E4E4E2;
+
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  max-height: 92vh;
+  max-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--csx-page);
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px -30px rgba(10, 14, 24, 0.7);
+  animation: csxPmRise 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes csxPmFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes csxPmRise {
+  from { opacity: 0; transform: translateY(22px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- hero ---- */
+.csx-pm-hero {
+  position: relative;
+  flex-shrink: 0;
+  height: clamp(240px, 34vh, 360px);
+  overflow: hidden;
+}
+
+.csx-pm-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* the title sits on the photo, so it needs a gradient to hold contrast */
+.csx-pm-hero-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 20, 32, 0.35) 0%,
+    rgba(16, 20, 32, 0) 34%,
+    rgba(16, 20, 32, 0.62) 74%,
+    rgba(16, 20, 32, 0.88) 100%
+  );
+}
+
+.csx-pm-hero-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.75rem 2rem;
+  z-index: 2;
+}
+
+.csx-pm-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: #FFFFFF;
+  background: rgba(234, 88, 12, 0.92);
+  border-radius: 9999px;
+  padding: 0.32rem 0.85rem;
+  margin-bottom: 0.7rem;
+}
+
+.csx-pm-hero-copy h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+.csx-pm-client {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #F5D0B0;
+  margin-top: 0.35rem;
+  letter-spacing: 0.01em;
+}
+
+.csx-pm-status {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+}
+
+.csx-pm-status i {
+  font-size: 0.7rem;
+}
+
+.csx-pm-status.done {
+  background: rgba(220, 252, 231, 0.95);
+  color: #15803D;
+}
+
+.csx-pm-status.live {
+  background: rgba(255, 237, 213, 0.95);
+  color: #C2410C;
+}
+
+.csx-pm-close {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.15rem;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--csx-ink);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.csx-pm-close:hover {
+  background: var(--brand-orange);
+  color: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+/* ---- body ---- */
+.csx-pm-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.75rem 2rem 0.5rem;
+}
+
+.csx-pm-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin: 0 0 1.75rem;
+  background: var(--csx-tint);
+  border-radius: 18px;
+  padding: 1.15rem 0.5rem;
+}
+
+.csx-pm-meta > div {
+  padding: 0.35rem 1.1rem;
+  border-right: 1px solid rgba(30, 37, 56, 0.1);
+}
+
+.csx-pm-meta > div:last-child {
+  border-right: none;
+}
+
+.csx-pm-meta dt {
+  font-size: 0.64rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: #8A93A2;
+  margin-bottom: 0.3rem;
+}
+
+.csx-pm-meta dd {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--csx-ink);
+  line-height: 1.35;
+}
+
+.csx-pm-section {
+  margin-bottom: 1.75rem;
+}
+
+.csx-pm-section h3 {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--csx-ink);
+  margin-bottom: 0.7rem;
+}
+
+.csx-pm-text {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #4B5563;
+}
+
+/* ---- gallery ---- */
+.csx-pm-thumbs {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  scrollbar-width: thin;
+}
+
+.csx-pm-thumb {
+  flex: 0 0 auto;
+  width: 116px;
+  height: 78px;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  position: relative;
+  opacity: 0.62;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: opacity 0.25s ease, outline-color 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.csx-pm-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.csx-pm-thumb:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.csx-pm-thumb.active {
+  opacity: 1;
+  outline-color: var(--brand-orange);
+}
+
+/* ---- scope ---- */
+.csx-pm-scope {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.5rem 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.csx-pm-scope li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.855rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+.csx-pm-scope i {
+  color: var(--brand-green);
+  font-size: 0.68rem;
+  margin-top: 0.36rem;
+  flex-shrink: 0;
+}
+
+/* ---- footer ---- */
+.csx-pm-foot {
+  flex-shrink: 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 1.15rem 2rem 1.5rem;
+  border-top: 1px solid var(--csx-line);
+  background: var(--csx-page);
+}
+
+.csx-pm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.855rem;
+  font-weight: 600;
+  padding: 0.72rem 1.4rem;
+  border-radius: 9999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease,
+    background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.csx-pm-btn:hover {
+  transform: translateY(-2px);
+}
+
+.csx-pm-btn.brand {
+  background: var(--brand-orange-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
+}
+
+.csx-pm-btn.brand:hover {
+  color: #FFFFFF;
+  box-shadow: 0 10px 26px rgba(234, 88, 12, 0.42);
+}
+
+.csx-pm-btn.brand i {
+  font-size: 1.05rem;
+}
+
+.csx-pm-btn.ghost {
+  background: #FFFFFF;
+  color: var(--csx-ink);
+  border-color: var(--csx-line);
+}
+
+.csx-pm-btn.ghost:hover {
+  border-color: #C7C7C4;
+  box-shadow: 0 8px 22px rgba(30, 37, 56, 0.12);
+}
+
+/* ---- responsive ---- */
+@media (max-width: 760px) {
+  .csx-pm-overlay {
+    padding: 0.75rem;
+  }
+
+  .csx-pm-box {
+    max-height: 94svh;
+    border-radius: 22px;
+  }
+
+  .csx-pm-hero {
+    height: clamp(190px, 28svh, 250px);
+  }
+
+  .csx-pm-hero-copy {
+    padding: 1.25rem 1.25rem 1.35rem;
+  }
+
+  .csx-pm-body {
+    padding: 1.35rem 1.25rem 0.5rem;
+  }
+
+  /* the four meta cells stack into a 2x2 with a cross rule, as on the page */
+  .csx-pm-meta {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0.5rem 0.25rem;
+  }
+
+  .csx-pm-meta > div {
+    padding: 0.8rem 0.9rem;
+  }
+
+  .csx-pm-meta > div:nth-child(2n) {
+    border-right: none;
+  }
+
+  .csx-pm-meta > div:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(30, 37, 56, 0.1);
+  }
+
+  .csx-pm-foot {
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .csx-pm-btn {
+    flex: 1 1 auto;
+    font-size: 0.8rem;
+    padding: 0.68rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csx-pm-overlay,
+  .csx-pm-box {
+    animation: none;
+  }
+
+  .csx-pm-close:hover,
+  .csx-pm-btn:hover,
+  .csx-pm-thumb:hover {
+    transform: none;
   }
 }

@@ -37,8 +37,25 @@ const DROPDOWNS = {
 /* ─── Main Navbar ────────────────────────────────────────────────────── */
 const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
   const [openMenu, setOpenMenu] = useState(null); // 'about' | 'services' | 'turnkey' | 'projects' | null
+  const [isScrolled, setIsScrolled] = useState(false);
   const timerRef = useRef(null);
   const navRef = useRef(null);
+
+  /* Solidify the frosted header once the page has moved off the top */
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 12);
+        ticking = false;
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   /* Hover Handlers with debounce grace period */
   const handleMouseEnter = (key) => {
@@ -115,7 +132,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
   };
 
   return (
-    <header className="main-header glass-header" ref={navRef}>
+    <header className={`main-header glass-header ${isScrolled ? 'is-scrolled' : ''}`} ref={navRef}>
       <div className="nav-container">
 
         {/* ── Brand logo ─────────────────────────────────────── */}
@@ -261,7 +278,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
 
             {/* Project Gallery ▾ */}
             <li
-              className={`dd-wrapper ${openMenu === 'projects' ? 'is-open' : ''}`}
+              className={`dd-wrapper dd-align-right ${openMenu === 'projects' ? 'is-open' : ''}`}
               onMouseEnter={() => handleMouseEnter('projects')}
               onMouseLeave={handleMouseLeave}
             >
@@ -316,7 +333,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
         <div className="header-actions">
           <a
             href="#contact"
-            className="btn-header-quote glowing-rim"
+            className="btn-header-quote"
             onClick={(e) => { e.preventDefault(); navGo('contact'); }}
           >
             Get a Quote <i className="fa-solid fa-arrow-right" />

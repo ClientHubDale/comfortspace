@@ -42,7 +42,7 @@ export const INITIAL_DATA = {
         "Rigorous concrete strength testing & structural integrity audits"
       ],
       icon: "fa-building-columns",
-      image: "assets/images/mcdonalds-hyd-exterior.jpg"
+      image: "assets/images/mcd-hyd-entrance.jpg"
     },
     {
       id: "turnkey-projects",
@@ -57,7 +57,7 @@ export const INITIAL_DATA = {
         "Synchronized trade scheduling ensuring zero-delay project delivery"
       ],
       icon: "fa-key",
-      image: "assets/images/mcdonalds-hyd-mccafe.png"
+      image: "assets/images/mcd-hyd-mccafe-bar.jpg"
     },
     {
       id: "project-management",
@@ -72,7 +72,7 @@ export const INITIAL_DATA = {
         "Risk mitigation, snag tracking, and transparent bill audits"
       ],
       icon: "fa-clipboard-check",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+      image: "assets/images/cs-tata-reception.jpg"
     },
     {
       id: "fire-safety",
@@ -87,7 +87,7 @@ export const INITIAL_DATA = {
         "Fire Department NOC documentation & statutory compliance sign-offs"
       ],
       icon: "fa-shield-halved",
-      image: "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=900&q=80"
+      image: "assets/images/cs-au-bank-floor.jpg"
     },
     {
       id: "modular-furniture",
@@ -102,7 +102,7 @@ export const INITIAL_DATA = {
         "Factory-finished pre-fabricated panels for rapid site installation"
       ],
       icon: "fa-couch",
-      image: "assets/images/mcdonalds-hyd-counters.png"
+      image: "assets/images/mcd-hyd-kiosks.jpg"
     },
     {
       id: "post-handover",
@@ -117,7 +117,7 @@ export const INITIAL_DATA = {
         "Long-term annual maintenance contracts (AMC) for corporate chains"
       ],
       icon: "fa-screwdriver-wrench",
-      image: "assets/images/mcdonalds-hyd-kitchen.jpg"
+      image: "assets/images/mcd-hyd-dining-rings.jpg"
     }
   ],
 
@@ -228,12 +228,12 @@ export const INITIAL_DATA = {
       type: "High Street Flagship & McCafe",
       status: "Handed Over",
       year: "2024",
-      image: "assets/images/mcdonalds-hyd-exterior.jpg",
+      image: "assets/images/mcd-hyd-entrance.jpg",
       gallery: [
-        "assets/images/mcdonalds-hyd-exterior.jpg",
-        "assets/images/mcdonalds-hyd-mccafe.png",
-        "assets/images/mcdonalds-hyd-kitchen.jpg",
-        "assets/images/mcdonalds-hyd-counters.png"
+        "assets/images/mcd-hyd-entrance.jpg",
+        "assets/images/mcd-hyd-mccafe-bar.jpg",
+        "assets/images/mcd-hyd-dining-rings.jpg",
+        "assets/images/mcd-hyd-kiosks.jpg"
       ],
       description: "Recently completed flagship high-street restaurant and McCafe for Hardcastle Restaurants Private Limited in Hyderabad. Delivered as an end-to-end turnkey project featuring structural glass frontage, contemporary McCafe timber louver cladding, digital ordering kiosks, commercial stainless steel modular kitchens, and custom curved dining booths.",
       scope: [
@@ -257,10 +257,10 @@ export const INITIAL_DATA = {
       type: "Luxury Restaurant & Cocktail Lounge",
       status: "Handed Over",
       year: "2023",
-      image: "assets/images/muro-bar-dining.jpg",
+      image: "assets/images/cs-muro-lounge.jpg",
       gallery: [
-        "assets/images/muro-bar-dining.jpg",
-        "assets/images/muro-sign-lounge.png"
+        "assets/images/cs-muro-lounge.jpg",
+        "assets/images/cs-muro-signage.jpg"
       ],
       description: "An ultra-premium dining destination in the heart of Bangalore. Delivered as a complete turnkey interior fit-out featuring intricate artisanal timber joinery, custom acoustical treatment, dramatic mood lighting, and high-specification kitchen and bar MEP integration.",
       scope: ["Turnkey Interiors", "Custom Modular Bar Counters", "Acoustic Wall Paneling", "Kitchen MEP", "Architectural Mood Lighting"],
@@ -277,10 +277,10 @@ export const INITIAL_DATA = {
       type: "Corporate Regional Office & Training Centre",
       status: "Handed Over",
       year: "2023",
-      image: "assets/images/tata-capital-reception-training.png",
+      image: "assets/images/cs-tata-training.jpg",
       gallery: [
-        "assets/images/tata-capital-reception-training.png",
-        "assets/images/tata-capital-workstations.png"
+        "assets/images/cs-tata-training.jpg",
+        "assets/images/cs-tata-reception.jpg"
       ],
       description: "Expansive corporate regional headquarters and state-of-the-art training campus for Tata Capital in Mysore. Incorporates ergonomic open-plan modular workstations, executive boardrooms, tiered training auditoriums, and IGBC-certified energy-efficient lighting.",
       scope: ["Civil Refurbishment", "Modular Workstations", "Training Auditoriums", "HVAC Automation", "Fire & Life Safety"],
@@ -297,9 +297,9 @@ export const INITIAL_DATA = {
       type: "Highway Drive-Thru & High Street",
       status: "Ongoing",
       year: "2024",
-      image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
+      image: "assets/images/mcd-hyd-kiosks.jpg",
       gallery: [
-        "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80"
+        "assets/images/mcd-hyd-kiosks.jpg"
       ],
       description: "Fast-track turnkey civil construction and fit-out of high-capacity highway drive-thru outlet in Poicha, Gujarat. Built strictly following global McDonald's architectural brand guidelines and heavy traffic durability parameters.",
       scope: ["Civil Construction", "Drive-Thru Lane Infrastructure", "Turnkey Interiors", "MEP & Gas Piping", "HVAC"],
@@ -316,9 +316,10 @@ export const INITIAL_DATA = {
       type: "Retail Banking Branch Hub",
       status: "Handed Over",
       year: "2023",
-      image: "assets/images/au-bank-cubicles-floor.png",
+      image: "assets/images/cs-au-bank-floor.jpg",
       gallery: [
-        "assets/images/au-bank-cubicles-floor.png"
+        "assets/images/cs-au-bank-floor.jpg",
+        "assets/images/cs-au-bank-pantry.jpg"
       ],
       description: "Modern retail banking branch fit-outs featuring secure teller counters, acoustic private consultation lounges, high-security record rooms, and branded facade illumination compliant with commercial banking regulations.",
       scope: ["Turnkey Fit-out", "Strong Room & Security Partitions", "Modular Cash Counters", "Networking & CCTV", "Signage"],
@@ -335,9 +336,9 @@ export const INITIAL_DATA = {
       type: "Artisanal Casual Dining",
       status: "Handed Over",
       year: "2023",
-      image: "https://images.unsplash.com/photo-1579684947550-22e945225d9a?auto=format&fit=crop&w=1200&q=80",
+      image: "assets/images/mcd-hyd-dining-rings.jpg",
       gallery: [
-        "https://images.unsplash.com/photo-1579684947550-22e945225d9a?auto=format&fit=crop&w=1200&q=80"
+        "assets/images/mcd-hyd-dining-rings.jpg"
       ],
       description: "Warm, authentic Neapolitan dining ambiance built with rustic brick finishes, open-kitchen mosaic wood-fired oven housing, bespoke dining tables, and high-efficiency kitchen exhaust systems.",
       scope: ["Turnkey Interior Fit-out", "Bespoke Dining Joinery", "Open Kitchen Exhaust & Fire Safety", "Plumbing & Gas Lines"],
@@ -354,9 +355,9 @@ export const INITIAL_DATA = {
       type: "Commercial Banking Center",
       status: "Handed Over",
       year: "2022",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+      image: "assets/images/cs-au-bank-pantry.jpg",
       gallery: [
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+        "assets/images/cs-au-bank-pantry.jpg"
       ],
       description: "Commercial branch fit-out delivering sleek customer interaction zones, robust safety systems, biometric access infrastructure, and sustainable low-power lighting.",
       scope: ["Turnkey Base Project", "Security Infrastructure", "Modular Workstations", "Electrical & UPS Cabling"],

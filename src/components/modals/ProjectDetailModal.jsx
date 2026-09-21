@@ -1,137 +1,144 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { INITIAL_DATA } from '../../data/initialData';
 
+const asPath = (src) => `/${String(src).replace(/^\/+/, '')}`;
+
 const ProjectDetailModal = ({ project, onClose }) => {
+  /* Hooks run unconditionally — the null guard sits below them, otherwise the
+     hook order changes between renders as the modal opens and closes. */
+  const [activeImage, setActiveImage] = useState(null);
+
+  /* A different project reuses this same mounted component, so the preview has
+     to follow it rather than keeping the previous project's shot. */
+  useEffect(() => {
+    setActiveImage(project ? project.image : null);
+  }, [project]);
+
+  /* Escape closes, and the page behind must not scroll while this is open. */
+  useEffect(() => {
+    if (!project) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [project, onClose]);
+
   if (!project) return null;
 
-  const [activeImage, setActiveImage] = useState(project.image);
+  const hero = activeImage || project.image;
+  const isHandedOver = project.status?.toLowerCase().includes('handed');
 
   return (
-    <div className="modal-overlay active" id="projectDetailModal" onClick={onClose}>
-      <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
-          <i className="fa-solid fa-xmark"></i>
-        </button>
+    <div
+      className="csx-pm-overlay"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={project.title}
+    >
+      <div className="csx-pm-box" onClick={(e) => e.stopPropagation()}>
+        {/* ---- hero ---- */}
+        <div className="csx-pm-hero">
+          <img src={asPath(hero)} alt={project.title} className="csx-pm-hero-img" />
+          <span className="csx-pm-hero-veil" aria-hidden="true"></span>
 
-        <div id="modalDynamicContent">
-          <img
-            id="modalHeroImg"
-            src={`/${activeImage.replace(/^\/+/, '')}`}
-            alt={project.title}
-            className="modal-hero-img"
-          />
+          <span className={`csx-pm-status ${isHandedOver ? 'done' : 'live'}`}>
+            <i className={`fa-solid ${isHandedOver ? 'fa-circle-check' : 'fa-hard-hat'}`}></i>
+            {project.status}
+          </span>
 
-          <div className="modal-inner-padding">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
-              <div>
-                <span className="section-tag">{project.categoryLabel || 'Turnkey Project'}</span>
-                <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-heading)', margin: '0.25rem 0' }}>
-                  {project.title}
-                </h2>
-                <p style={{ fontSize: '1.1rem', color: 'var(--brand-orange)', fontWeight: 700 }}>
-                  Client: {project.client}
-                </p>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <span
-                  className={`project-status-tag ${
-                    project.status?.toLowerCase().includes('handed') ? 'handed-over' : 'ongoing'
-                  }`}
-                  style={{ position: 'static' }}
-                >
-                  {project.status}
-                </span>
-                <p style={{ fontSize: '0.8125rem', color: '#64748B', marginTop: '0.35rem' }}>
-                  Year: {project.year || '2024'}
-                </p>
-              </div>
-            </div>
+          <button className="csx-pm-close" onClick={onClose} aria-label="Close">
+            <i className="fa-solid fa-xmark"></i>
+          </button>
 
-            <div className="modal-meta-grid">
-              <div className="modal-meta-item">
-                <label>Location</label>
-                <p>{project.city}, {project.state}</p>
-              </div>
-              <div className="modal-meta-item">
-                <label>Typology</label>
-                <p>{project.type}</p>
-              </div>
-              <div className="modal-meta-item">
-                <label>Green Standard</label>
-                <p>IGBC Norms Verified</p>
-              </div>
-              <div className="modal-meta-item">
-                <label>Turnkey Scope</label>
-                <p>End-to-End Delivery</p>
-              </div>
-            </div>
-
-            <div style={{ marginBottom: '2rem' }}>
-              <h4 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-heading)', marginBottom: '0.75rem' }}>
-                Project Overview
-              </h4>
-              <p style={{ fontSize: '0.95rem', color: '#4B5563', lineHeight: 1.8 }}>
-                {project.description}
-              </p>
-            </div>
-
-            {project.gallery && project.gallery.length > 0 && (
-              <div style={{ marginBottom: '2rem' }}>
-                <h4 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-heading)', marginBottom: '0.75rem' }}>
-                  Project Photo Gallery
-                </h4>
-                <div style={{ display: 'flex', gap: '0.75rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
-                  {project.gallery.map((img, idx) => (
-                    <img
-                      key={idx}
-                      src={`/${img.replace(/^\/+/, '')}`}
-                      alt={`${project.title} gallery thumbnail ${idx + 1}`}
-                      onClick={() => setActiveImage(img)}
-                      style={{
-                        width: '120px',
-                        height: '80px',
-                        objectFit: 'cover',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        border: activeImage === img ? '2px solid var(--brand-orange)' : '1px solid var(--border-subtle)',
-                        opacity: activeImage === img ? 1 : 0.7,
-                        transition: 'all 0.2s ease',
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {project.scope && project.scope.length > 0 && (
-              <div style={{ marginBottom: '2.5rem' }}>
-                <h4 style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--text-heading)', marginBottom: '0.75rem' }}>
-                  Turnkey Deliverables &amp; Execution Scope
-                </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem' }}>
-                  {project.scope.map((s, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: '#334155' }}>
-                      <i className="fa-solid fa-circle-check" style={{ color: 'var(--brand-green)' }}></i> {s}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
-              <a
-                href={`https://wa.me/${INITIAL_DATA.company.whatsappNumber}?text=Hello%20Comfort%20Space,%20I%20am%20inquiring%20about%20a%20project%20similar%20to%20${encodeURIComponent(project.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-brand"
-              >
-                <i className="fa-brands fa-whatsapp"></i> Inquire About Similar Space
-              </a>
-              <button className="btn btn-outline-dark" onClick={onClose}>
-                Close Details
-              </button>
-            </div>
+          <div className="csx-pm-hero-copy">
+            <span className="csx-pm-tag">{project.categoryLabel || 'Turnkey Project'}</span>
+            <h2>{project.title}</h2>
+            <p className="csx-pm-client">{project.client}</p>
           </div>
+        </div>
+
+        {/* ---- body ---- */}
+        <div className="csx-pm-body">
+          <dl className="csx-pm-meta">
+            <div>
+              <dt>Location</dt>
+              <dd>
+                {project.city}, {project.state}
+              </dd>
+            </div>
+            <div>
+              <dt>Typology</dt>
+              <dd>{project.type}</dd>
+            </div>
+            <div>
+              <dt>Year</dt>
+              <dd>{project.year || '2024'}</dd>
+            </div>
+            <div>
+              <dt>Green Standard</dt>
+              <dd>IGBC Norms Verified</dd>
+            </div>
+          </dl>
+
+          <section className="csx-pm-section">
+            <h3>Project Overview</h3>
+            <p className="csx-pm-text">{project.description}</p>
+          </section>
+
+          {project.gallery?.length > 1 && (
+            <section className="csx-pm-section">
+              <h3>Photo Gallery</h3>
+              <div className="csx-pm-thumbs">
+                {project.gallery.map((img, idx) => (
+                  <button
+                    key={idx}
+                    className={`csx-pm-thumb ${hero === img ? 'active' : ''}`}
+                    onClick={() => setActiveImage(img)}
+                    aria-label={`View photo ${idx + 1}`}
+                  >
+                    <img src={asPath(img)} alt="" loading="lazy" />
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {project.scope?.length > 0 && (
+            <section className="csx-pm-section">
+              <h3>Turnkey Deliverables &amp; Execution Scope</h3>
+              <ul className="csx-pm-scope">
+                {project.scope.map((item, idx) => (
+                  <li key={idx}>
+                    <i className="fa-solid fa-check"></i> {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+
+        {/* ---- footer ---- */}
+        <div className="csx-pm-foot">
+          <a
+            href={`https://wa.me/${INITIAL_DATA.company.whatsappNumber}?text=${encodeURIComponent(
+              `Hello Comfort Space, I am inquiring about a project similar to ${project.title}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="csx-pm-btn brand"
+          >
+            <i className="fa-brands fa-whatsapp"></i> Inquire About a Similar Space
+          </a>
+          <button className="csx-pm-btn ghost" onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>
