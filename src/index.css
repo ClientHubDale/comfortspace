@@ -49,7 +49,9 @@
 }
 
 /* Reset & Universal Defaults */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -88,7 +90,9 @@ body {
   margin-bottom: 2.25rem;
 }
 
-.text-center { text-align: center; }
+.text-center {
+  text-align: center;
+}
 
 .section-tag {
   display: inline-flex;
@@ -320,7 +324,7 @@ body {
 }
 
 /* the menu sits centred between the brand and the actions */
-.nav-container > nav {
+.nav-container>nav {
   flex: 1 1 auto;
   align-self: stretch;
   display: flex;
@@ -394,7 +398,8 @@ body {
 /* ── Nav menu ────────────────────────────────────────────────────── */
 .nav-menu {
   display: flex;
-  align-items: stretch; /* each item spans the full bar height */
+  align-items: stretch;
+  /* each item spans the full bar height */
   height: 100%;
   list-style: none;
   gap: 1.3rem;
@@ -523,6 +528,7 @@ button.dd-trigger {
     opacity: 0;
     transform: translateY(-6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -634,7 +640,9 @@ button.dd-trigger {
 .nav-dropdown-wrapper,
 .nav-dropdown-menu,
 .nav-dropdown-item,
-.dd-backdrop { all: unset; }
+.dd-backdrop {
+  all: unset;
+}
 
 /* ── "Get a Quote" pill — mirrors the dark buttons used on the page ── */
 .btn-header-quote {
@@ -787,7 +795,8 @@ button.dd-trigger {
   display: none !important;
 }
 
-.breadcrumb-trail a:hover, .breadcrumb-trail a.active {
+.breadcrumb-trail a:hover,
+.breadcrumb-trail a.active {
   color: var(--brand-orange);
   font-weight: 600;
 }
@@ -833,8 +842,15 @@ button.dd-trigger {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
@@ -842,8 +858,8 @@ button.dd-trigger {
    ========================================================================== */
 .hero-section-ref {
   background: radial-gradient(circle at 65% 20%, rgba(245, 178, 110, 0.4) 0%, transparent 55%),
-              radial-gradient(circle at 20% 35%, rgba(195, 180, 205, 0.5) 0%, transparent 65%),
-              linear-gradient(135deg, #8E7D93 0%, #826E88 28%, #5C3C62 65%, #321838 100%);
+    radial-gradient(circle at 20% 35%, rgba(195, 180, 205, 0.5) 0%, transparent 65%),
+    linear-gradient(135deg, #8E7D93 0%, #826E88 28%, #5C3C62 65%, #321838 100%);
   padding: 1.5rem 0 0;
   position: relative;
   overflow: hidden;
@@ -1059,10 +1075,21 @@ button.dd-trigger {
   box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45);
 }
 
-.hero-feat-icon.purple i { color: #4A1E54; }
-.hero-feat-icon.peach i { color: #D97706; }
-.hero-feat-icon.mint i { color: #16A34A; }
-.hero-feat-icon.lavender i { color: #7C3AED; }
+.hero-feat-icon.purple i {
+  color: #4A1E54;
+}
+
+.hero-feat-icon.peach i {
+  color: #D97706;
+}
+
+.hero-feat-icon.mint i {
+  color: #16A34A;
+}
+
+.hero-feat-icon.lavender i {
+  color: #7C3AED;
+}
 
 .hero-feat-info strong {
   font-size: 0.8rem;
@@ -1214,8 +1241,8 @@ button.dd-trigger {
   height: 100%;
   object-fit: cover;
   object-position: right center;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 10%, black 28%);
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 10%, black 28%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.3) 10%, black 28%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.3) 10%, black 28%);
   display: block;
 }
 
@@ -1306,18 +1333,39 @@ button.dd-trigger {
    Keyframe Animations for Hero Experience ("Actractive Animations")
    ========================================================================== */
 @keyframes heroFadeDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes heroVisualIn {
-  from { opacity: 0; transform: translateX(35px) scale(0.98); }
-  to { opacity: 1; transform: translateX(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateX(35px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 .animate-slide-up {
@@ -1328,48 +1376,121 @@ button.dd-trigger {
   animation: heroVisualIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.animate-stagger-in .hero-ref-title span:nth-child(1) { animation-delay: 0.02s; }
-.animate-stagger-in .hero-ref-title span:nth-child(2) { animation-delay: 0.06s; }
-.animate-stagger-in .hero-ref-title span:nth-child(3) { animation-delay: 0.10s; }
-.animate-stagger-in .hero-ref-desc { animation-delay: 0.14s; }
-.animate-stagger-in .hero-features-row { animation-delay: 0.18s; }
-.animate-stagger-in .hero-cta-row { animation-delay: 0.22s; }
+.animate-stagger-in .hero-ref-title span:nth-child(1) {
+  animation-delay: 0.02s;
+}
+
+.animate-stagger-in .hero-ref-title span:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.animate-stagger-in .hero-ref-title span:nth-child(3) {
+  animation-delay: 0.10s;
+}
+
+.animate-stagger-in .hero-ref-desc {
+  animation-delay: 0.14s;
+}
+
+.animate-stagger-in .hero-features-row {
+  animation-delay: 0.18s;
+}
+
+.animate-stagger-in .hero-cta-row {
+  animation-delay: 0.22s;
+}
 
 @keyframes floatOrb1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -25px) scale(1.12); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -25px) scale(1.12);
+  }
 }
 
 @keyframes floatOrb2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-25px, 30px) scale(1.08); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-25px, 30px) scale(1.08);
+  }
 }
 
 @keyframes floatOrb3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(20px, 20px) scale(0.94); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(20px, 20px) scale(0.94);
+  }
 }
 
 @keyframes playRadar {
-  0% { transform: scale(1); opacity: 0.85; }
-  100% { transform: scale(1.85); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
 }
 
 @keyframes amberGlowPulse {
-  0%, 100% { box-shadow: 0 0 16px rgba(245, 158, 11, 0.35), 0 8px 25px rgba(0, 0, 0, 0.3); }
-  50% { box-shadow: 0 0 28px rgba(245, 158, 11, 0.65), 0 10px 32px rgba(0, 0, 0, 0.45); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.35), 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 28px rgba(245, 158, 11, 0.65), 0 10px 32px rgba(0, 0, 0, 0.45);
+  }
 }
 
 @keyframes waNudge {
-  0%, 90%, 100% { transform: scale(1); }
-  92% { transform: scale(1.06) rotate(-2deg); }
-  95% { transform: scale(1.06) rotate(2deg); }
-  98% { transform: scale(1.02); }
+
+  0%,
+  90%,
+  100% {
+    transform: scale(1);
+  }
+
+  92% {
+    transform: scale(1.06) rotate(-2deg);
+  }
+
+  95% {
+    transform: scale(1.06) rotate(2deg);
+  }
+
+  98% {
+    transform: scale(1.02);
+  }
 }
 
 @keyframes buttonShine {
-  0%, 70% { left: -120%; }
-  100% { left: 220%; }
+
+  0%,
+  70% {
+    left: -120%;
+  }
+
+  100% {
+    left: 220%;
+  }
 }
 
 /* ==========================================================================
@@ -1900,8 +2021,15 @@ button.dd-trigger {
 }
 
 @keyframes modalPop {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-close-btn {
@@ -2275,7 +2403,8 @@ textarea.form-control {
   transition: var(--trans-fast);
 }
 
-.admin-tab-btn.active, .admin-tab-btn:hover {
+.admin-tab-btn.active,
+.admin-tab-btn:hover {
   background: #E2E8F0;
   color: var(--text-heading);
 }
@@ -2336,8 +2465,15 @@ textarea.form-control {
 }
 
 @keyframes slideIn {
-  from { transform: translateX(-100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* ==========================================================================
@@ -2403,6 +2539,7 @@ textarea.form-control {
   .hero-main-container {
     padding-left: 2rem;
   }
+
   .hero-title-serif {
     font-size: 3.25rem;
   }
@@ -2413,38 +2550,71 @@ textarea.form-control {
     flex-direction: column;
     padding: 1.5rem;
   }
+
   .hero-content-left {
     max-width: 100%;
     padding: 1.5rem 0 2rem;
   }
+
   .hero-visual-container {
     width: 100%;
     min-height: 380px;
     justify-content: center;
   }
+
   .hero-visual-frame {
     min-height: 380px;
     border-radius: 16px;
   }
+
   .hero-visual-img {
     -webkit-mask-image: none;
     mask-image: none;
     border-radius: 16px;
   }
-  .hero-grid-two-col { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
-  .turnkey-card-display { grid-template-columns: 1fr; }
-  .igbc-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+
+  .hero-grid-two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .turnkey-card-display {
+    grid-template-columns: 1fr;
+  }
+
+  .igbc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 768px) {
-  .top-bar { display: none; }
-  .nav-menu { display: none; }
-  .mobile-toggle { display: block; }
-  
+  .top-bar {
+    display: none;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
   .mobile-nav-drawer {
     position: fixed;
     top: 72px;
@@ -2460,28 +2630,38 @@ textarea.form-control {
     box-shadow: 0 24px 40px -24px rgba(30, 37, 56, 0.5);
     z-index: 999;
   }
-  
+
   .mobile-nav-drawer.active {
     display: flex;
   }
 
-  .hero-title-lead { font-size: 1.75rem; }
-  .hero-title-serif { font-size: 2.65rem; }
-  .hero-features-row { 
+  .hero-title-lead {
+    font-size: 1.75rem;
+  }
+
+  .hero-title-serif {
+    font-size: 2.65rem;
+  }
+
+  .hero-features-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem 1rem;
   }
+
   .hero-cta-row {
     flex-direction: column;
     align-items: stretch;
   }
+
   .btn-hero-explore {
     justify-content: center;
   }
+
   .btn-hero-watch {
     justify-content: center;
   }
+
   .hero-whatsapp-badge {
     position: static;
     margin-top: 1.25rem;
@@ -2489,13 +2669,34 @@ textarea.form-control {
     justify-content: center;
   }
 
-  .services-grid { grid-template-columns: 1fr; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .turnkey-wrapper { padding: 2rem 1.5rem; }
-  .turnkey-roadmap-nav { overflow-x: auto; gap: 1.5rem; }
-  .form-row { grid-template-columns: 1fr; }
-  .admin-stat-grid { grid-template-columns: 1fr 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .turnkey-wrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .turnkey-roadmap-nav {
+    overflow-x: auto;
+    gap: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ==========================================================================
@@ -2507,13 +2708,13 @@ textarea.form-control {
   background: #FFFFFF;
   border-radius: 14px;
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 24px 60px -12px rgba(0,0,0,0.18), 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.18), 0 4px 20px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: box-shadow 0.35s ease, transform 0.35s ease;
 }
 
 .about-browser-mockup:hover {
-  box-shadow: 0 32px 72px -12px rgba(0,0,0,0.24), 0 6px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 32px 72px -12px rgba(0, 0, 0, 0.24), 0 6px 24px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
@@ -2542,9 +2743,20 @@ textarea.form-control {
   flex-shrink: 0;
 }
 
-.dot-red    { background: #ff5f57; box-shadow: 0 0 0 1px #e0443e; }
-.dot-yellow { background: #febc2e; box-shadow: 0 0 0 1px #d4a017; }
-.dot-green  { background: #28c840; box-shadow: 0 0 0 1px #1aab32; }
+.dot-red {
+  background: #ff5f57;
+  box-shadow: 0 0 0 1px #e0443e;
+}
+
+.dot-yellow {
+  background: #febc2e;
+  box-shadow: 0 0 0 1px #d4a017;
+}
+
+.dot-green {
+  background: #28c840;
+  box-shadow: 0 0 0 1px #1aab32;
+}
 
 /* Address Bar */
 .about-browser-addressbar {
@@ -2560,7 +2772,7 @@ textarea.form-control {
   font-family: 'Outfit', monospace;
   max-width: 520px;
   width: 100%;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 /* Tab Pills inside Chrome */
@@ -2621,8 +2833,15 @@ textarea.form-control {
 }
 
 @keyframes browserTabFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* === Milestones Timeline === */
@@ -2652,7 +2871,7 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1;
 }
 
@@ -3089,8 +3308,13 @@ textarea.form-control {
   animation: csxUp 0.9s var(--csx-ease) both;
 }
 
-.csx-hero-title .csx-line:nth-child(1) { animation-delay: 0.16s; }
-.csx-hero-title .csx-line:nth-child(2) { animation-delay: 0.26s; }
+.csx-hero-title .csx-line:nth-child(1) {
+  animation-delay: 0.16s;
+}
+
+.csx-hero-title .csx-line:nth-child(2) {
+  animation-delay: 0.26s;
+}
 
 .csx-hero-title .csx-serif {
   font-family: 'Playfair Display', Georgia, serif;
@@ -3267,11 +3491,9 @@ textarea.form-control {
   width: 26px;
   height: 26px;
   pointer-events: none;
-  background: radial-gradient(
-    circle 26px at 0 0,
-    transparent 0 26px,
-    var(--csx-page) 26px
-  );
+  background: radial-gradient(circle 26px at 0 0,
+      transparent 0 26px,
+      var(--csx-page) 26px);
 }
 
 /* bottom-left, against the frame's lower edge */
@@ -3581,7 +3803,7 @@ textarea.form-control {
 }
 
 /* the bullet list takes the slack so short cards no longer leave a void */
-.csx-bento-card > .csx-bento-body {
+.csx-bento-card>.csx-bento-body {
   flex: 1;
 }
 
@@ -3781,21 +4003,17 @@ textarea.form-control {
   width: 18px;
   height: 18px;
   pointer-events: none;
-  background: radial-gradient(
-    circle 18px at 0 0,
-    transparent 0 18px,
-    var(--csx-tint) 18px
-  );
+  background: radial-gradient(circle 18px at 0 0,
+      transparent 0 18px,
+      var(--csx-tint) 18px);
   transition: background 0.3s ease;
 }
 
 .csx-shot:hover .csx-shot-meta::before,
 .csx-shot:hover .csx-shot-meta::after {
-  background: radial-gradient(
-    circle 18px at 0 0,
-    transparent 0 18px,
-    var(--csx-tint-hover) 18px
-  );
+  background: radial-gradient(circle 18px at 0 0,
+      transparent 0 18px,
+      var(--csx-tint-hover) 18px);
 }
 
 /* bottom-left, against the card's lower edge */
@@ -3878,7 +4096,7 @@ textarea.form-control {
   color: var(--brand-orange);
 }
 
-.csx-split-badge > span {
+.csx-split-badge>span {
   display: block;
   font-size: 0.74rem;
   font-weight: 600;
@@ -4338,8 +4556,15 @@ textarea.form-control {
 }
 
 @keyframes csxSweep {
-  0%, 62% { transform: translateX(-60%); }
-  100% { transform: translateX(60%); }
+
+  0%,
+  62% {
+    transform: translateX(-60%);
+  }
+
+  100% {
+    transform: translateX(60%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4378,44 +4603,92 @@ textarea.form-control {
    Keyframes
    ========================================================================== */
 @keyframes csxHeroIn {
-  from { opacity: 0; transform: scale(1.16); }
-  to { opacity: 1; transform: scale(1.08); }
+  from {
+    opacity: 0;
+    transform: scale(1.16);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.08);
+  }
 }
 
 @keyframes csxUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes csxPanelIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes csxRadar {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
 
 @keyframes csxMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes csxDrift1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-40px, 30px) scale(1.12); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-40px, 30px) scale(1.12);
+  }
 }
 
 @keyframes csxDrift2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(35px, -28px) scale(1.08); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(35px, -28px) scale(1.08);
+  }
 }
 
 /* ==========================================================================
    Responsive
    ========================================================================== */
 @media (max-width: 1100px) {
+
   /* the cards narrow here, so the caption panel widens to keep its title
      on one line rather than wrapping and eating into the photo */
   .csx-shot-meta {
@@ -4458,6 +4731,7 @@ textarea.form-control {
 }
 
 @media (max-width: 900px) {
+
   .csx-split,
   .csx-green {
     grid-template-columns: 1fr;
@@ -4613,11 +4887,9 @@ textarea.form-control {
   .csx-hero-card-right::before {
     width: 22px;
     height: 22px;
-    background: radial-gradient(
-      circle 22px at 0 0,
-      transparent 0 22px,
-      var(--csx-page) 22px
-    );
+    background: radial-gradient(circle 22px at 0 0,
+        transparent 0 22px,
+        var(--csx-page) 22px);
   }
 
   .csx-hero-card-right::after {
@@ -4808,7 +5080,8 @@ textarea.form-control {
 
 .csx-stage-scroller.is-pinning .csx-stage-sticky {
   position: sticky;
-  top: 72px; /* clears the sticky site header */
+  top: 72px;
+  /* clears the sticky site header */
   height: calc(100svh - 72px);
 }
 
@@ -4882,8 +5155,15 @@ textarea.form-control {
 }
 
 @keyframes csxStagePulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.55); }
-  60% { box-shadow: 0 0 0 7px rgba(234, 88, 12, 0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.55);
+  }
+
+  60% {
+    box-shadow: 0 0 0 7px rgba(234, 88, 12, 0);
+  }
 }
 
 /* ---- progress counter under the rail ---- */
@@ -4910,6 +5190,7 @@ textarea.form-control {
 
 /* ---- phones and tablets: the rail lies on its side ---- */
 @media (max-width: 1100px) {
+
   .csx-stage-track,
   .csx-stage-caret,
   .csx-stage-counter {
@@ -4961,6 +5242,7 @@ textarea.form-control {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .csx-stage-btn,
   .csx-stage-btn.is-in {
     opacity: 1;
@@ -5066,6 +5348,7 @@ textarea.form-control {
 /* the closing band keeps its two buttons side by side on phones, as a pair of
    compact pills, rather than stacking them full-width */
 @media (max-width: 700px) {
+
   /* fill the screen like the hero does, and share its narrower side gutter
      so the two frames line up at the same width */
   .csx-cta-section {
@@ -5104,6 +5387,7 @@ textarea.form-control {
 }
 
 @media (max-width: 380px) {
+
   /* the very narrowest phones drop the icon to keep both pills on one row */
   .csx-home .csx-cta-inner .csx-btn i {
     display: none;
@@ -5179,13 +5463,25 @@ textarea.form-control {
 }
 
 @keyframes csxPmFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes csxPmRise {
-  from { opacity: 0; transform: translateY(22px) scale(0.98); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ---- hero ---- */
@@ -5207,13 +5503,11 @@ textarea.form-control {
 .csx-pm-hero-veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(16, 20, 32, 0.35) 0%,
-    rgba(16, 20, 32, 0) 34%,
-    rgba(16, 20, 32, 0.62) 74%,
-    rgba(16, 20, 32, 0.88) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(16, 20, 32, 0.35) 0%,
+      rgba(16, 20, 32, 0) 34%,
+      rgba(16, 20, 32, 0.62) 74%,
+      rgba(16, 20, 32, 0.88) 100%);
 }
 
 .csx-pm-hero-copy {
@@ -5332,12 +5626,12 @@ textarea.form-control {
   padding: 1.15rem 0.5rem;
 }
 
-.csx-pm-meta > div {
+.csx-pm-meta>div {
   padding: 0.35rem 1.1rem;
   border-right: 1px solid rgba(30, 37, 56, 0.1);
 }
 
-.csx-pm-meta > div:last-child {
+.csx-pm-meta>div:last-child {
   border-right: none;
 }
 
@@ -5534,15 +5828,15 @@ textarea.form-control {
     padding: 0.5rem 0.25rem;
   }
 
-  .csx-pm-meta > div {
+  .csx-pm-meta>div {
     padding: 0.8rem 0.9rem;
   }
 
-  .csx-pm-meta > div:nth-child(2n) {
+  .csx-pm-meta>div:nth-child(2n) {
     border-right: none;
   }
 
-  .csx-pm-meta > div:nth-child(-n + 2) {
+  .csx-pm-meta>div:nth-child(-n + 2) {
     border-bottom: 1px solid rgba(30, 37, 56, 0.1);
   }
 
@@ -5558,6 +5852,7 @@ textarea.form-control {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .csx-pm-overlay,
   .csx-pm-box {
     animation: none;
