@@ -1,56 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { INITIAL_DATA } from '../data/initialData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useStageSequence from '../hooks/useStageSequence';
-
-/* --------------------------------------------------------------------------
-   Animated counter — counts up the first time the number scrolls into view
-   -------------------------------------------------------------------------- */
-const CountUp = ({ end, prefix = '', suffix = '', duration = 1700 }) => {
-  const [value, setValue] = useState(0);
-  const nodeRef = useRef(null);
-
-  useEffect(() => {
-    const node = nodeRef.current;
-    if (!node) return;
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setValue(end);
-      return;
-    }
-
-    let frame;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return;
-        observer.disconnect();
-        const startedAt = performance.now();
-        const step = (now) => {
-          const progress = Math.min((now - startedAt) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          setValue(Math.round(end * eased));
-          if (progress < 1) frame = requestAnimationFrame(step);
-        };
-        frame = requestAnimationFrame(step);
-      },
-      { threshold: 0.45 }
-    );
-
-    observer.observe(node);
-    return () => {
-      observer.disconnect();
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, [end, duration]);
-
-  return (
-    <span ref={nodeRef}>
-      {prefix}
-      {value}
-      {suffix}
-    </span>
-  );
-};
+import CountUp from '../components/common/CountUp';
 
 /* --------------------------------------------------------------------------
    Home
@@ -173,7 +125,7 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
   ];
 
   return (
-    <main id="tab-home" className="tab-page active-page csx-home">
+    <main id="tab-home" className="tab-page active-page csx-page csx-home">
       {/* ====================================================================
           1. CINEMATIC HERO
           ==================================================================== */}
@@ -262,7 +214,11 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
         <div className="csx-marquee-viewport">
           <div className="csx-marquee-rail">
             {[...INITIAL_DATA.clients, ...INITIAL_DATA.clients].map((client, idx) => (
-              <div className="csx-marquee-chip" key={idx}>
+              <div
+                className="csx-marquee-chip"
+                key={idx}
+                aria-hidden={idx >= INITIAL_DATA.clients.length || undefined}
+              >
                 <span className="csx-chip-name">{client.logoText}</span>
                 <span className="csx-chip-badge">{client.logoBadge}</span>
               </div>
@@ -330,7 +286,10 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') onSelectTab('services');
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelectTab('services');
+                }
               }}
             >
               <div className="csx-bento-head">
@@ -367,7 +326,10 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') onSelectTab('turnkey');
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelectTab('turnkey');
+                }
               }}
             >
               <i className={`fa-solid ${services[1].icon} csx-bento-watermark`} aria-hidden="true"></i>
@@ -397,7 +359,10 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') onSelectTab('services');
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelectTab('services');
+                }
               }}
             >
               <i className={`fa-solid ${services[2].icon} csx-bento-watermark`} aria-hidden="true"></i>
@@ -431,7 +396,10 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') onSelectTab('services');
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelectTab('services');
+                }
               }}
             >
               <i className={`fa-solid ${services[3].icon} csx-bento-watermark`} aria-hidden="true"></i>
@@ -489,7 +457,7 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
                 key={idx}
                 className="csx-shot"
                 data-reveal
-                style={{ transitionDelay: `${idx * 70}ms` }}
+                style={{ '--reveal-delay': `${idx * 70}ms` }}
                 onClick={openFlagship}
               >
                 <span className="csx-shot-media">
@@ -644,7 +612,7 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
                 key={proj.id}
                 className="csx-proj-card"
                 data-reveal
-                style={{ transitionDelay: `${idx * 70}ms` }}
+                style={{ '--reveal-delay': `${idx * 70}ms` }}
                 onClick={() => onOpenProjectModal(proj)}
               >
                 <div className="csx-proj-media">
@@ -740,7 +708,7 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
                 key={idx}
                 className="csx-quote"
                 data-reveal
-                style={{ transitionDelay: `${idx * 80}ms` }}
+                style={{ '--reveal-delay': `${idx * 80}ms` }}
               >
                 <i className="fa-solid fa-quote-right csx-quote-mark" aria-hidden="true"></i>
                 <div className="csx-quote-stars">★★★★★</div>
