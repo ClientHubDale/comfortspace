@@ -23,7 +23,7 @@ const ProjectsPage = ({ projects, onOpenProjectModal }) => {
 
       <section className="section-padding" style={{ background: '#FFFFFF' }}>
         <div className="container">
-          
+
           {/* Category Filters */}
           <div className="gallery-filters" id="projectFiltersWrap">
             {INITIAL_DATA.categories.map((cat) => (
@@ -48,9 +48,8 @@ const ProjectsPage = ({ projects, onOpenProjectModal }) => {
                 <div className="project-card-img-wrap">
                   <img src={`/${proj.image.replace(/^\/+/, '')}`} alt={proj.title} loading="lazy" />
                   <span
-                    className={`project-status-tag ${
-                      proj.status.toLowerCase().includes('handed') ? 'handed-over' : 'ongoing'
-                    }`}
+                    className={`project-status-tag ${proj.status.toLowerCase().includes('handed') ? 'handed-over' : 'ongoing'
+                      }`}
                   >
                     {proj.status}
                   </span>
