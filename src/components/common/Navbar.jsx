@@ -1,38 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-/* ─── Dropdown data ─────────────────────────────────────────────────── */
-const DROPDOWNS = {
-  about: {
-    items: [
-      { icon: 'fa-building',          label: 'Our Story',          sub: '20-year legacy of craftsmanship & trust',     tab: 'about' },
-      { icon: 'fa-leaf',              label: 'IGBC Founding Member',sub: 'Eco-conscious green building commitment',     tab: 'about' },
-      { icon: 'fa-map-location-dot',  label: 'National Footprint', sub: 'Executing seamlessly across 7+ states',       tab: 'about' },
-    ],
-  },
-  services: {
-    items: [
-      { icon: 'fa-building-columns',  label: 'Civil Construction',      sub: 'Structural, façade & RCC engineering',         tab: 'services' },
-      { icon: 'fa-key',               label: 'Turnkey Base Projects',    sub: 'MEP, interiors & networking — one window',     tab: 'services' },
-      { icon: 'fa-clipboard-check',   label: 'Project Management (PMC)', sub: 'BOQ, site supervision & vendor orchestration', tab: 'services' },
-      { icon: 'fa-shield-halved',     label: 'Fire & Life Safety',       sub: 'Detection, suppression & statutory compliance', tab: 'services' },
-      { icon: 'fa-couch',             label: 'Modular Furniture',        sub: 'Bespoke fitments, workstations & joinery',     tab: 'services' },
-    ],
-  },
-  turnkey: {
-    items: [
-      { icon: 'fa-list-check',        label: '7-Step Scope of Work',     sub: 'Pre-inspection to transparent PO billing',     tab: 'turnkey' },
-      { icon: 'fa-chart-gantt',       label: 'Ongoing Projects Tracker', sub: "Live progress of active McDonald's builds",   tab: 'turnkey' },
-      { icon: 'fa-images',            label: 'Deliverables in Action',   sub: 'Real site photos across sectors',              tab: 'turnkey' },
-    ],
-  },
-  projects: {
-    items: [
-      { icon: 'fa-utensils',          label: 'Hospitality & F&B',        sub: "McDonald's, MURO & luxury dining fit-outs",    tab: 'projects' },
-      { icon: 'fa-landmark',          label: 'Corporate & Banking',       sub: 'Tata Capital, AU Bank & NBFC branches',        tab: 'projects' },
-      { icon: 'fa-layer-group',       label: 'All Projects',             sub: '200+ completed projects across India',          tab: 'projects' },
-    ],
-  },
-};
+import { DROPDOWNS } from './navMenus';
 
 /* ─── Main Navbar ────────────────────────────────────────────────────── */
 const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
@@ -84,9 +51,9 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
     }
   };
 
-  /* Dropdown Item Click */
-  const handleItemClick = (tab) => {
-    onSelectTab(tab);
+  /* Dropdown Item Click — an item may target one section of its page */
+  const handleItemClick = (tab, section, filter) => {
+    onSelectTab(tab, section, filter);
     setOpenMenu(null);
   };
 
@@ -175,14 +142,14 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
                 About Us <i className="fa-solid fa-chevron-down" />
               </button>
               {openMenu === 'about' && (
-                <div className="dd-panel" role="menu">
+                <div className="dd-panel dd-panel-grid" role="menu">
                   {DROPDOWNS.about.items.map((item) => (
                     <button
                       key={item.label}
                       type="button"
                       className="dd-item"
                       role="menuitem"
-                      onClick={() => handleItemClick(item.tab)}
+                      onClick={() => handleItemClick(item.tab, item.section, item.filter)}
                     >
                       <span className="dd-icon">
                         <i className={`fa-solid ${item.icon}`} />
@@ -214,14 +181,14 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
                 Services <i className="fa-solid fa-chevron-down" />
               </button>
               {openMenu === 'services' && (
-                <div className="dd-panel" role="menu">
+                <div className="dd-panel dd-panel-grid" role="menu">
                   {DROPDOWNS.services.items.map((item) => (
                     <button
                       key={item.label}
                       type="button"
                       className="dd-item"
                       role="menuitem"
-                      onClick={() => handleItemClick(item.tab)}
+                      onClick={() => handleItemClick(item.tab, item.section, item.filter)}
                     >
                       <span className="dd-icon">
                         <i className={`fa-solid ${item.icon}`} />
@@ -260,7 +227,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
                       type="button"
                       className="dd-item"
                       role="menuitem"
-                      onClick={() => handleItemClick(item.tab)}
+                      onClick={() => handleItemClick(item.tab, item.section, item.filter)}
                     >
                       <span className="dd-icon">
                         <i className={`fa-solid ${item.icon}`} />
@@ -299,7 +266,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
                       type="button"
                       className="dd-item"
                       role="menuitem"
-                      onClick={() => handleItemClick(item.tab)}
+                      onClick={() => handleItemClick(item.tab, item.section, item.filter)}
                     >
                       <span className="dd-icon">
                         <i className={`fa-solid ${item.icon}`} />

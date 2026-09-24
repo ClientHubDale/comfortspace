@@ -116,7 +116,7 @@ const AdminCMSModal = ({
   const newLeadsCount = leads.filter((l) => l.status === 'New').length;
 
   return (
-    <div className="admin-modal-overlay active" id="adminPortalModal" onClick={onClose}>
+    <div className="admin-modal-overlay active" id="adminPortalModal" data-lenis-prevent onClick={onClose}>
       <div className="admin-window" onClick={(e) => e.stopPropagation()}>
         <div className="admin-header">
           <div className="admin-brand">

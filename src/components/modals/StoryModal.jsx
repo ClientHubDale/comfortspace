@@ -4,7 +4,7 @@ const StoryModal = ({ isOpen, onClose, onExploreProjects }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-backdrop active" id="storyModal" onClick={onClose}>
+    <div className="modal-backdrop active" data-lenis-prevent id="storyModal" onClick={onClose}>
       <div
         className="modal-box"
         style={{

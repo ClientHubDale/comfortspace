@@ -10,6 +10,7 @@ import Toast from './components/common/Toast';
 import ProjectDetailModal from './components/modals/ProjectDetailModal';
 import StoryModal from './components/modals/StoryModal';
 import AdminCMSModal from './components/modals/AdminCMSModal';
+import { initSmoothScroll, setScrollLocked, smoothScrollTo } from './utils/smoothScroll';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -46,6 +47,17 @@ function App() {
   const [projects, setProjects] = useState(() => getStoredProjects());
   const [leads, setLeads] = useState(() => getStoredLeads());
 
+  // Inertia scrolling for the whole site
+  useEffect(() => {
+    initSmoothScroll();
+  }, []);
+
+  // The page behind an open modal must not scroll
+  const anyModalOpen = Boolean(selectedProject) || isStoryOpen || isAdminOpen;
+  useEffect(() => {
+    setScrollLocked(anyModalOpen);
+  }, [anyModalOpen]);
+
   // URL Hash Sync
   useEffect(() => {
     const handleHashChange = () => {
@@ -60,11 +72,40 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const handleSelectTab = (tab) => {
+  // A dropdown item can point at one section of a page, e.g. ('about', 'about-journey')
+  const [scrollTarget, setScrollTarget] = useState(null);
+
+  // Project Gallery category, so a dropdown item can open the gallery pre-filtered
+  const [projectCategory, setProjectCategory] = useState('all');
+
+  const handleSelectTab = (tab, sectionId, filter) => {
+    const samePage = tab === activeTab;
+    // A new page always starts from its top — jump there at once rather than
+    // gliding up through the new page's content
+    if (!samePage) smoothScrollTo(0, { immediate: true });
+
     setActiveTab(tab);
     window.location.hash = tab;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (tab === 'projects') setProjectCategory(filter || 'all');
+
+    if (sectionId) {
+      setScrollTarget({ id: sectionId, at: Date.now() });
+    } else {
+      // clear any earlier target so it is not replayed on this page
+      setScrollTarget(null);
+      if (samePage) smoothScrollTo(0);
+    }
   };
+
+  // Runs after the target page has rendered, so the section exists to scroll to.
+  // Keyed on the target alone: a plain page change must never replay it.
+  useEffect(() => {
+    if (!scrollTarget) return;
+    const frame = requestAnimationFrame(() => {
+      smoothScrollTo(document.getElementById(scrollTarget.id) || 0);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [scrollTarget]);
 
   // Project CRUD
   const handleSaveProject = (newOrUpdatedProj) => {
@@ -171,6 +212,8 @@ function App() {
       {activeTab === 'projects' && (
         <ProjectsPage
           projects={projects}
+          selectedCategory={projectCategory}
+          onSelectCategory={setProjectCategory}
           onOpenProjectModal={(proj) => setSelectedProject(proj)}
         />
       )}

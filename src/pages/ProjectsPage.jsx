@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { INITIAL_DATA } from '../data/initialData';
 
-const ProjectsPage = ({ projects, onOpenProjectModal }) => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
+const ProjectsPage = ({ projects, onOpenProjectModal, selectedCategory = 'all', onSelectCategory }) => {
   const filteredProjects = projects.filter((proj) => {
     if (selectedCategory === 'all') return true;
     return proj.category === selectedCategory;
@@ -21,7 +19,7 @@ const ProjectsPage = ({ projects, onOpenProjectModal }) => {
         </div>
       </div>
 
-      <section className="section-padding" style={{ background: '#FFFFFF' }}>
+      <section id="projects-gallery" className="section-padding" style={{ background: '#FFFFFF' }}>
         <div className="container">
 
           {/* Category Filters */}
@@ -30,7 +28,7 @@ const ProjectsPage = ({ projects, onOpenProjectModal }) => {
               <button
                 key={cat.id}
                 className={`filter-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat.id)}
+                onClick={() => onSelectCategory(cat.id)}
               >
                 {cat.name}
               </button>

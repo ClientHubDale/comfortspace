@@ -16,7 +16,7 @@ const TurnkeyPage = ({ onSelectTab }) => {
       </div>
 
       {/* The 7 Step Scope of Work Breakdown */}
-      <section className="section-padding" style={{ background: '#FFFFFF' }}>
+      <section id="tk-scope" className="section-padding" style={{ background: '#FFFFFF' }}>
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Execution Roadmap</span>
@@ -166,7 +166,7 @@ const TurnkeyPage = ({ onSelectTab }) => {
       </section>
 
       {/* Turnkey Deliverables in Action Gallery */}
-      <section className="section-padding" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
+      <section id="tk-deliverables" className="section-padding" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Visual Verification</span>
@@ -223,7 +223,7 @@ const TurnkeyPage = ({ onSelectTab }) => {
       </section>
 
       {/* Ongoing McDonald's Projects */}
-      <section className="section-padding" style={{ background: 'var(--bg-secondary)' }}>
+      <section id="tk-tracker" className="section-padding" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Active Construction</span>

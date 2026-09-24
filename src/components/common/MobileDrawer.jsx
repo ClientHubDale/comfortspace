@@ -1,10 +1,29 @@
 import React from 'react';
+import { DROPDOWNS } from './navMenus';
+
+/* Section links indented under a top-level page link */
+const DrawerSub = ({ items, onSelectTab, onClose }) => (
+  <div className="drawer-sub">
+    {items.map((item) => (
+      <button
+        key={item.label}
+        type="button"
+        onClick={() => {
+          onSelectTab(item.tab, item.section, item.filter);
+          onClose();
+        }}
+      >
+        <i className={`fa-solid ${item.icon}`}></i> {item.label}
+      </button>
+    ))}
+  </div>
+);
 
 const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="mobile-nav-drawer active" id="mobileNavDrawer">
+    <div className="mobile-nav-drawer active" id="mobileNavDrawer" data-lenis-prevent>
       <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '0.5rem' }}>
         <button
           onClick={onClose}
@@ -37,6 +56,7 @@ const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) 
       >
         About Us
       </a>
+      <DrawerSub items={DROPDOWNS.about.items} onSelectTab={onSelectTab} onClose={onClose} />
       <a
         href="#services"
         className={`nav-link ${activeTab === 'services' ? 'active' : ''}`}
@@ -48,6 +68,7 @@ const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) 
       >
         Services
       </a>
+      <DrawerSub items={DROPDOWNS.services.items} onSelectTab={onSelectTab} onClose={onClose} />
       <a
         href="#turnkey"
         className={`nav-link ${activeTab === 'turnkey' ? 'active' : ''}`}
@@ -59,6 +80,7 @@ const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) 
       >
         Turnkey &amp; Project Management
       </a>
+      <DrawerSub items={DROPDOWNS.turnkey.items} onSelectTab={onSelectTab} onClose={onClose} />
       <a
         href="#projects"
         className={`nav-link ${activeTab === 'projects' ? 'active' : ''}`}
@@ -70,6 +92,7 @@ const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) 
       >
         Project Gallery
       </a>
+      <DrawerSub items={DROPDOWNS.projects.items} onSelectTab={onSelectTab} onClose={onClose} />
       <a
         href="#contact"
         className={`nav-link ${activeTab === 'contact' ? 'active' : ''}`}

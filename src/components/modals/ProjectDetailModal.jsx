@@ -37,6 +37,7 @@ const ProjectDetailModal = ({ project, onClose }) => {
   return (
     <div
       className="csx-pm-overlay"
+      data-lenis-prevent
       onClick={onClose}
       role="dialog"
       aria-modal="true"

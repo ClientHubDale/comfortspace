@@ -3,6 +3,7 @@ import { INITIAL_DATA } from '../data/initialData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import CountUp from '../components/common/CountUp';
 import useStageSequence from '../hooks/useStageSequence';
+import { smoothScrollTo } from '../utils/smoothScroll';
 
 /* --------------------------------------------------------------------------
    Content
@@ -256,10 +257,7 @@ const AboutPage = ({ onSelectTab }) => {
     }
     const travel = section.offsetHeight - (window.innerHeight - 72);
     const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top: sectionTop - 72 + (travel * (idx + 0.5)) / MILESTONES.length,
-      behavior: 'smooth',
-    });
+    smoothScrollTo(sectionTop - 72 + (travel * (idx + 0.5)) / MILESTONES.length);
   };
 
   return (
@@ -369,7 +367,7 @@ const AboutPage = ({ onSelectTab }) => {
       {/* ====================================================================
           3. MANIFESTO — words light up on scroll
           ==================================================================== */}
-      <section className="abx-manifesto-wrap">
+      <section className="abx-manifesto-wrap" id="about-story">
         <div className="container">
           <span className="csx-tag">Excellence Through Experience</span>
           <p
@@ -402,7 +400,7 @@ const AboutPage = ({ onSelectTab }) => {
       {/* ====================================================================
           4. PURPOSE — mission / vision / values as tabs
           ==================================================================== */}
-      <section className="abx-section abx-tint">
+      <section className="abx-section abx-tint" id="about-purpose">
         <div className="container">
           <div className="abx-head" data-reveal>
             <span className="csx-tag">What Drives Us</span>
@@ -457,7 +455,7 @@ const AboutPage = ({ onSelectTab }) => {
       {/* ====================================================================
           5. WHY US — numbered advantage list beside a sticky intro
           ==================================================================== */}
-      <section className="abx-section">
+      <section className="abx-section" id="about-why">
         <div className="container abx-why">
           <div className="abx-why-intro" data-reveal>
             <span className="csx-tag">Why Comfort Space</span>
@@ -494,7 +492,7 @@ const AboutPage = ({ onSelectTab }) => {
       {/* ====================================================================
           6. INDUSTRIES — icon grid
           ==================================================================== */}
-      <section className="abx-section abx-dark">
+      <section className="abx-section abx-dark" id="about-industries">
         <div className="container">
           <div className="abx-head abx-head-split" data-reveal>
             <div>
@@ -530,6 +528,7 @@ const AboutPage = ({ onSelectTab }) => {
           7. JOURNEY — pinned on scroll, one milestone per scroll slice
           ==================================================================== */}
       <section
+        id="about-journey"
         ref={journeyRef}
         className={`csx-stage-scroller abx-journey ${journeyPinned ? 'is-pinning' : ''}`}
         style={{ '--csx-stage-count': MILESTONES.length }}
@@ -599,7 +598,7 @@ const AboutPage = ({ onSelectTab }) => {
       {/* ====================================================================
           8. LEADERSHIP — portrait panels
           ==================================================================== */}
-      <section className="abx-section abx-tint">
+      <section className="abx-section abx-tint" id="about-leadership">
         <div className="container">
           <div className="abx-head abx-head-split" data-reveal>
             <div>
@@ -641,13 +640,12 @@ const AboutPage = ({ onSelectTab }) => {
       {/* ====================================================================
           9. CREDENTIALS — certificate + seals
           ==================================================================== */}
-      <section className="abx-section">
+      <section className="abx-section" id="about-credentials">
         <div className="container abx-creds">
           <figure className="abx-cert" data-reveal>
             <img
               src="/assets/images/extracted_11_IGBC_Founding_Member_certificate.jpeg"
               alt="IGBC Founding Member certificate awarded to Comfort Space"
-              loading="lazy"
             />
           </figure>
           <div className="abx-creds-copy" data-reveal>
@@ -676,7 +674,7 @@ const AboutPage = ({ onSelectTab }) => {
       {/* ====================================================================
           10. PRESENCE — HQ card + state accordion
           ==================================================================== */}
-      <section className="abx-section abx-tint">
+      <section className="abx-section abx-tint" id="about-presence">
         <div className="container abx-presence">
           <div className="abx-hq" data-reveal>
             <span className="abx-tag-light">Headquarters</span>

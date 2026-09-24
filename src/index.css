@@ -7966,3 +7966,1054 @@
     transition: none;
   }
 }
+
+
+/* ==========================================================================
+   About dropdown: each item jumps to one section of the About page
+   ========================================================================== */
+.dd-panel.dd-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.15rem 0.35rem;
+  min-width: 640px;
+}
+
+/* the About sections land just below the sticky header */
+.csx-about [id^="about-"] {
+  scroll-margin-top: 84px;
+}
+
+/* About section links, indented under "About Us" in the mobile drawer */
+.mobile-nav-drawer {
+  max-height: calc(100svh - 80px);
+  overflow-y: auto;
+}
+
+.drawer-sub {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.2rem 0.5rem;
+  padding: 0.35rem 0 0.75rem 0.25rem;
+  border-bottom: 1px solid #F1F2F5;
+}
+
+.drawer-sub button {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: none;
+  border: none;
+  padding: 0.45rem 0.25rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.drawer-sub button:hover {
+  color: var(--brand-orange);
+  background: #F5F6F8;
+}
+
+.drawer-sub i {
+  width: 16px;
+  font-size: 0.72rem;
+  color: var(--brand-orange);
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  .drawer-sub {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==========================================================================
+   SERVICES PAGE
+   Same tokens as Home and About (.csx-page); its own layouts (.svx-*).
+   Motion: blur-in word swap, cursor spotlights, kinetic type band, sticky
+   stacking cards, scroll-driven image parallax, rotating gradient border.
+   ========================================================================== */
+.svx-section {
+  padding: 5.5rem 0;
+}
+
+.svx-head {
+  margin-bottom: 3rem;
+}
+
+.svx-head-center {
+  text-align: center;
+}
+
+.svx-head-split {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.svx-head-note {
+  max-width: 380px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--csx-ink-soft);
+}
+
+.svx-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #EA580C 0%, #B45309 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- 1. Hero ---------- */
+.svx-hero {
+  --mx: 50%;
+  --my: 35%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 2.5rem 0 4.75rem;
+}
+
+/* faint blueprint grid, faded out towards the edges */
+.svx-hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(30, 37, 56, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 37, 56, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 40%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 75% at 50% 40%, #000 25%, transparent 75%);
+}
+
+/* the glow follows the cursor */
+.svx-hero-spot {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(460px circle at var(--mx) var(--my), rgba(234, 88, 12, 0.16), transparent 62%);
+}
+
+.svx-hero-inner {
+  text-align: center;
+}
+
+.svx-crumb {
+  justify-content: center;
+}
+
+.svx-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--csx-line);
+  border-radius: 9999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--csx-ink);
+  margin-bottom: 1.6rem;
+  animation: csxUp 0.8s var(--csx-ease) 0.05s both;
+}
+
+.svx-kicker-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-orange);
+  animation: csxStagePulse 2.2s ease-in-out infinite;
+}
+
+.svx-hero-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.4rem;
+}
+
+.svx-hero-line {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: var(--csx-ink);
+  animation: csxUp 0.9s var(--csx-ease) both;
+}
+
+.svx-hero-line:nth-child(1) {
+  animation-delay: 0.14s;
+}
+
+.svx-hero-line:nth-child(2) {
+  animation-delay: 0.26s;
+}
+
+.svx-word-slot {
+  display: inline-block;
+}
+
+/* each new verb blurs up into place */
+.svx-word {
+  display: inline-block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  padding-right: 0.06em;
+  background: linear-gradient(120deg, #EA580C 0%, #B45309 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: svxWordIn 0.75s var(--csx-ease) both;
+}
+
+.svx-hero-sub {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: clamp(0.94rem, 1.1vw, 1.05rem);
+  line-height: 1.75;
+  color: #4B5563;
+  animation: csxUp 0.9s var(--csx-ease) 0.36s both;
+}
+
+.svx-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  max-width: 900px;
+  margin: 2.4rem auto 0;
+}
+
+.svx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--csx-line);
+  border-radius: 9999px;
+  padding: 0.4rem 1rem 0.4rem 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--csx-ink);
+  cursor: pointer;
+  animation: csxUp 0.7s var(--csx-ease) var(--d, 0.5s) both;
+  transition: transform 0.35s var(--csx-ease), border-color 0.3s ease, box-shadow 0.35s var(--csx-ease);
+}
+
+.svx-chip:hover {
+  transform: translateY(-3px);
+  border-color: rgba(234, 88, 12, 0.45);
+  box-shadow: 0 12px 26px -16px rgba(30, 37, 56, 0.45);
+}
+
+.svx-chip-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #EEF1F6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.66rem;
+  font-weight: 800;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.svx-chip:hover .svx-chip-num {
+  background: var(--brand-orange);
+  color: #FFFFFF;
+}
+
+.svx-chip > i {
+  font-size: 0.62rem;
+  color: #A9B0BD;
+  transition: transform 0.35s var(--csx-ease), color 0.3s ease;
+}
+
+.svx-chip:hover > i {
+  color: var(--brand-orange);
+  transform: translateY(2px);
+}
+
+.svx-chip:focus-visible,
+.svx-link:focus-visible {
+  outline: 2.5px solid var(--brand-orange);
+  outline-offset: 3px;
+}
+
+/* ---------- 2. Kinetic band ---------- */
+.svx-kinetic {
+  overflow: hidden;
+  background: var(--csx-ink);
+  padding: 1.35rem 0;
+  margin: 0.5rem 0;
+  transform: rotate(-1.4deg) scale(1.03);
+  box-shadow: 0 24px 50px -30px rgba(30, 37, 56, 0.7);
+}
+
+.svx-kinetic-rail {
+  display: flex;
+  width: max-content;
+  animation: csxMarquee 40s linear infinite;
+}
+
+.svx-kinetic-rail span {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.2rem;
+  padding-right: 2.2rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3.2vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+.svx-kinetic-rail span.is-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.6);
+}
+
+.svx-kinetic-rail i {
+  font-size: 0.9rem;
+  color: var(--brand-orange);
+  -webkit-text-stroke: 0;
+}
+
+/* ---------- 3. Stacking service cards ---------- */
+.svx-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.svx-card {
+  --cover: 0;
+  position: sticky;
+  top: calc(96px + var(--i) * 16px);
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid var(--csx-line);
+  border-radius: 32px;
+  box-shadow: 0 -18px 50px -34px rgba(30, 37, 56, 0.45);
+  transform-origin: center top;
+  transform: scale(calc(1 - var(--cover) * 0.06));
+  scroll-margin-top: calc(96px + var(--i) * 16px);
+}
+
+/* dims a card as the next one slides over it */
+.svx-card-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--csx-ink);
+  opacity: calc(var(--cover) * 0.4);
+}
+
+.svx-card-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  min-height: 500px;
+}
+
+.svx-card-copy {
+  padding: 2.6rem 2.9rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.svx-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.svx-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 17px;
+  background: var(--brand-orange-gradient);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 14px 28px -14px rgba(234, 88, 12, 0.75);
+}
+
+.svx-card-count {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--csx-ink);
+}
+
+.svx-card-count em {
+  font-style: normal;
+  color: #A9B0BD;
+}
+
+.svx-card-copy h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.55rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--csx-ink);
+  margin: 1.5rem 0 0.4rem;
+}
+
+.svx-card-sub {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--brand-orange);
+}
+
+.svx-card-copy > p {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--csx-ink-soft);
+  margin: 0.9rem 0 1.3rem;
+}
+
+.svx-card-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1.4rem;
+}
+
+.svx-card-list li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #4B5563;
+}
+
+.svx-card-list i {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: #DCFCE7;
+  color: var(--brand-green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+}
+
+.svx-card-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin-top: auto;
+  padding-top: 1.8rem;
+}
+
+.svx-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--csx-ink);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.25s ease;
+}
+
+.svx-link i {
+  font-size: 0.72rem;
+  transition: transform 0.35s var(--csx-ease);
+}
+
+.svx-link:hover {
+  color: var(--brand-orange);
+}
+
+.svx-link:hover i {
+  transform: translateX(4px);
+}
+
+.svx-card-media {
+  position: relative;
+  overflow: hidden;
+  margin: 0.75rem 0.75rem 0.75rem 0;
+  border-radius: 24px;
+}
+
+.svx-card-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+}
+
+.svx-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(12, 16, 28, 0.5) 100%);
+}
+
+.svx-card-bignum {
+  position: absolute;
+  right: 1.4rem;
+  bottom: -1.6rem;
+  z-index: 1;
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 11vw, 9.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.75);
+}
+
+/* scroll-driven parallax where the browser supports view timelines */
+@supports (animation-timeline: view()) {
+  .svx-card-media img {
+    animation: svxParallax linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 60%;
+  }
+}
+
+/* ---------- 4. Trades: glowing-border spotlight grid ---------- */
+.svx-trades-wrap {
+  background: var(--csx-tint);
+}
+
+.svx-trades {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.svx-trade {
+  --mx: -999px;
+  --my: -999px;
+  position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+  border-radius: 22px;
+  padding: 1.75rem 1.5rem 1.6rem;
+}
+
+/* the border: a hairline everywhere, glowing orange nearest the cursor */
+.svx-trade::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background:
+    radial-gradient(260px circle at var(--mx) var(--my), rgba(234, 88, 12, 0.95), transparent 45%),
+    linear-gradient(var(--csx-line), var(--csx-line));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* a soft wash inside the tile under the cursor */
+.svx-trade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(300px circle at var(--mx) var(--my), rgba(234, 88, 12, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+.svx-trade-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #EEF1F6;
+  color: var(--csx-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s var(--csx-ease);
+}
+
+.svx-trade:hover .svx-trade-icon {
+  background: var(--brand-orange);
+  color: #FFFFFF;
+  transform: rotate(-8deg);
+}
+
+.svx-trade h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--csx-ink);
+  margin-bottom: 0.3rem;
+}
+
+.svx-trade p {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--csx-ink-soft);
+}
+
+/* ---------- 5. Engagement models ---------- */
+.svx-models {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.svx-model {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid var(--csx-line);
+  border-radius: 28px;
+  padding: 2.25rem 2rem 2rem;
+}
+
+.svx-model::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(340px circle at var(--mx) var(--my), rgba(234, 88, 12, 0.09), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.svx-model:hover::before {
+  opacity: 1;
+}
+
+.svx-model:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 52px -30px rgba(30, 37, 56, 0.5);
+}
+
+.svx-model.is-featured {
+  border-color: var(--csx-ink);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(234, 88, 12, 0.35) 0%, transparent 45%),
+    var(--csx-ink);
+  box-shadow: 0 34px 64px -34px rgba(30, 37, 56, 0.85);
+}
+
+.svx-model.is-featured::before {
+  background: radial-gradient(340px circle at var(--mx) var(--my), rgba(253, 186, 116, 0.14), transparent 60%);
+}
+
+.svx-model-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.64rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #FFFFFF;
+  background: var(--brand-orange-gradient);
+  border-radius: 9999px;
+  padding: 0.3rem 0.75rem;
+}
+
+.svx-model-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--brand-orange-light);
+  color: var(--brand-orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.svx-model.is-featured .svx-model-icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FDBA74;
+}
+
+.svx-model-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--brand-orange);
+  margin: 1.4rem 0 0.35rem;
+}
+
+.svx-model.is-featured .svx-model-tag {
+  color: #FDBA74;
+}
+
+.svx-model h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--csx-ink);
+}
+
+.svx-model > p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--csx-ink-soft);
+  margin: 0.55rem 0 1.4rem;
+}
+
+.svx-model ul {
+  list-style: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1.3rem;
+  margin-bottom: 1.9rem;
+  border-top: 1px solid var(--csx-line);
+}
+
+.svx-model li {
+  display: flex;
+  gap: 0.65rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--csx-ink);
+}
+
+.svx-model li i {
+  color: var(--brand-orange);
+  font-size: 0.85rem;
+  margin-top: 0.12rem;
+}
+
+.svx-model.is-featured h3 {
+  color: #FFFFFF;
+}
+
+.svx-model.is-featured > p {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.svx-model.is-featured ul {
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+.svx-model.is-featured li {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.svx-model.is-featured li i {
+  color: #FDBA74;
+}
+
+.svx-model .csx-btn {
+  align-self: flex-start;
+}
+
+/* ---------- 6. CTA with a rotating gradient border ---------- */
+@property --svx-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.svx-cta-wrap {
+  padding: 1rem 0 5.5rem;
+}
+
+.svx-cta {
+  position: relative;
+  isolation: isolate;
+  border-radius: 36px;
+  padding: 2px;
+  background: conic-gradient(from var(--svx-angle), rgba(234, 88, 12, 0.08) 0%, #EA580C 18%, #FDBA74 30%, rgba(30, 37, 56, 0.25) 50%, rgba(234, 88, 12, 0.08) 70%, #EA580C 88%, rgba(234, 88, 12, 0.08) 100%);
+  animation: svxAngle 7s linear infinite;
+}
+
+/* the same gradient, blurred, as a halo behind the card */
+.svx-cta::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  z-index: -1;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(40px);
+  opacity: 0.35;
+}
+
+.svx-cta-inner {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background:
+    linear-gradient(rgba(30, 37, 56, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgba(30, 37, 56, 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+    #FFFFFF;
+  border-radius: 34px;
+  padding: 4.25rem 2rem;
+}
+
+.svx-cta-inner h2 {
+  max-width: 760px;
+  margin: 0 auto;
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--csx-ink);
+}
+
+.svx-cta-inner h2 .svx-serif {
+  display: block;
+}
+
+.svx-cta-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.1rem;
+}
+
+.svx-cta-actions .csx-btn-outline i {
+  color: #25D366;
+  font-size: 0.95rem;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes svxWordIn {
+  from {
+    opacity: 0;
+    transform: translateY(38%);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes svxParallax {
+  from {
+    transform: scale(1.18) translateY(-5%);
+  }
+
+  to {
+    transform: scale(1.18) translateY(5%);
+  }
+}
+
+@keyframes svxAngle {
+  to {
+    --svx-angle: 360deg;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .svx-trades {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .svx-models {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .svx-card-copy {
+    padding: 2.2rem 2.2rem;
+  }
+
+  .svx-card-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* phones and small tablets: cards are too tall to stack, so they just flow */
+@media (max-width: 900px) {
+  .svx-section {
+    padding: 4rem 0;
+  }
+
+  .svx-card {
+    position: relative;
+    top: auto;
+    transform: none;
+    border-radius: 26px;
+  }
+
+  .svx-card-shade {
+    display: none;
+  }
+
+  .svx-card-inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .svx-card-media {
+    order: -1;
+    height: 240px;
+    margin: 0.6rem 0.6rem 0;
+    border-radius: 20px;
+  }
+
+  .svx-card-copy {
+    padding: 1.6rem 1.5rem 1.75rem;
+  }
+
+  .svx-card-copy h3 {
+    margin-top: 1.1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .svx-hero {
+    padding: 1.75rem 0 3.5rem;
+  }
+
+  .svx-chips {
+    gap: 0.45rem;
+    margin-top: 1.8rem;
+  }
+
+  .svx-chip {
+    font-size: 0.76rem;
+    padding-right: 0.8rem;
+  }
+
+  .svx-kinetic {
+    padding: 1rem 0;
+  }
+
+  .svx-card-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.05rem;
+  }
+
+  .svx-card-actions {
+    gap: 1rem;
+  }
+
+  .svx-model {
+    padding: 1.9rem 1.5rem 1.6rem;
+  }
+
+  .svx-cta-inner {
+    padding: 3rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .svx-trades {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svx-kicker,
+  .svx-kicker-dot,
+  .svx-hero-line,
+  .svx-word,
+  .svx-hero-sub,
+  .svx-chip,
+  .svx-kinetic-rail,
+  .svx-card-media img,
+  .svx-cta {
+    animation: none !important;
+  }
+
+  .svx-card {
+    transform: none;
+  }
+}
+
+/* .csx-page .csx-btn sets a transparent border and outranks the variant, so
+   the outline button lost its edge — restore it at matching specificity */
+.csx-page .csx-btn-outline {
+  border-color: var(--csx-line);
+}
+
+.csx-page .csx-btn-outline:hover {
+  border-color: #C7C7C4;
+}
+
+/* on white cards the translucent fill disappears, so give it a solid one */
+.svx-model .csx-btn-outline,
+.svx-cta .csx-btn-outline {
+  background: #F6F6F5;
+}
+
+/* the tilted kinetic band pokes past the viewport edge; clip (not hidden) so
+   the sticky service cards keep working */
+.csx-services {
+  overflow-x: clip;
+}
+
+/* Lenis drives the smoothing, so the browser's own smooth scroll would fight
+   it (double easing on anchor jumps). Without Lenis (reduced motion) the
+   native rule above still applies. */
+html.lenis {
+  scroll-behavior: auto;
+}
+
+/* Turnkey and Project Gallery menu targets land just below the sticky header */
+#tk-scope,
+#tk-deliverables,
+#tk-tracker,
+#projects-gallery {
+  scroll-margin-top: 80px;
+}
