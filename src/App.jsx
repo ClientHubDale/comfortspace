@@ -152,7 +152,12 @@ function App() {
       )}
 
       {activeTab === 'about' && (
-        <AboutPage onSelectTab={handleSelectTab} />
+        <AboutPage
+          onSelectTab={handleSelectTab}
+          onOpenProjectModal={(proj) => setSelectedProject(proj)}
+          onOpenStoryModal={() => setIsStoryOpen(true)}
+          projects={projects}
+        />
       )}
 
       {activeTab === 'services' && (
