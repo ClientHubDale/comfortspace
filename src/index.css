@@ -270,19 +270,7 @@
     user-select: none;
   }
 
-  .top-bar-admin-link {
-    color: #A9B1C2;
-    opacity: 0.7;
-    text-decoration: none;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
-    transition: opacity 0.2s ease, color 0.2s ease;
-  }
 
-  .top-bar-admin-link:hover {
-    opacity: 1;
-    color: var(--brand-orange);
-  }
 
   /* ==========================================================================
    2. Main Navigation Header
@@ -821,26 +809,7 @@
         margin: 0 0.15rem;
       }
 
-      .admin-pill-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        padding: 0.35rem 0.95rem;
-        border-radius: 9999px;
-        background: #FFF7ED;
-        color: var(--brand-orange);
-        border: 1.5px solid rgba(234, 88, 12, 0.35);
-        font-weight: 700;
-        font-size: 0.78rem;
-        text-decoration: none;
-        transition: var(--trans-fast);
-        white-space: nowrap;
-      }
 
-      .admin-pill-btn:hover {
-        background: var(--brand-orange);
-        color: #FFFFFF;
-      }
 
       /* ==========================================================================
    4. Tab Routing & Pages
@@ -2499,172 +2468,6 @@
 
 
 
-      /* ==========================================================================
-   Admin CMS Portal
-   ========================================================================== */
-      .admin-modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(15, 23, 42, 0.85);
-        backdrop-filter: blur(12px);
-        z-index: 3000;
-        display: none;
-        padding: 2rem;
-        overflow-y: auto;
-      }
-
-      .admin-modal-overlay.active {
-        display: block;
-      }
-
-      .admin-window {
-        background: #FFFFFF;
-        border: 1px solid var(--border-subtle);
-        border-radius: 12px;
-        max-width: 1320px;
-        margin: 0 auto;
-        color: var(--text-heading);
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-      }
-
-      .admin-header {
-        padding: 1.5rem 2.5rem;
-        background: #F8FAFC;
-        border-bottom: 1px solid var(--border-subtle);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .admin-brand {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .admin-brand img {
-        height: 38px;
-      }
-
-      .admin-brand h3 {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: var(--text-heading);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .admin-brand span {
-        font-size: 0.75rem;
-        background: var(--brand-orange-light);
-        color: var(--brand-orange);
-        padding: 0.2rem 0.6rem;
-        border-radius: 4px;
-      }
-
-      .admin-nav {
-        display: flex;
-        gap: 0.75rem;
-      }
-
-      .admin-tab-btn {
-        background: none;
-        border: none;
-        color: #64748B;
-        font-weight: 600;
-        font-size: 0.875rem;
-        padding: 0.5rem 1rem;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: var(--trans-fast);
-      }
-
-
-        .admin-tab-btn.active,
-        .admin-tab-btn:hover {
-          background: #E2E8F0;
-          color: var(--text-heading);
-        }
-
-        .admin-body {
-          padding: 2.5rem;
-        }
-
-        .admin-stat-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.5rem;
-          margin-bottom: 2.5rem;
-        }
-
-        .admin-stat-card {
-          background: #F8FAFC;
-          border: 1px solid var(--border-subtle);
-          border-radius: 8px;
-          padding: 1.5rem;
-        }
-
-        .admin-stat-card label {
-          font-size: 0.75rem;
-          text-transform: uppercase;
-          color: #64748B;
-          font-weight: 700;
-        }
-
-        .admin-stat-card h3 {
-          font-size: 2rem;
-          font-weight: 800;
-          color: var(--text-heading);
-          margin-top: 0.25rem;
-        }
-
-        /* Toast Notifications */
-        .toast-container {
-          position: fixed;
-          bottom: 2rem;
-          left: 2rem;
-          z-index: 4000;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .toast {
-          background: #0F172A;
-          color: #FFFFFF;
-          padding: 1rem 1.5rem;
-          border-radius: 6px;
-          border-left: 4px solid var(--brand-orange);
-          box-shadow: var(--shadow-lg);
-          font-size: 0.875rem;
-          font-weight: 600;
-          animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-          from {
-            transform: translateX(-100%);
-            opacity: 0;
-          }
-
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-
-          from {
-            transform: translateX(-100%);
-            opacity: 0;
-          }
-
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-
         /* ==========================================================================
    Footer
    ========================================================================== */
@@ -2937,9 +2740,6 @@
               grid-template-columns: 1fr;
             }
 
-            .admin-stat-grid {
-              grid-template-columns: 1fr 1fr;
-            }
 
             .footer-grid {
               grid-template-columns: 1fr;
@@ -2966,9 +2766,6 @@
               grid-template-columns: 1fr;
             }
 
-            .admin-stat-grid {
-              grid-template-columns: 1fr 1fr;
-            }
 
             .footer-grid {
               grid-template-columns: 1fr;

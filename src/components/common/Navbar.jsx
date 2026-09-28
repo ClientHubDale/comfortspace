@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { DROPDOWNS } from './navMenus';
+import { DROPDOWNS, serviceMenuItems } from './navMenus';
 
 /* ─── Main Navbar ────────────────────────────────────────────────────── */
-const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
+const Navbar = ({ services, activeTab, onSelectTab, onToggleMobileMenu }) => {
+  const serviceItems = services?.length ? serviceMenuItems(services) : DROPDOWNS.services.items;
   const [openMenu, setOpenMenu] = useState(null); // 'about' | 'services' | 'turnkey' | 'projects' | null
   const [isScrolled, setIsScrolled] = useState(false);
   const timerRef = useRef(null);
@@ -182,7 +183,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
               </button>
               {openMenu === 'services' && (
                 <div className="dd-panel dd-panel-grid" role="menu">
-                  {DROPDOWNS.services.items.map((item) => (
+                  {serviceItems.map((item) => (
                     <button
                       key={item.label}
                       type="button"

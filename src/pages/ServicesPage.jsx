@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { INITIAL_DATA } from '../data/initialData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { smoothScrollTo } from '../utils/smoothScroll';
+import { assetSrc } from '../utils/assetSrc';
 
 /* --------------------------------------------------------------------------
    Content
@@ -65,8 +66,8 @@ const MODELS = [
 /* --------------------------------------------------------------------------
    Services
    -------------------------------------------------------------------------- */
-const ServicesPage = ({ onSelectTab }) => {
-  const services = INITIAL_DATA.services;
+const ServicesPage = ({ services: serviceList, onSelectTab }) => {
+  const services = serviceList?.length ? serviceList : INITIAL_DATA.services;
   const company = INITIAL_DATA.company;
 
   const stackRef = useRef(null);
@@ -254,7 +255,7 @@ const ServicesPage = ({ onSelectTab }) => {
                     </div>
                   </div>
                   <div className="svx-card-media">
-                    <img src={`/${s.image.replace(/^\/+/, '')}`} alt={s.title} loading="lazy" />
+                    <img src={assetSrc(s.image)} alt={s.title} loading="lazy" />
                     <span className="svx-card-bignum" aria-hidden="true">
                       {s.number}
                     </span>

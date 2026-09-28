@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { INITIAL_DATA } from '../../data/initialData';
 
-const asPath = (src) => `/${String(src).replace(/^\/+/, '')}`;
+import { assetSrc as asPath } from '../../utils/assetSrc';
 
 const ProjectDetailModal = ({ project, onClose }) => {
   /* Hooks run unconditionally — the null guard sits below them, otherwise the

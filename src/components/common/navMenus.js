@@ -42,3 +42,13 @@ export const DROPDOWNS = {
     ],
   },
 };
+
+/** The Services menu follows the service list from the API (admin-managed). */
+export const serviceMenuItems = (services = []) =>
+  services.map((s) => ({
+    icon: s.icon || 'fa-briefcase',
+    label: s.title,
+    sub: s.subtitle,
+    tab: 'services',
+    section: `svc-${s.id}`,
+  }));

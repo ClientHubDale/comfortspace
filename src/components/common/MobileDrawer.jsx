@@ -1,5 +1,5 @@
 import React from 'react';
-import { DROPDOWNS } from './navMenus';
+import { DROPDOWNS, serviceMenuItems } from './navMenus';
 
 /* Section links indented under a top-level page link */
 const DrawerSub = ({ items, onSelectTab, onClose }) => (
@@ -19,7 +19,7 @@ const DrawerSub = ({ items, onSelectTab, onClose }) => (
   </div>
 );
 
-const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) => {
+const MobileDrawer = ({ services, isOpen, activeTab, onSelectTab, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -68,7 +68,7 @@ const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) 
       >
         Services
       </a>
-      <DrawerSub items={DROPDOWNS.services.items} onSelectTab={onSelectTab} onClose={onClose} />
+      <DrawerSub items={services?.length ? serviceMenuItems(services) : DROPDOWNS.services.items} onSelectTab={onSelectTab} onClose={onClose} />
       <a
         href="#turnkey"
         className={`nav-link ${activeTab === 'turnkey' ? 'active' : ''}`}
@@ -104,16 +104,6 @@ const MobileDrawer = ({ isOpen, activeTab, onSelectTab, onOpenAdmin, onClose }) 
       >
         Contact
       </a>
-      <button
-        className="btn btn-outline-brand"
-        style={{ marginTop: '1rem', width: '100%', justifyContent: 'center' }}
-        onClick={() => {
-          onClose();
-          onOpenAdmin();
-        }}
-      >
-        <i className="fa-solid fa-lock"></i> Open Admin CMS
-      </button>
     </div>
   );
 };

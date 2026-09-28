@@ -3,11 +3,12 @@ import { INITIAL_DATA } from '../data/initialData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useStageSequence from '../hooks/useStageSequence';
 import CountUp from '../components/common/CountUp';
+import { assetSrc } from '../utils/assetSrc';
 
 /* --------------------------------------------------------------------------
    Home
    -------------------------------------------------------------------------- */
-const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects }) => {
+const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpenProjectModal, projects }) => {
   const heroImgRef = useRef(null);
   const showreelRef = useRef(null);
   const stageRailRef = useRef(null);
@@ -23,7 +24,8 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
 
   const featuredProjects = projects.filter((p) => p.featured);
   const currentTurnkey = turnkeySteps[selectedTurnkeyStep];
-  const services = INITIAL_DATA.services;
+  // the capability bento lays out four cards; keep the built-in set if fewer are published
+  const services = serviceList?.length >= 4 ? serviceList : INITIAL_DATA.services;
 
   useScrollReveal([projects.length]);
 
@@ -616,7 +618,7 @@ const HomePage = ({ onSelectTab, onOpenStoryModal, onOpenProjectModal, projects 
                 onClick={() => onOpenProjectModal(proj)}
               >
                 <div className="csx-proj-media">
-                  <img src={`/${proj.image.replace(/^\/+/, '')}`} alt={proj.title} loading="lazy" />
+                  <img src={assetSrc(proj.image)} alt={proj.title} loading="lazy" />
                   <span
                     className={`csx-proj-status ${
                       proj.status.toLowerCase().includes('handed') ? 'done' : 'live'

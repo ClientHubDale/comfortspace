@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = ({ onSelectTab, onOpenAdmin }) => {
+const Footer = ({ onSelectTab }) => {
   return (
     <footer className="main-footer">
       <div className="container">
@@ -94,9 +94,6 @@ const Footer = ({ onSelectTab, onOpenAdmin }) => {
               </a>
             </p>
             <div style={{ marginTop: '1.5rem' }}>
-              <button className="btn btn-outline-dark btn-sm" onClick={onOpenAdmin}>
-                <i className="fa-solid fa-lock"></i> Client CMS Login
-              </button>
             </div>
           </div>
 

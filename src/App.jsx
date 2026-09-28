@@ -9,7 +9,6 @@ import Toast from './components/common/Toast';
 
 import ProjectDetailModal from './components/modals/ProjectDetailModal';
 import StoryModal from './components/modals/StoryModal';
-import AdminCMSModal from './components/modals/AdminCMSModal';
 import { initSmoothScroll, setScrollLocked, smoothScrollTo } from './utils/smoothScroll';
 
 import HomePage from './pages/HomePage';
@@ -19,13 +18,8 @@ import TurnkeyPage from './pages/TurnkeyPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
 
-import {
-  INITIAL_DATA,
-  getStoredProjects,
-  saveStoredProjects,
-  getStoredLeads,
-  saveStoredLeads,
-} from './data/initialData';
+import { INITIAL_DATA, getStoredLeads, saveStoredLeads } from './data/initialData';
+import { fetchServices, fetchProjects } from './services/api';
 
 function App() {
   // Navigation Routing State
@@ -40,12 +34,28 @@ function App() {
   // Modals & Popups State
   const [selectedProject, setSelectedProject] = useState(null);
   const [isStoryOpen, setIsStoryOpen] = useState(false);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
-  // Persistent Data State
-  const [projects, setProjects] = useState(() => getStoredProjects());
-  const [leads, setLeads] = useState(() => getStoredLeads());
+  // Services & Projects come from comfortspace-backend (managed in comfortspace-admin).
+  // The built-in data paints instantly and stays in place if the API is unreachable.
+  const [services, setServices] = useState(INITIAL_DATA.services);
+  const [projects, setProjects] = useState(INITIAL_DATA.projects);
+
+  useEffect(() => {
+    const ctrl = new AbortController();
+    const load = (fetcher, setter, label) =>
+      fetcher({ signal: ctrl.signal })
+        .then((items) => setter(items))
+        .catch((err) => {
+          if (err.name !== 'AbortError') console.warn(`[api] ${label} unavailable, showing built-in content:`, err.message);
+        });
+    load(fetchServices, setServices, 'services');
+    load(fetchProjects, setProjects, 'projects');
+    return () => ctrl.abort();
+  }, []);
+
+  // Contact-form enquiries are still kept in this browser (moving them to the backend is a later step)
+  const [, setLeads] = useState(() => getStoredLeads());
 
   // Inertia scrolling for the whole site
   useEffect(() => {
@@ -53,7 +63,7 @@ function App() {
   }, []);
 
   // The page behind an open modal must not scroll
-  const anyModalOpen = Boolean(selectedProject) || isStoryOpen || isAdminOpen;
+  const anyModalOpen = Boolean(selectedProject) || isStoryOpen;
   useEffect(() => {
     setScrollLocked(anyModalOpen);
   }, [anyModalOpen]);
@@ -107,37 +117,7 @@ function App() {
     return () => cancelAnimationFrame(frame);
   }, [scrollTarget]);
 
-  // Project CRUD
-  const handleSaveProject = (newOrUpdatedProj) => {
-    setProjects((prev) => {
-      const exists = prev.some((p) => p.id === newOrUpdatedProj.id);
-      let updated;
-      if (exists) {
-        updated = prev.map((p) => (p.id === newOrUpdatedProj.id ? newOrUpdatedProj : p));
-      } else {
-        updated = [newOrUpdatedProj, ...prev];
-      }
-      saveStoredProjects(updated);
-      return updated;
-    });
-  };
-
-  const handleDeleteProject = (projId) => {
-    setProjects((prev) => {
-      const updated = prev.filter((p) => p.id !== projId);
-      saveStoredProjects(updated);
-      return updated;
-    });
-  };
-
-  const handleRestoreDefaults = () => {
-    setProjects(INITIAL_DATA.projects);
-    saveStoredProjects(INITIAL_DATA.projects);
-    setLeads(INITIAL_DATA.initialLeads);
-    saveStoredLeads(INITIAL_DATA.initialLeads);
-  };
-
-  // Lead CRUD
+  // Lead capture
   const handleSaveLead = (newLead) => {
     setLeads((prev) => {
       const updated = [newLead, ...prev];
@@ -146,13 +126,6 @@ function App() {
     });
   };
 
-  const handleDeleteLead = (leadId) => {
-    setLeads((prev) => {
-      const updated = prev.filter((l) => l.id !== leadId);
-      saveStoredLeads(updated);
-      return updated;
-    });
-  };
 
   return (
     <div className="site-wrapper">
@@ -161,6 +134,7 @@ function App() {
 
       {/* Main Glass Header */}
       <Navbar
+        services={services}
         activeTab={activeTab}
         onSelectTab={handleSelectTab}
         onToggleMobileMenu={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -168,23 +142,20 @@ function App() {
 
       {/* Mobile Slide-out Drawer */}
       <MobileDrawer
+        services={services}
         isOpen={isMobileMenuOpen}
         activeTab={activeTab}
         onSelectTab={handleSelectTab}
-        onOpenAdmin={() => setIsAdminOpen(true)}
         onClose={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Sub-nav breadcrumb strip (hidden on Home) */}
-      <SubNavStrip
-        activeTab={activeTab}
-        onSelectTab={handleSelectTab}
-        onOpenAdmin={() => setIsAdminOpen(true)}
-      />
+      <SubNavStrip activeTab={activeTab} onSelectTab={handleSelectTab} />
 
       {/* Active Tab View */}
       {activeTab === 'home' && (
         <HomePage
+          services={services}
           onSelectTab={handleSelectTab}
           onOpenStoryModal={() => setIsStoryOpen(true)}
           onOpenProjectModal={(proj) => setSelectedProject(proj)}
@@ -202,7 +173,7 @@ function App() {
       )}
 
       {activeTab === 'services' && (
-        <ServicesPage onSelectTab={handleSelectTab} />
+        <ServicesPage services={services} onSelectTab={handleSelectTab} />
       )}
 
       {activeTab === 'turnkey' && (
@@ -227,10 +198,7 @@ function App() {
       )}
 
       {/* Main Corporate Footer */}
-      <Footer
-        onSelectTab={handleSelectTab}
-        onOpenAdmin={() => setIsAdminOpen(true)}
-      />
+      <Footer onSelectTab={handleSelectTab} />
 
       {/* Floating WhatsApp Action Pill */}
       <FloatingWhatsApp activeTab={activeTab} />
@@ -247,17 +215,6 @@ function App() {
         onExploreProjects={() => handleSelectTab('projects')}
       />
 
-      <AdminCMSModal
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-        projects={projects}
-        onSaveProject={handleSaveProject}
-        onDeleteProject={handleDeleteProject}
-        onRestoreDefaults={handleRestoreDefaults}
-        leads={leads}
-        onDeleteLead={handleDeleteLead}
-        onShowToast={(msg) => setToastMessage(msg)}
-      />
 
       {/* Toast Notification Alert */}
       <Toast

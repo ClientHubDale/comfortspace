@@ -4,8 +4,7 @@ import { INITIAL_DATA } from '../data/initialData';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
-/* Project images may be site paths or (from the admin CMS) full URLs */
-const src = (path) => (!path ? '' : /^(data:|https?:)/.test(path) ? path : `/${path.replace(/^\/+/, '')}`);
+import { assetSrc as src } from '../utils/assetSrc';
 
 const HERO_COLUMNS = [
   [

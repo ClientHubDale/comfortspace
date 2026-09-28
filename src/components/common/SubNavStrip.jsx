@@ -9,7 +9,7 @@ const tabLabels = {
   contact: 'Contact',
 };
 
-const SubNavStrip = ({ activeTab, onSelectTab, onOpenAdmin }) => {
+const SubNavStrip = ({ activeTab, onSelectTab }) => {
   if (activeTab === 'home') return null;
 
   return (
@@ -31,9 +31,6 @@ const SubNavStrip = ({ activeTab, onSelectTab, onOpenAdmin }) => {
             {tabLabels[activeTab] || activeTab}
           </span>
         </div>
-        <button className="admin-pill-btn" onClick={onOpenAdmin}>
-          <i className="fa-solid fa-lock"></i> Open Admin CMS
-        </button>
       </div>
     </div>
   );
