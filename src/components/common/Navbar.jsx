@@ -220,7 +220,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
                 Turnkey &amp; Project Management <i className="fa-solid fa-chevron-down" />
               </button>
               {openMenu === 'turnkey' && (
-                <div className="dd-panel" role="menu">
+                <div className="dd-panel dd-panel-grid" role="menu">
                   {DROPDOWNS.turnkey.items.map((item) => (
                     <button
                       key={item.label}
@@ -259,7 +259,7 @@ const Navbar = ({ activeTab, onSelectTab, onToggleMobileMenu }) => {
                 Project Gallery <i className="fa-solid fa-chevron-down" />
               </button>
               {openMenu === 'projects' && (
-                <div className="dd-panel" role="menu">
+                <div className="dd-panel dd-panel-grid" role="menu">
                   {DROPDOWNS.projects.items.map((item) => (
                     <button
                       key={item.label}

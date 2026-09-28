@@ -25,16 +25,20 @@ export const DROPDOWNS = {
   },
   turnkey: {
     items: [
-      { icon: 'fa-list-check',        label: '7-Step Scope of Work',     sub: 'Pre-inspection to transparent PO billing',     tab: 'turnkey', section: 'tk-scope' },
-      { icon: 'fa-images',            label: 'Deliverables in Action',   sub: 'Real site photos across sectors',              tab: 'turnkey', section: 'tk-deliverables' },
-      { icon: 'fa-chart-gantt',       label: 'Ongoing Projects Tracker', sub: "Live progress of active McDonald's builds",   tab: 'turnkey', section: 'tk-tracker' },
+      { icon: 'fa-scale-balanced',     label: 'Why Turnkey',              sub: 'Separate contractors vs one accountable team', tab: 'turnkey', section: 'tk-why' },
+      { icon: 'fa-list-check',         label: '7-Step Scope of Work',     sub: 'Site inspection to transparent PO billing',    tab: 'turnkey', section: 'tk-scope' },
+      { icon: 'fa-images',             label: 'Deliverables in Action',   sub: 'Real site photos across sectors',              tab: 'turnkey', section: 'tk-deliverables' },
+      { icon: 'fa-chart-gantt',        label: 'Live Projects Tracker',    sub: "Progress of active McDonald's builds",         tab: 'turnkey', section: 'tk-tracker' },
     ],
   },
   projects: {
     items: [
-      { icon: 'fa-utensils',          label: 'Hospitality & F&B',        sub: "McDonald's, MURO & luxury dining fit-outs",    tab: 'projects', section: 'projects-gallery', filter: 'hospitality-retail' },
-      { icon: 'fa-landmark',          label: 'Corporate & Banking',      sub: 'Tata Capital, AU Bank & NBFC branches',        tab: 'projects', section: 'projects-gallery', filter: 'corporate-banking' },
-      { icon: 'fa-layer-group',       label: 'All Projects',             sub: '200+ completed projects across India',          tab: 'projects', section: 'projects-gallery', filter: 'all' },
+      { icon: 'fa-star',               label: 'Flagship Case Study',      sub: "McDonald's & McCafe, Hyderabad",               tab: 'projects', section: 'pg-flagship' },
+      { icon: 'fa-layer-group',        label: 'All Projects',             sub: 'The complete handed-over portfolio',            tab: 'projects', section: 'projects-gallery', filter: 'all' },
+      { icon: 'fa-utensils',           label: 'Hospitality & F&B',        sub: "McDonald's, MURO & luxury dining fit-outs",    tab: 'projects', section: 'projects-gallery', filter: 'hospitality-retail' },
+      { icon: 'fa-landmark',           label: 'Corporate & Banking',      sub: 'Tata Capital, AU Bank & Kotak branches',       tab: 'projects', section: 'projects-gallery', filter: 'corporate-banking' },
+      { icon: 'fa-burger',             label: "McDonald's Rollout",       sub: 'Every handed-over outlet, state by state',     tab: 'projects', section: 'pg-rollout' },
+      { icon: 'fa-handshake',          label: 'Brand Partners',           sub: 'The brands that build with us',                tab: 'projects', section: 'pg-clients' },
     ],
   },
 };

@@ -212,6 +212,7 @@ function App() {
       {activeTab === 'projects' && (
         <ProjectsPage
           projects={projects}
+          onSelectTab={handleSelectTab}
           selectedCategory={projectCategory}
           onSelectCategory={setProjectCategory}
           onOpenProjectModal={(proj) => setSelectedProject(proj)}
