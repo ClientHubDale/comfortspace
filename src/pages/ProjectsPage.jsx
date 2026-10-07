@@ -5,6 +5,7 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
 import { assetSrc as src } from '../utils/assetSrc';
+import { pickFlagship } from '../utils/projectMedia';
 
 const HERO_COLUMNS = [
   [
@@ -29,7 +30,8 @@ const ProjectsPage = ({ projects, onOpenProjectModal, onSelectTab, selectedCateg
   const clients = INITIAL_DATA.clients;
   const mcd = INITIAL_DATA.mcdonaldsHandedOver;
 
-  const featured = projects.find((p) => p.id === 'proj-mcd-hyd') || projects[0];
+  // the flagship case study is whichever project is marked flagship in the admin
+  const featured = pickFlagship(projects);
   const featuredShots = featured ? (featured.gallery?.length ? featured.gallery : [featured.image]) : [];
   const [shot, setShot] = useState(0);
 
@@ -105,11 +107,6 @@ const ProjectsPage = ({ projects, onOpenProjectModal, onSelectTab, selectedCateg
       <section className="pgx-hero">
         <div className="container pgx-hero-grid">
           <div className="pgx-hero-copy">
-            <nav className="abx-crumb" aria-label="Breadcrumb">
-              <button onClick={() => onSelectTab('home')}>Home</button>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page">Project Gallery</span>
-            </nav>
 
             <span className="abx-eyebrow">
               <span className="abx-eyebrow-line" aria-hidden="true"></span>

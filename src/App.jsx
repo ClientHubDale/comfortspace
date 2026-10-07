@@ -18,8 +18,26 @@ import TurnkeyPage from './pages/TurnkeyPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
 
-import { INITIAL_DATA, getStoredLeads, saveStoredLeads } from './data/initialData';
+import { INITIAL_DATA } from './data/initialData';
 import { fetchServices, fetchProjects } from './services/api';
+
+/* last successful API response per collection, kept in this browser */
+const CACHE_KEY = (key) => `cs_cache_${key}_v1`;
+const readCache = (key) => {
+  try {
+    const items = JSON.parse(localStorage.getItem(CACHE_KEY(key)));
+    return Array.isArray(items) && items.length ? items : null;
+  } catch {
+    return null;
+  }
+};
+const writeCache = (key, items) => {
+  try {
+    localStorage.setItem(CACHE_KEY(key), JSON.stringify(items));
+  } catch {
+    /* storage full or blocked — the site still works without the cache */
+  }
+};
 
 function App() {
   // Navigation Routing State
@@ -37,25 +55,27 @@ function App() {
   const [toastMessage, setToastMessage] = useState('');
 
   // Services & Projects come from comfortspace-backend (managed in comfortspace-admin).
-  // The built-in data paints instantly and stays in place if the API is unreachable.
-  const [services, setServices] = useState(INITIAL_DATA.services);
-  const [projects, setProjects] = useState(INITIAL_DATA.projects);
+  // First paint uses the last copy fetched in this browser, so admin edits never flash
+  // back to old content; the built-in data is only used before anything has loaded.
+  const [services, setServices] = useState(() => readCache('services') || INITIAL_DATA.services);
+  const [projects, setProjects] = useState(() => readCache('projects') || INITIAL_DATA.projects);
 
   useEffect(() => {
     const ctrl = new AbortController();
-    const load = (fetcher, setter, label) =>
+    const load = (fetcher, setter, key) =>
       fetcher({ signal: ctrl.signal })
-        .then((items) => setter(items))
+        .then((items) => {
+          setter(items);
+          writeCache(key, items);
+        })
         .catch((err) => {
-          if (err.name !== 'AbortError') console.warn(`[api] ${label} unavailable, showing built-in content:`, err.message);
+          if (err.name !== 'AbortError') console.warn(`[api] ${key} unavailable, showing saved content:`, err.message);
         });
     load(fetchServices, setServices, 'services');
     load(fetchProjects, setProjects, 'projects');
     return () => ctrl.abort();
   }, []);
 
-  // Contact-form enquiries are still kept in this browser (moving them to the backend is a later step)
-  const [, setLeads] = useState(() => getStoredLeads());
 
   // Inertia scrolling for the whole site
   useEffect(() => {
@@ -117,14 +137,6 @@ function App() {
     return () => cancelAnimationFrame(frame);
   }, [scrollTarget]);
 
-  // Lead capture
-  const handleSaveLead = (newLead) => {
-    setLeads((prev) => {
-      const updated = [newLead, ...prev];
-      saveStoredLeads(updated);
-      return updated;
-    });
-  };
 
 
   return (
@@ -177,7 +189,7 @@ function App() {
       )}
 
       {activeTab === 'turnkey' && (
-        <TurnkeyPage onSelectTab={handleSelectTab} />
+        <TurnkeyPage projects={projects} onSelectTab={handleSelectTab} />
       )}
 
       {activeTab === 'projects' && (
@@ -192,7 +204,6 @@ function App() {
 
       {activeTab === 'contact' && (
         <ContactPage
-          onSaveLead={handleSaveLead}
           onShowToast={(msg) => setToastMessage(msg)}
         />
       )}

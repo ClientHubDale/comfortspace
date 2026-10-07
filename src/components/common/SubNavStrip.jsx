@@ -6,7 +6,7 @@ const tabLabels = {
   services: 'Services',
   turnkey: 'Turnkey & Project Management',
   projects: 'Project Gallery',
-  contact: 'Contact',
+  contact: 'Project Inquiry',
 };
 
 const SubNavStrip = ({ activeTab, onSelectTab }) => {

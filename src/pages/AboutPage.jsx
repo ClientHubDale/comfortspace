@@ -268,11 +268,6 @@ const AboutPage = ({ onSelectTab }) => {
       <section className="abx-hero">
         <div className="container abx-hero-grid">
           <div className="abx-hero-copy">
-            <nav className="abx-crumb" aria-label="Breadcrumb">
-              <button onClick={() => onSelectTab('home')}>Home</button>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page">About Us</span>
-            </nav>
 
             <span className="abx-eyebrow">
               <span className="abx-eyebrow-line" aria-hidden="true"></span>
@@ -813,21 +808,6 @@ const AboutPage = ({ onSelectTab }) => {
                 <div>
                   <small>Email</small>
                   <a href={`mailto:${company.email}`}>{company.email}</a>
-                </div>
-              </li>
-              <li>
-                <span>
-                  <i className="fa-brands fa-whatsapp"></i>
-                </span>
-                <div>
-                  <small>WhatsApp</small>
-                  <a
-                    href={`https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent(company.whatsappMessage)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Chat with our team
-                  </a>
                 </div>
               </li>
             </ul>

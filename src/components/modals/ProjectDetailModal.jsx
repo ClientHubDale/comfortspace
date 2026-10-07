@@ -127,15 +127,8 @@ const ProjectDetailModal = ({ project, onClose }) => {
 
         {/* ---- footer ---- */}
         <div className="csx-pm-foot">
-          <a
-            href={`https://wa.me/${INITIAL_DATA.company.whatsappNumber}?text=${encodeURIComponent(
-              `Hello Comfort Space, I am inquiring about a project similar to ${project.title}.`
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="csx-pm-btn brand"
-          >
-            <i className="fa-brands fa-whatsapp"></i> Inquire About a Similar Space
+          <a href={`tel:${INITIAL_DATA.company.phone.replace(/\s/g, '')}`} className="csx-pm-btn brand">
+            <i className="fa-solid fa-phone"></i> Call {INITIAL_DATA.company.phoneDisplay}
           </a>
           <button className="csx-pm-btn ghost" onClick={onClose}>
             Close

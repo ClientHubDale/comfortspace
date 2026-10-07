@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { INITIAL_DATA } from '../data/initialData';
 import useScrollReveal from '../hooks/useScrollReveal';
+import { submitLead } from '../services/api';
 
 /* --------------------------------------------------------------------------
    Content
@@ -73,9 +74,10 @@ const EMPTY = {
 /* --------------------------------------------------------------------------
    Contact
    -------------------------------------------------------------------------- */
-const ContactPage = ({ onSaveLead, onShowToast }) => {
+const ContactPage = ({ onShowToast }) => {
   const company = INITIAL_DATA.company;
-  const whatsapp = `https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent(company.whatsappMessage)}`;
+  const tel = `tel:${company.phone.replace(/\s/g, '')}`;
+  const mail = `mailto:${company.email}`;
   // the full postal address ('#48, 2nd Floor…') makes Google pick the wrong place;
   // locality + PIN centres on BTM 2nd Stage (swap in exact coordinates when available)
   const mapQuery = encodeURIComponent('BTM Layout 2nd Stage, Bengaluru, Karnataka 560076');
@@ -85,9 +87,39 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
   const [dir, setDir] = useState(1);
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(null);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState('');
+  const [honeypot, setHoneypot] = useState('');
   const [openFaq, setOpenFaq] = useState(0);
+  const [countdown, setCountdown] = useState(5);
 
   useScrollReveal([sent]);
+
+  const reset = () => {
+    setForm(EMPTY);
+    setErrors({});
+    setDir(-1);
+    setStep(0);
+    setSent(null);
+    setSendError('');
+    setCountdown(5);
+  };
+
+  useEffect(() => {
+    if (!sent) return;
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          reset();
+          return 5;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [sent]);
 
   const set = (key) => (e) => {
     const value = e && e.target ? e.target.value : e;
@@ -112,7 +144,7 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
     setStep(to);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (step < FORM_STEPS.length - 1) {
       go(step + 1);
@@ -134,17 +166,41 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
       status: 'New',
     };
 
-    onSaveLead(lead);
-    onShowToast(`✓ Thank you ${lead.name}! Your inquiry has been sent to our estimation desk.`);
-    setSent(lead);
-  };
-
-  const reset = () => {
-    setForm(EMPTY);
-    setErrors({});
-    setDir(-1);
-    setStep(0);
-    setSent(null);
+    setSending(true);
+    setSendError('');
+    try {
+      await submitLead({
+        name: lead.name,
+        company: form.company.trim(),
+        phone: lead.phone,
+        email: lead.email,
+        service: lead.service,
+        budget: lead.budget,
+        location: form.location.trim(),
+        message: lead.message,
+        hp_field: honeypot,
+      });
+      onShowToast(`✓ Thank you ${lead.name}! Your inquiry has been sent to our estimation desk.`);
+      setCountdown(5);
+      setSent(lead);
+    } catch (err) {
+      const fieldErrors = err.details || {};
+      if (Object.keys(fieldErrors).length) {
+        setErrors(fieldErrors);
+        // the bad field may be on an earlier step
+        const firstStepWithError = ['service', 'budget'].some((k) => fieldErrors[k]) ? 0 : ['location', 'message'].some((k) => fieldErrors[k]) ? 1 : 2;
+        if (firstStepWithError !== step) go(firstStepWithError);
+      }
+      setSendError(
+        err.offline
+          ? `Couldn't send your enquiry — please check your connection and try again, or call us on ${company.phoneDisplay}.`
+          : Object.keys(fieldErrors).length
+            ? 'Please check the highlighted fields.'
+            : `${err.message}. Please try again, or call us on ${company.phoneDisplay}.`
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   const serviceLabel = SERVICES.find((s) => s.value === form.service)?.label;
@@ -176,7 +232,7 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
             </p>
 
             <div className="ctx-quick">
-              <a className="ctx-quick-card" href={`tel:${company.phone.replace(/\s/g, '')}`}>
+              <a className="ctx-quick-card" href={tel}>
                 <span className="ctx-quick-icon">
                   <i className="fa-solid fa-phone"></i>
                 </span>
@@ -186,23 +242,13 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
                 </span>
                 <i className="fa-solid fa-arrow-right ctx-quick-go"></i>
               </a>
-              <a className="ctx-quick-card" href={`mailto:${company.email}`}>
+              <a className="ctx-quick-card" href={mail}>
                 <span className="ctx-quick-icon">
                   <i className="fa-solid fa-envelope"></i>
                 </span>
                 <span>
                   <small>Enquiries &amp; BOQ submissions</small>
                   <strong>{company.email}</strong>
-                </span>
-                <i className="fa-solid fa-arrow-right ctx-quick-go"></i>
-              </a>
-              <a className="ctx-quick-card is-wa" href={whatsapp} target="_blank" rel="noopener noreferrer">
-                <span className="ctx-quick-icon">
-                  <i className="fa-brands fa-whatsapp"></i>
-                </span>
-                <span>
-                  <small>Instant chat</small>
-                  <strong>WhatsApp our team</strong>
                 </span>
                 <i className="fa-solid fa-arrow-right ctx-quick-go"></i>
               </a>
@@ -241,9 +287,17 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
                     <dd>{sent.phone}</dd>
                   </div>
                 </dl>
+                <div className="ctx-countdown-bar" role="status" aria-live="polite">
+                  <i className="fa-solid fa-arrows-rotate fa-spin" style={{ '--fa-animation-duration': '3s' }} aria-hidden="true"></i>
+                  <span>Returning to project inquiry in <strong>{countdown}s</strong>…</span>
+                </div>
+                <p className="ctx-success-more">For more information, contact our project team:</p>
                 <div className="ctx-success-actions">
-                  <a className="csx-btn csx-btn-brand" href={whatsapp} target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-whatsapp"></i> Continue on WhatsApp
+                  <a className="csx-btn csx-btn-brand" href={tel}>
+                    <i className="fa-solid fa-phone"></i> {company.phoneDisplay}
+                  </a>
+                  <a className="csx-btn csx-btn-outline" href={mail}>
+                    <i className="fa-solid fa-envelope"></i> {company.email}
                   </a>
                   <button type="button" className="csx-btn csx-btn-outline" onClick={reset}>
                     Send Another Enquiry
@@ -252,6 +306,17 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
+                <input
+                  type="text"
+                  name="cs_hp_field"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  readOnly
+                  aria-hidden="true"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                />
                 <div className="ctx-form-head">
                   <div>
                     <span className="ctx-form-kicker">Project Inquiry &amp; Estimation</span>
@@ -432,8 +497,12 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
                   ) : (
                     <span></span>
                   )}
-                  <button type="submit" className="csx-btn csx-btn-brand">
-                    {step < FORM_STEPS.length - 1 ? (
+                  <button type="submit" className="csx-btn csx-btn-brand" disabled={sending}>
+                    {sending ? (
+                      <>
+                        <i className="fa-solid fa-spinner fa-spin"></i> Sending…
+                      </>
+                    ) : step < FORM_STEPS.length - 1 ? (
                       <>
                         Continue <i className="fa-solid fa-arrow-right"></i>
                       </>
@@ -444,6 +513,11 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
                     )}
                   </button>
                 </div>
+                {sendError && (
+                  <p className="ctx-send-error" role="alert">
+                    <i className="fa-solid fa-circle-exclamation"></i> {sendError}
+                  </p>
+                )}
               </form>
             )}
           </div>
@@ -531,17 +605,22 @@ const ContactPage = ({ onSaveLead, onShowToast }) => {
       </section>
 
       {/* ====================================================================
-          4. FAQ + WHATSAPP BAND
+          4. FAQ + CONTACT DETAILS
           ==================================================================== */}
       <section className="ctx-section">
         <div className="container abx-faq">
           <div className="abx-faq-intro" data-reveal>
             <span className="csx-tag">Before You Write</span>
             <h2 className="csx-head-title csx-head-sm">Questions we hear first</h2>
-            <p>Still unsure? Our project team is a message away.</p>
-            <a className="csx-btn csx-btn-dark" href={whatsapp} target="_blank" rel="noopener noreferrer">
-              <i className="fa-brands fa-whatsapp"></i> Ask on WhatsApp
-            </a>
+            <p>Still unsure? Call or email our project team.</p>
+            <div className="ctx-faq-contact">
+              <a className="csx-btn csx-btn-dark" href={tel}>
+                <i className="fa-solid fa-phone"></i> {company.phoneDisplay}
+              </a>
+              <a className="csx-btn csx-btn-outline" href={mail}>
+                <i className="fa-solid fa-envelope"></i> {company.email}
+              </a>
+            </div>
           </div>
 
           <div className="abx-acc abx-faq-list" data-reveal>

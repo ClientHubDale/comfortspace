@@ -45,7 +45,7 @@ const Footer = ({ onSelectTab }) => {
                 <a href="#projects" onClick={(e) => { e.preventDefault(); onSelectTab('projects'); }}>Handed-Over Projects</a>
               </li>
               <li>
-                <a href="#contact" onClick={(e) => { e.preventDefault(); onSelectTab('contact'); }}>Request Quote</a>
+                <a href="#contact" onClick={(e) => { e.preventDefault(); onSelectTab('contact'); }}>Project Inquiry</a>
               </li>
             </ul>
           </div>

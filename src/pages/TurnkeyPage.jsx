@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { INITIAL_DATA } from '../data/initialData';
 import useScrollReveal from '../hooks/useScrollReveal';
+import { liveSites } from '../utils/projectMedia';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
 /* --------------------------------------------------------------------------
@@ -59,9 +60,12 @@ const RING = 2 * Math.PI * 42; // circumference of the progress rings
 /* --------------------------------------------------------------------------
    Turnkey
    -------------------------------------------------------------------------- */
-const TurnkeyPage = ({ onSelectTab }) => {
+const TurnkeyPage = ({ projects = [], onSelectTab }) => {
   const steps = INITIAL_DATA.turnkeySteps;
-  const ongoing = INITIAL_DATA.ongoingProjects;
+  // Live sites are the projects marked Ongoing in the admin. Until the API has
+  // answered once (built-in data has no progress fields) the built-in list is used.
+  const fromApi = projects.some((p) => 'progress' in p);
+  const ongoing = fromApi ? liveSites(projects) : INITIAL_DATA.ongoingProjects;
 
   const hscrollRef = useRef(null);
   const trackRef = useRef(null);
@@ -140,11 +144,6 @@ const TurnkeyPage = ({ onSelectTab }) => {
       <section className="tkx-hero">
         <div className="container tkx-hero-grid">
           <div className="tkx-hero-copy">
-            <nav className="abx-crumb" aria-label="Breadcrumb">
-              <button onClick={() => onSelectTab('home')}>Home</button>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page">Turnkey &amp; Project Management</span>
-            </nav>
 
             <span className="abx-eyebrow">
               <span className="abx-eyebrow-line" aria-hidden="true"></span>
@@ -183,7 +182,7 @@ const TurnkeyPage = ({ onSelectTab }) => {
                 <span>Contract &amp; point of contact</span>
               </li>
               <li>
-                <strong>0{ongoing.length}</strong>
+                <strong>{String(ongoing.length).padStart(2, '0')}</strong>
                 <span>Sites under construction now</span>
               </li>
             </ul>
@@ -207,6 +206,7 @@ const TurnkeyPage = ({ onSelectTab }) => {
               </div>
             </div>
 
+            {ongoing.length > 0 && (
             <div className="tkx-float tkx-float-b">
               <div className="tkx-float-head">
                 <span className="tkx-live-dot" aria-hidden="true"></span>
@@ -224,6 +224,7 @@ const TurnkeyPage = ({ onSelectTab }) => {
                 </div>
               ))}
             </div>
+            )}
           </div>
         </div>
       </section>
@@ -375,6 +376,7 @@ const TurnkeyPage = ({ onSelectTab }) => {
       {/* ====================================================================
           5. LIVE TRACKER — progress rings
           ==================================================================== */}
+      {ongoing.length > 0 && (
       <section id="tk-tracker" className="tkx-section">
         <div className="container">
           <div className="tkx-head tkx-head-split" data-reveal>
@@ -426,6 +428,8 @@ const TurnkeyPage = ({ onSelectTab }) => {
           </div>
         </div>
       </section>
+
+      )}
 
       {/* ====================================================================
           6. CTA

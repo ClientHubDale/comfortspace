@@ -8622,7 +8622,7 @@
 }
 
 .svx-cta-actions .csx-btn-outline i {
-  color: #25D366;
+  color: var(--brand-orange);
   font-size: 0.95rem;
 }
 
@@ -11443,6 +11443,26 @@ html.lenis {
   overflow-wrap: anywhere;
 }
 
+.ctx-countdown-bar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #64748B;
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  margin: 0 auto 1.4rem;
+}
+
+.ctx-countdown-bar strong {
+  color: var(--csx-brand);
+  font-weight: 800;
+}
+
 .ctx-success-actions {
   display: flex;
   justify-content: center;
@@ -11782,4 +11802,222 @@ html.lenis {
   .ctx-bar span {
     transition: none;
   }
+}
+
+/* Contact: phone + email shown instead of WhatsApp (success screen and FAQ intro) */
+.ctx-success-more {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--csx-ink);
+  margin: 0 0 0.8rem;
+}
+
+.ctx-faq-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+/* the floating pill and the hero card button now dial the office number */
+.floating-whatsapp i.fa-phone,
+.csx-hero-card-btn i.fa-phone {
+  color: var(--brand-orange);
+}
+
+/* Brand-partner marquee: icon + name, no subtitle */
+.csx-marquee-chip {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.5rem 0.85rem 0.85rem;
+  min-width: 0;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfa 100%);
+  box-shadow: 0 1px 2px rgba(30, 37, 56, 0.04), 0 10px 24px -18px rgba(30, 37, 56, 0.35);
+}
+
+.csx-chip-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  color: var(--brand-orange);
+  background: var(--brand-orange-light);
+  box-shadow: inset 0 0 0 1px rgba(234, 88, 12, 0.18);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s var(--csx-ease);
+}
+
+.csx-marquee-chip:hover .csx-chip-icon {
+  background: var(--brand-orange-gradient);
+  color: #ffffff;
+  transform: rotate(-8deg) scale(1.05);
+}
+
+.csx-marquee-chip .csx-chip-name {
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
+}
+
+/* brand pills: a round real photo instead of an icon */
+.csx-chip-icon {
+  width: 46px;
+  height: 46px;
+  overflow: hidden;
+  background: #eef1f6;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px rgba(234, 88, 12, 0.35);
+}
+
+.csx-chip-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--csx-ease);
+}
+
+.csx-marquee-chip:hover .csx-chip-icon {
+  background: #eef1f6;
+  transform: none;
+}
+
+.csx-marquee-chip:hover .csx-chip-icon img {
+  transform: scale(1.15);
+}
+
+/* brand pills: the official logo; name wordmark when there is no logo file */
+.csx-marquee-chip {
+  height: 72px;
+  justify-content: center;
+  padding: 0 1.9rem;
+  min-width: 190px;
+}
+
+.csx-chip-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+  border-radius: 6px;
+  filter: grayscale(0.15);
+  transition: filter 0.3s ease, transform 0.4s var(--csx-ease);
+}
+
+.csx-marquee-chip:hover .csx-chip-logo {
+  filter: none;
+  transform: scale(1.06);
+}
+
+.csx-marquee-chip .csx-chip-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--csx-ink);
+}
+
+/* ---- Brand logo strip: uniform cards, logos muted until hovered ---- */
+.csx-marquee-rail {
+  gap: 1.1rem;
+}
+
+.csx-marquee-chip {
+  width: 196px;
+  min-width: 196px;
+  height: 92px;
+  padding: 0 1.4rem;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid rgba(30, 37, 56, 0.07);
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(30, 37, 56, 0.04);
+  transition: border-color 0.35s ease, box-shadow 0.4s var(--csx-ease), transform 0.4s var(--csx-ease);
+}
+
+.csx-marquee-chip:hover {
+  transform: translateY(-4px);
+  border-color: rgba(234, 88, 12, 0.3);
+  box-shadow: 0 18px 34px -20px rgba(30, 37, 56, 0.35);
+}
+
+.csx-chip-logo {
+  height: 38px;
+  max-width: 140px;
+  border-radius: 4px;
+  filter: grayscale(1);
+  opacity: 0.62;
+  mix-blend-mode: multiply; /* drops the white box behind JPG logos */
+  transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s var(--csx-ease);
+}
+
+.csx-marquee-chip:hover .csx-chip-logo {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* brands without a logo file get a matching wordmark */
+.csx-marquee-chip .csx-chip-name {
+  font-family: var(--font-heading);
+  font-style: normal;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #8a909c;
+  transition: color 0.4s ease;
+}
+
+.csx-marquee-chip:hover .csx-chip-name {
+  color: var(--csx-ink);
+}
+
+@media (max-width: 700px) {
+  .csx-marquee-chip {
+    width: 156px;
+    min-width: 156px;
+    height: 76px;
+    padding: 0 1rem;
+  }
+
+  .csx-chip-logo {
+    height: 30px;
+    max-width: 116px;
+  }
+
+  .csx-marquee-chip .csx-chip-name {
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+  }
+}
+
+/* room for the hover lift + shadow, which the scrolling viewport would otherwise clip */
+.csx-marquee-viewport {
+  padding: 10px 0 26px;
+  margin: -10px 0 -26px;
+}
+
+/* Project Inquiry: message shown if the enquiry could not be sent */
+.ctx-send-error {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.ctx-send-error i {
+  margin-top: 0.2rem;
 }

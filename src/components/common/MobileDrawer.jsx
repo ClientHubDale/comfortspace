@@ -102,7 +102,7 @@ const MobileDrawer = ({ services, isOpen, activeTab, onSelectTab, onClose }) => 
           onClose();
         }}
       >
-        Contact
+        Project Inquiry
       </a>
     </div>
   );

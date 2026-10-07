@@ -413,28 +413,11 @@ export const INITIAL_DATA = {
       company: "Tata Capital Limited",
       badge: "Corporate & Banking"
     }
-  ],
-
-  initialLeads: [
-    {
-      id: "lead-101",
-      name: "Arun Kumar",
-      email: "arun.k@stellartech.in",
-      phone: "+91 98451 88990",
-      company: "Stellar Tech Parks",
-      service: "Turnkey Base Projects",
-      location: "Whitefield, Bangalore",
-      budget: "₹50L - ₹1 Cr",
-      message: "Looking for complete turnkey fit-out for 15,000 sq.ft new tech office.",
-      date: "2026-09-12 14:30",
-      status: "New"
-    }
   ]
 };
 
 export const STORAGE_KEYS = {
-  PROJECTS: "csd_projects_data_v5",
-  LEADS: "csd_leads_data_v3"
+  PROJECTS: "csd_projects_data_v5"
 };
 
 export function getStoredProjects() {
@@ -444,13 +427,4 @@ export function getStoredProjects() {
 
 export function saveStoredProjects(projects) {
   localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projects));
-}
-
-export function getStoredLeads() {
-  const data = localStorage.getItem(STORAGE_KEYS.LEADS);
-  return data ? JSON.parse(data) : INITIAL_DATA.initialLeads;
-}
-
-export function saveStoredLeads(leads) {
-  localStorage.setItem(STORAGE_KEYS.LEADS, JSON.stringify(leads));
 }

@@ -290,7 +290,7 @@ const Navbar = ({ services, activeTab, onSelectTab, onToggleMobileMenu }) => {
                 className={`nav-link ${activeTab === 'contact' ? 'active' : ''}`}
                 onClick={(e) => { e.preventDefault(); navGo('contact'); }}
               >
-                Contact
+                Project Inquiry
               </a>
             </li>
 
@@ -304,7 +304,7 @@ const Navbar = ({ services, activeTab, onSelectTab, onToggleMobileMenu }) => {
             className="btn-header-quote"
             onClick={(e) => { e.preventDefault(); navGo('contact'); }}
           >
-            Get a Quote <i className="fa-solid fa-arrow-right" />
+            Let's Talk <i className="fa-solid fa-arrow-right" />
           </a>
           <button
             className="mobile-toggle"

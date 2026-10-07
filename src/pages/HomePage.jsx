@@ -4,10 +4,28 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import useStageSequence from '../hooks/useStageSequence';
 import CountUp from '../components/common/CountUp';
 import { assetSrc } from '../utils/assetSrc';
+import { firstSentence, flagshipShots as shotsOf, pickFlagship } from '../utils/projectMedia';
 
 /* --------------------------------------------------------------------------
    Home
    -------------------------------------------------------------------------- */
+/* The Hyderabad flagship keeps its hand-written heading and intro; any other
+   flagship chosen in the admin uses its own title and first sentence. */
+const flagshipHeading = (p) => (p.id === 'proj-mcd-hyd' ? "McDonald's & McCafe, Hyderabad" : p.title);
+const flagshipIntro = (p) =>
+  p.id === 'proj-mcd-hyd'
+    ? 'Complete turnkey civil, structural facade, McCafe joinery, commercial stainless steel kitchen and self-ordering kiosk fit-out for Hardcastle Restaurants Pvt. Ltd.'
+    : firstSentence(p.description) || [p.type, p.client].filter(Boolean).join(' for ');
+
+/* Official brand logos (public/assets/images/clients). Brands without a logo file
+   show their name as a wordmark — drop a file in and add it here to switch. */
+const CLIENT_LOGOS = {
+  "McDonald's": '/assets/images/clients/mcdonalds.png',
+  "TATA CAPITAL": '/assets/images/clients/tata-capital.jpg',
+  "KOTAK BANK": '/assets/images/clients/kotak.png',
+  "AU BANK": '/assets/images/clients/au-bank.png',
+};
+
 const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpenProjectModal, projects }) => {
   const heroImgRef = useRef(null);
   const showreelRef = useRef(null);
@@ -98,33 +116,12 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
     });
   }, [selectedTurnkeyStep]);
 
+  // the flagship case study is whichever project is marked flagship in the admin
+  const flagship = pickFlagship(projects);
+  const flagshipShots = shotsOf(flagship);
   const openFlagship = () => {
-    const mcd = projects.find((p) => p.id === 'proj-mcd-hyd') || projects[0];
-    if (mcd) onOpenProjectModal(mcd);
+    if (flagship) onOpenProjectModal(flagship);
   };
-
-  const flagshipShots = [
-    {
-      img: '/assets/images/mcd-hyd-entrance.jpg',
-      title: 'Main Entrance & Facade',
-      meta: 'Structural Glazing & Signage',
-    },
-    {
-      img: '/assets/images/mcd-hyd-mccafe-bar.jpg',
-      title: 'McCafe & Ordering Counter',
-      meta: 'Timber Louver Joinery',
-    },
-    {
-      img: '/assets/images/mcd-hyd-dining-rings.jpg',
-      title: 'Dining Area & Lighting',
-      meta: 'Circular Booths & Ring Fixtures',
-    },
-    {
-      img: '/assets/images/mcd-hyd-kiosks.jpg',
-      title: 'Self-Ordering Kiosks',
-      meta: 'Digital Counters & Flooring',
-    },
-  ];
 
   return (
     <main id="tab-home" className="tab-page active-page csx-page csx-home">
@@ -179,15 +176,8 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
               <CountUp end={200} suffix="+" />
             </div>
             <div className="csx-hero-card-label">Projects Delivered</div>
-            <a
-              className="csx-hero-card-btn"
-              href={`https://wa.me/${INITIAL_DATA.company.whatsappNumber}?text=${encodeURIComponent(
-                INITIAL_DATA.company.whatsappMessage
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fa-brands fa-whatsapp"></i> Chat With Us
+            <a className="csx-hero-card-btn" href={`tel:${INITIAL_DATA.company.phone.replace(/\s/g, '')}`}>
+              <i className="fa-solid fa-phone"></i> {INITIAL_DATA.company.phoneDisplay}
             </a>
           </div>
 
@@ -221,8 +211,11 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
                 key={idx}
                 aria-hidden={idx >= INITIAL_DATA.clients.length || undefined}
               >
-                <span className="csx-chip-name">{client.logoText}</span>
-                <span className="csx-chip-badge">{client.logoBadge}</span>
+                {CLIENT_LOGOS[client.logoText] ? (
+                  <img className="csx-chip-logo" src={CLIENT_LOGOS[client.logoText]} alt={client.name} loading="lazy" />
+                ) : (
+                  <span className="csx-chip-name">{client.logoText}</span>
+                )}
               </div>
             ))}
           </div>
@@ -301,7 +294,7 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
                 <span className="csx-bento-num">{services[0].number}</span>
               </div>
               <div className="csx-bento-media">
-                <img src="/assets/images/mcd-hyd-entrance.jpg" alt={services[0].title} loading="lazy" />
+                <img src={assetSrc(services[0].image || '/assets/images/mcd-hyd-entrance.jpg', 900)} alt={services[0].title} loading="lazy" />
               </div>
               <div className="csx-bento-body">
                 <h3>{services[0].title}</h3>
@@ -433,6 +426,7 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
       {/* ====================================================================
           5. FLAGSHIP SPOTLIGHT
           ==================================================================== */}
+      {flagship && (
       <section className="csx-section csx-section-tint">
         <div className="container">
           <div className="csx-head-row" data-reveal>
@@ -440,13 +434,8 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
               <span className="csx-tag csx-tag-amber">
                 <i className="fa-solid fa-star"></i> Recently Handed Over Flagship
               </span>
-              <h2 className="csx-head-title csx-head-sm">
-                McDonald's &amp; McCafe, Hyderabad
-              </h2>
-              <p className="csx-head-sub">
-                Complete turnkey civil, structural facade, McCafe joinery, commercial stainless steel
-                kitchen and self-ordering kiosk fit-out for Hardcastle Restaurants Pvt. Ltd.
-              </p>
+              <h2 className="csx-head-title csx-head-sm">{flagshipHeading(flagship)}</h2>
+              <p className="csx-head-sub">{flagshipIntro(flagship)}</p>
             </div>
             <button className="csx-btn csx-btn-brand" onClick={openFlagship}>
               View Gallery &amp; Specs <i className="fa-solid fa-expand"></i>
@@ -463,7 +452,7 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
                 onClick={openFlagship}
               >
                 <span className="csx-shot-media">
-                  <img src={shot.img} alt={shot.title} loading="lazy" />
+                  <img src={assetSrc(shot.img, 800)} alt={shot.title} loading="lazy" />
                   <span className="csx-shot-zoom">
                     <i className="fa-solid fa-up-right-and-down-left-from-center"></i>
                   </span>
@@ -477,6 +466,7 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
           </div>
         </div>
       </section>
+      )}
 
       {/* ====================================================================
           6. ABOUT SPLIT
@@ -618,7 +608,7 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
                 onClick={() => onOpenProjectModal(proj)}
               >
                 <div className="csx-proj-media">
-                  <img src={assetSrc(proj.image)} alt={proj.title} loading="lazy" />
+                  <img src={assetSrc(proj.image, 900)} alt={proj.title} loading="lazy" />
                   <span
                     className={`csx-proj-status ${
                       proj.status.toLowerCase().includes('handed') ? 'done' : 'live'

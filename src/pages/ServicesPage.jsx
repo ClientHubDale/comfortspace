@@ -9,7 +9,15 @@ import { assetSrc } from '../utils/assetSrc';
    -------------------------------------------------------------------------- */
 const HERO_WORDS = ['design', 'engineer', 'build', 'maintain'];
 
-const KINETIC = ['Civil Construction', 'Turnkey Fit-Outs', 'Project Management', 'Fire & Life Safety', 'Modular Furniture', '24/7 AMC'];
+/* Short labels for the scrolling band; services added in the admin use their title */
+const KINETIC_LABELS = {
+  'civil-construction': 'Civil Construction',
+  'turnkey-projects': 'Turnkey Fit-Outs',
+  'project-management': 'Project Management',
+  'fire-safety': 'Fire & Life Safety',
+  'modular-furniture': 'Modular Furniture',
+  'post-handover': '24/7 AMC',
+};
 
 const TRADES = [
   { icon: 'fa-bolt', title: 'Electrical & Lighting', text: 'LT panels, DB wiring, feature and emergency lighting' },
@@ -69,6 +77,7 @@ const MODELS = [
 const ServicesPage = ({ services: serviceList, onSelectTab }) => {
   const services = serviceList?.length ? serviceList : INITIAL_DATA.services;
   const company = INITIAL_DATA.company;
+  const kinetic = services.map((s) => KINETIC_LABELS[s.id] || s.title);
 
   const stackRef = useRef(null);
   const tradesRef = useRef(null);
@@ -146,11 +155,6 @@ const ServicesPage = ({ services: serviceList, onSelectTab }) => {
         <span className="svx-hero-spot" aria-hidden="true"></span>
 
         <div className="container svx-hero-inner">
-          <nav className="abx-crumb svx-crumb" aria-label="Breadcrumb">
-            <button onClick={() => onSelectTab('home')}>Home</button>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">Services</span>
-          </nav>
 
           <span className="svx-kicker">
             <span className="svx-kicker-dot" aria-hidden="true"></span>6 disciplines · 1 accountable team
@@ -195,7 +199,7 @@ const ServicesPage = ({ services: serviceList, onSelectTab }) => {
           ==================================================================== */}
       <section className="svx-kinetic" aria-hidden="true">
         <div className="svx-kinetic-rail">
-          {[...KINETIC, ...KINETIC].map((word, idx) => (
+          {[...kinetic, ...kinetic].map((word, idx) => (
             <span key={idx} className={idx % 2 ? 'is-outline' : ''}>
               {word}
               <i className="fa-solid fa-asterisk"></i>
@@ -365,13 +369,8 @@ const ServicesPage = ({ services: serviceList, onSelectTab }) => {
                 <button className="csx-btn csx-btn-brand" onClick={() => onSelectTab('contact')}>
                   Request a Site Visit <i className="fa-solid fa-arrow-right"></i>
                 </button>
-                <a
-                  className="csx-btn csx-btn-outline"
-                  href={`https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent(company.whatsappMessage)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fa-brands fa-whatsapp"></i> WhatsApp Us
+                <a className="csx-btn csx-btn-outline" href={`tel:${company.phone.replace(/\s/g, '')}`}>
+                  <i className="fa-solid fa-phone"></i> {company.phoneDisplay}
                 </a>
               </div>
             </div>
