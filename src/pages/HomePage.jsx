@@ -152,7 +152,7 @@ const HomePage = ({ services: serviceList, onSelectTab, onOpenStoryModal, onOpen
 
             <p className="csx-hero-sub">
               From bare shells to luxury dining, multi-state QSR drive-thrus, high-security banking
-              hubs and corporate headquarters — Comfort Space Pvt. Ltd. delivers structurally sound,
+              hubs and corporate headquarters — Comfort Space Designs Pvt. Ltd. delivers structurally sound,
               aesthetically superior built environments.
             </p>
 

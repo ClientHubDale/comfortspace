@@ -79,8 +79,8 @@ const ContactPage = ({ onShowToast }) => {
   const tel = `tel:${company.phone.replace(/\s/g, '')}`;
   const mail = `mailto:${company.email}`;
   // the full postal address ('#48, 2nd Floor…') makes Google pick the wrong place;
-  // locality + PIN centres on BTM 2nd Stage (swap in exact coordinates when available)
-  const mapQuery = encodeURIComponent('BTM Layout 2nd Stage, Bengaluru, Karnataka 560076');
+  // the office pin sent by the client
+  const mapQuery = `${company.mapLat},${company.mapLng}`;
 
   const [form, setForm] = useState(EMPTY);
   const [step, setStep] = useState(0);
@@ -560,7 +560,7 @@ const ContactPage = ({ onShowToast }) => {
             <div className="ctx-map">
               <iframe
                 title="Comfort Space headquarters on Google Maps"
-                src={`https://www.google.com/maps?q=${mapQuery}&z=15&output=embed`}
+                src={`https://www.google.com/maps?q=${mapQuery}&z=16&output=embed`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>

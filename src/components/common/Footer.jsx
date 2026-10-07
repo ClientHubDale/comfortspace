@@ -1,4 +1,7 @@
 import React from 'react';
+import { INITIAL_DATA } from '../../data/initialData';
+
+const company = INITIAL_DATA.company;
 
 const Footer = ({ onSelectTab }) => {
   return (
@@ -77,14 +80,14 @@ const Footer = ({ onSelectTab }) => {
           <div className="footer-col">
             <h4>Bangalore HQ</h4>
             <p style={{ fontSize: '0.875rem', lineHeight: 1.7, color: '#64748B', marginBottom: '1rem' }}>
-              #48, 2nd Floor, 100 Feet Ring Road,<br />
-              BTM Layout 2nd Stage, Bangalore,<br />
-              Karnataka - 560076, India
+              # 32, Shivapura, Airport Road,<br />
+              Bagalur Cross, Kattigenahalli, Yelahanka,<br />
+              Bangalore - 560063, India
             </p>
             <p style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>
               <i className="fa-solid fa-phone" style={{ color: 'var(--brand-orange)', marginRight: '6px' }}></i>
-              <a href="tel:+919845012345" style={{ color: 'var(--text-heading)', textDecoration: 'none', fontWeight: 600 }}>
-                +91 98450 12345
+              <a href={`tel:${company.phone.replace(/\s/g, '')}`} style={{ color: 'var(--text-heading)', textDecoration: 'none', fontWeight: 600 }}>
+                {company.phoneDisplay}
               </a>
             </p>
             <p style={{ fontSize: '0.875rem' }}>
@@ -101,7 +104,7 @@ const Footer = ({ onSelectTab }) => {
 
         <div className="footer-bottom">
           <div>
-            &copy; {new Date().getFullYear()} Comfort Space Pvt. Ltd. (Formerly Shivashakthi Comforts). All Rights Reserved.
+            &copy; {new Date().getFullYear()} Comfort Space Designs Pvt. Ltd. (Formerly Shivashakthi Comforts). All Rights Reserved.
           </div>
           <div style={{ display: 'flex', gap: '1.5rem' }}>
             <span>Privacy Policy</span>

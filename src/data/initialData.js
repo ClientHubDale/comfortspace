@@ -1,11 +1,12 @@
 /**
- * Comfort Space Pvt. Ltd. (Formerly Shivashakthi Comforts)
+ * Comfort Space Designs Pvt. Ltd. (Formerly Shivashakthi Comforts)
  * Master Data Store & Initial Seeds
  */
 
 export const INITIAL_DATA = {
   company: {
-    name: "Comfort Space Pvt. Ltd.",
+    name: "Comfort Space Designs Pvt. Ltd.",
+    legalName: "COMFORT SPACE DESIGNS PRIVATE LIMITED",
     formerName: "Shivashakthi Comforts",
     logo: "assets/images/logo.png",
     tagline: "Commercial Interiors, Turnkey Fit-Outs & Civil Infrastructure",
@@ -14,12 +15,14 @@ export const INITIAL_DATA = {
     statesCovered: "7+",
     igbcStatus: "Founding Member, Indian Green Building Council (IGBC)",
     igbcVision: "To enable a sustainable built environment for all",
-    phone: "+91 98450 12345",
-    phoneDisplay: "+91 98450 12345",
+    phone: "+91 80 6646 9013",
+    phoneDisplay: "080-6646 9013",
     email: "projects@comfortspace.com",
-    address: "#48, 2nd Floor, 100 Feet Ring Road, BTM Layout 2nd Stage, Bangalore, Karnataka - 560076",
-    whatsappNumber: "919845012345",
-    whatsappMessage: "Hello Comfort Space team, I am interested in discussing a Turnkey / Interior Fit-out project."
+    address: "# 32, Shivapura, Airport Road, Bagalur Cross, Kattigenahalli, Yelahanka, Bangalore - 560063",
+    // office pin (13°07'10.1"N 77°37'20.5"E), as sent by the client
+    mapLat: 13.1194618,
+    mapLng: 77.6223569,
+    mapUrl: "https://maps.app.goo.gl/ERt2HrE97sbjBkSk7"
   },
 
   categories: [

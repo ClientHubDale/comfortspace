@@ -104,7 +104,7 @@ const MILESTONES = [
   },
   {
     year: '2022',
-    title: 'Rebranded to Comfort Space Pvt. Ltd.',
+    title: 'Rebranded to Comfort Space Designs Pvt. Ltd.',
     desc: 'Restructured and rebranded to reflect two decades of growth across 7+ states and 200+ completed projects.',
     icon: 'fa-arrow-up-right-dots',
   },
@@ -282,7 +282,7 @@ const AboutPage = ({ onSelectTab }) => {
             </h1>
 
             <p className="abx-hero-sub">
-              Comfort Space Pvt. Ltd. — formerly <strong>Shivashakthi Comforts</strong> — is a
+              Comfort Space Designs Pvt. Ltd. — formerly <strong>Shivashakthi Comforts</strong> — is a
               turnkey interior, civil and project management firm building India&apos;s most
               demanding commercial spaces for over two decades.
             </p>
@@ -386,7 +386,7 @@ const AboutPage = ({ onSelectTab }) => {
             <span className="abx-signature-mark">DSR</span>
             <div>
               <strong>D. Sridhar Rao</strong>
-              <small>Managing Director, Comfort Space Pvt. Ltd.</small>
+              <small>Managing Director, Comfort Space Designs Pvt. Ltd.</small>
             </div>
           </div>
         </div>
@@ -639,8 +639,8 @@ const AboutPage = ({ onSelectTab }) => {
         <div className="container abx-creds">
           <figure className="abx-cert" data-reveal>
             <img
-              src="/assets/images/extracted_11_IGBC_Founding_Member_certificate.jpeg"
-              alt="IGBC Founding Member certificate awarded to Comfort Space"
+              src="/assets/images/igbc-certificate-2023.jpg"
+              alt="IGBC Founding Member certificate, membership no. IGBCFM230054, awarded to Comfort Space Designs Pvt. Ltd."
             />
           </figure>
           <div className="abx-creds-copy" data-reveal>
